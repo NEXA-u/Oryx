@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Agency | Websites, Local SEO & Automation</title>
+  <meta name="description" content="We help local businesses get more leads with modern websites, local SEO, and conversion-focused systems. Book a free consultation call." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #111833;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-strong: rgba(255, 255, 255, 0.1);
+      --text: #f5f7ff;
+      --muted: #a8b0c8;
+      --line: rgba(255, 255, 255, 0.12);
+      --primary: #7c9cff;
+      --primary-2: #5eead4;
+      --shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124, 156, 255, 0.18), transparent 35%),
+        radial-gradient(circle at 85% 15%, rgba(94, 234, 212, 0.14), transparent 25%),
+        linear-gradient(180deg, #09101f 0%, #0b1020 55%, #0d1328 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 12, 24, 0.65);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 74px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 12px 30px rgba(124, 156, 255, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 13px;
+      background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,0));
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+    }
+
+    .nav-cta,
+    .btn {
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      min-height: 48px;
+      padding: 0 1.15rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease, background .2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #08101f;
+      box-shadow: 0 16px 40px rgba(124, 156, 255, 0.28);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible,
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible,
+    .nav-cta:hover,
+    .nav-cta:focus-visible {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.09);
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #08101f;
+      box-shadow: 0 16px 40px rgba(124, 156, 255, 0.24);
+    }
+
+    .hero {
+      padding: 5rem 0 3rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: #d9e0f8;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--primary-2);
+      box-shadow: 0 0 0 8px rgba(94, 234, 212, 0.12);
+    }
+
+    h1, h2, h3 {
+      line-height: 1.05;
+      margin: 0;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 5.2rem);
+      max-width: 12ch;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 0.9rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 62ch;
+      margin: 1.2rem 0 1.6rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      color: #d9e0f8;
+      font-size: 0.94rem;
+    }
+
+    .hero-proof span {
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: 28px;
+      padding: 1.25rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(124,156,255,0.2), transparent 30%);
+      pointer-events: none;
+    }
+
+    .dashboard {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .metric-row,
+    .mini-grid,
+    .list-card {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .metric-row {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .mini-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    .panel {
+      background: rgba(10, 15, 31, 0.72);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 1rem;
+    }
+
+    .metric {
+      text-align: left;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+
+    .metric small,
+    .panel p,
+    .panel li,
+    .section-lead,
+    .faq-answer,
+    .testimonial-role,
+    .muted {
+      color: var(--muted);
+    }
+
+    .bars {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .bar span {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.92rem;
+      margin-bottom: 0.45rem;
+      color: #e8edff;
+    }
+
+    .bar-track {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary), var(--primary-2));
+    }
+
+    .list-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .list-card li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.8rem 0.9rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .pill {
+      font-size: 0.8rem;
+      color: #08101f;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    section {
+      padding: 4.5rem 0;
+    }
+
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+
+    .section-kicker {
+      color: var(--primary-2);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section-lead {
+      max-width: 66ch;
+      margin: 0;
+    }
+
+    .grid-3,
+    .grid-2,
+    .testimonials,
+    .faq-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .testimonials { grid-template-columns: repeat(3, 1fr); }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 1.35rem;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: inline-grid;
+      place-items: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, rgba(124,156,255,0.18), rgba(94,234,212,0.18));
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 1.25rem;
+    }
+
+    .service-list,
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .service-list li,
+    .bullet-list li {
+      position: relative;
+      padding-left: 1.35rem;
+      color: var(--muted);
+    }
+
+    .service-list li::before,
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    }
+
+    .process-step {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-number {
+      display: inline-flex;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .result-highlight {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      margin-top: 1rem;
+    }
+
+    .result-highlight strong {
+      display: block;
+      font-size: 1.35rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .testimonial {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .stars {
+      letter-spacing: 0.12em;
+      color: #ffd76a;
+      font-size: 0.95rem;
+    }
+
+    .testimonial-footer {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-top: auto;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(124,156,255,.28), rgba(94,234,212,.25));
+      border: 1px solid rgba(255,255,255,0.08);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .testimonial-role {
+      font-size: 0.93rem;
+    }
+
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .faq-item {
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      color: var(--text);
+      text-align: left;
+      font: inherit;
+      padding: 1.1rem 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      cursor: pointer;
+    }
+
+    .faq-question span:last-child {
+      font-size: 1.5rem;
+      line-height: 1;
+      transition: transform .2s ease;
+    }
+
+    .faq-item.active .faq-question span:last-child {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .28s ease;
+      padding: 0 1.15rem;
+    }
+
+    .faq-answer p {
+      margin: 0 0 1.1rem;
+    }
+
+    .cta-wrap {
+      position: relative;
+      overflow: hidden;
+      padding: 2rem;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 156, 255, 0.22), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(94, 234, 212, 0.18), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .cta-inner p {
+      margin: 0.8rem 0 0;
+      color: var(--muted);
+      max-width: 52ch;
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.25rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .mini-grid,
+      .grid-3,
+      .grid-2,
+      .testimonials,
+      .cta-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid,
+      .cta-inner {
+        display: grid;
+      }
+
+      .metric-row {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      h1 {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(calc(100% - 1.2rem), var(--max));
+      }
+
+      .hero {
+        padding-top: 3.8rem;
+      }
+
+      section {
+        padding: 3.6rem 0;
+      }
+
+      .card,
+      .hero-card,
+      .cta-wrap {
+        border-radius: 20px;
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .footer-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#top" class="brand" aria-label="Agency home">
+        <span class="logo" aria-hidden="true"></span>
+        <span>YOUR AGENCY</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#services">Services</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#process">Process</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <a class="nav-cta" href="https://cal.com/your-booking-link" target="_blank" rel="noopener noreferrer">Book Free Call</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span>Built for local business growth</span>
+          </div>
+
+          <h1>Turn your local business into a lead-generating machine.</h1>
+          <p>
+            We build modern websites, sharpen your local presence, and install conversion systems that help more people discover you, trust you, and book with you.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://cal.com/your-booking-link" target="_blank" rel="noopener noreferrer">Book a Free Consultation</a>
+            <a class="btn btn-secondary" href="#services">See Services</a>
+          </div>
+
+          <div class="hero-proof" aria-label="Trust indicators">
+            <span>Fast-loading websites</span>
+            <span>Local SEO focused</span>
+            <span>Conversion-first design</span>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <div class="dashboard">
+            <div class="metric-row">
+              <div class="panel metric">
+                <small>More qualified leads</small>
+                <strong>+32%</strong>
+              </div>
+              <div class="panel metric">
+                <small>Faster response flow</small>
+                <strong>24/7</strong>
+              </div>
+              <div class="panel metric">
+                <small>Stronger online trust</small>
+                <strong>5★</strong>
+              </div>
+            </div>
+
+            <div class="mini-grid">
+              <div class="panel">
+                <h3>Growth dashboard</h3>
+                <p>Designed to help local businesses look premium, rank better, and convert more visitors into calls.</p>
+                <div class="bars">
+                  <div class="bar">
+                    <span><strong>Website conversion</strong><strong>84%</strong></span>
+                    <div class="bar-track"><div class="bar-fill" style="width:84%"></div></div>
+                  </div>
+                  <div class="bar">
+                    <span><strong>Google visibility</strong><strong>71%</strong></span>
+                    <div class="bar-track"><div class="bar-fill" style="width:71%"></div></div>
+                  </div>
+                  <div class="bar">
+                    <span><strong>Lead follow-up</strong><strong>92%</strong></span>
+                    <div class="bar-track"><div class="bar-fill" style="width:92%"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel list-card">
+                <h3>What we improve</h3>
+                <ul>
+                  <li><span>Website experience</span><span class="pill">High impact</span></li>
+                  <li><span>Google Maps presence</span><span class="pill">Local growth</span></li>
+                  <li><span>Lead capture system</span><span class="pill">More calls</span></li>
+                  <li><span>Trust & positioning</span><span class="pill">Premium brand</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Services</span>
+          <h2>Everything you need to turn traffic into booked calls.</h2>
+          <p class="section-lead">We focus on the essentials that help local businesses grow online without wasting time on bloated marketing retainers.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card reveal">
+            <div class="icon" aria-hidden="true">✦</div>
+            <h3>Modern Website Design</h3>
+            <p class="muted">Clean, premium one-page or multi-page websites built to load fast, look credible, and convert visitors into leads.</p>
+            <ul class="service-list">
+              <li>Mobile-first design</li>
+              <li>Clear calls to action</li>
+              <li>Fast and lightweight build</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon" aria-hidden="true">⌁</div>
+            <h3>Google Maps & Local SEO</h3>
+            <p class="muted">Show up stronger where local customers are already searching so your business becomes the obvious choice nearby.</p>
+            <ul class="service-list">
+              <li>Local optimization</li>
+              <li>Profile improvement</li>
+              <li>Better visibility and trust</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon" aria-hidden="true">↗</div>
+            <h3>Lead Capture Systems</h3>
+            <p class="muted">We help you turn website visitors into booked consultations with clear offer positioning and simple conversion flows.</p>
+            <ul class="service-list">
+              <li>Lead forms and CTAs</li>
+              <li>Booking flow setup</li>
+              <li>Better follow-up experience</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="why-us">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Why choose us</span>
+          <h2>Premium execution without agency bloat.</h2>
+          <p class="section-lead">We keep things simple: clear messaging, strong positioning, fast pages, and a website experience that actually helps your business make money.</p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card reveal">
+            <h3>Built for local businesses</h3>
+            <ul class="bullet-list">
+              <li>We focus on businesses that need more calls, more trust, and better local visibility.</li>
+              <li>Your site is designed around action, not just aesthetics.</li>
+              <li>Every section has one goal: move visitors toward booking.</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <h3>Fast, clear, conversion-focused</h3>
+            <ul class="bullet-list">
+              <li>No cluttered pages, no confusing copy, no slow-loading designs.</li>
+              <li>Premium modern look that makes your business feel established and trustworthy.</li>
+              <li>Easy booking flow connected directly to your consultation page.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Process</span>
+          <h2>A simple system designed to get you more qualified conversations.</h2>
+          <p class="section-lead">We make growth easier by focusing on the steps that matter most: a clear offer, a strong online presence, and an easy next action.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card process-step reveal">
+            <span class="step-number">01</span>
+            <h3>Clarify the offer</h3>
+            <p class="muted">We sharpen your messaging so visitors immediately understand what you do, why you’re credible, and why they should contact you.</p>
+            <div class="result-highlight">
+              <strong>Clear positioning</strong>
+              <span class="muted">Less confusion, more trust.</span>
+            </div>
+          </article>
+
+          <article class="card process-step reveal">
+            <span class="step-number">02</span>
+            <h3>Build the lead flow</h3>
+            <p class="muted">We design a clean website structure with strategic sections, strong CTAs, and a direct path to your booking page.</p>
+            <div class="result-highlight">
+              <strong>Higher intent leads</strong>
+              <span class="muted">Visitors know exactly what to do next.</span>
+            </div>
+          </article>
+
+          <article class="card process-step reveal">
+            <span class="step-number">03</span>
+            <h3>Drive consistent action</h3>
+            <p class="muted">With better positioning and a better web experience, your business is set up to capture more consultations over time.</p>
+            <div class="result-highlight">
+              <strong>More booked calls</strong>
+              <span class="muted">A smoother path from traffic to consultation.</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Testimonials</span>
+          <h2>What clients could say about working with you.</h2>
+          <p class="section-lead">Replace these placeholders with real client feedback once you start collecting testimonials.</p>
+        </div>
+
+        <div class="testimonials">
+          <article class="card testimonial reveal">
+            <div class="stars">★★★★★</div>
+            <p>“Our website finally looks like a real business. It feels premium, clearer, and now people actually know what to do when they land on it.”</p>
+            <div class="testimonial-footer">
+              <div class="avatar">A</div>
+              <div>
+                <strong>Ahmed</strong>
+                <div class="testimonial-role">Local Service Business Owner</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card testimonial reveal">
+            <div class="stars">★★★★★</div>
+            <p>“The booking flow became way simpler. Instead of just browsing, people started taking action faster and contacting us with better intent.”</p>
+            <div class="testimonial-footer">
+              <div class="avatar">S</div>
+              <div>
+                <strong>Sara</strong>
+                <div class="testimonial-role">Clinic / Practice Manager</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card testimonial reveal">
+            <div class="stars">★★★★★</div>
+            <p>“Clean design, fast results, and no unnecessary complexity. It gave our business a stronger presence online from day one.”</p>
+            <div class="testimonial-footer">
+              <div class="avatar">M</div>
+              <div>
+                <strong>Mohammed</strong>
+                <div class="testimonial-role">Local Brand Founder</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">FAQ</span>
+          <h2>Common questions before booking a free consultation.</h2>
+        </div>
+
+        <div class="faq-grid reveal">
+          <div class="faq-item active">
+            <button class="faq-question" type="button" aria-expanded="true">
+              <span>What kind of businesses do you work with?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <p>We primarily help local businesses that want better positioning online, more trust, and more qualified inbound calls or inquiries.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Do I need a full website redesign?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Not always. Sometimes a one-page site or a cleaner lead flow is enough. We’ll look at your current setup and recommend the simplest path.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>How does the free consultation work?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <p>You book a call, we review your business goals and current online presence, and we show you where the main opportunities are.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Can you connect this page to my booking link?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. Just replace the placeholder Cal.com URL in the buttons with your real booking link and the entire page is ready to send traffic to it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta-wrap reveal" id="contact">
+          <div class="cta-inner">
+            <div>
+              <span class="section-kicker">Final CTA</span>
+              <h2>Ready to get more local customers to book with you?</h2>
+              <p>Book a free consultation call and let’s see how your website, local presence, and lead flow can be upgraded for better results.</p>
+            </div>
+            <div>
+              <a class="btn btn-primary" href="https://cal.com/your-booking-link" target="_blank" rel="noopener noreferrer">Book Your Free Call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>© <span id="year"></span> Your Agency. All rights reserved.</div>
+      <a href="https://cal.com/your-booking-link" target="_blank" rel="noopener noreferrer">Contact / Book Consultation</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach((item, index) => {
+      const button = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+
+      if (item.classList.contains('active')) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+
+      button.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+
+        faqItems.forEach((other) => {
+          other.classList.remove('active');
+          other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          other.querySelector('.faq-answer').style.maxHeight = null;
+        });
+
+        if (!isActive) {
+          item.classList.add('active');
+          button.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealElements.forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
