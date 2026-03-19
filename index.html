@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Agency | Websites, Local SEO & Automation</title>
-  <meta name="description" content="We help local businesses get more leads with modern websites, local SEO, and conversion-focused systems. Book a free consultation call." />
+  <title>Oryx | نظام ذكاء اصطناعي للعيادات والمجال الطبي</title>
+  <meta name="description" content="Oryx يساعد العيادات والمنشآت الطبية على زيادة العملاء المحتملين، رفع الحجوزات، تقليل الهدر، وتحسين التشغيل باستخدام أنظمة الذكاء الاصطناعي." />
   <style>
     :root {
-      --bg: #0b1020;
-      --bg-soft: #111833;
-      --card: rgba(255, 255, 255, 0.06);
-      --card-strong: rgba(255, 255, 255, 0.1);
-      --text: #f5f7ff;
-      --muted: #a8b0c8;
-      --line: rgba(255, 255, 255, 0.12);
-      --primary: #7c9cff;
-      --primary-2: #5eead4;
-      --shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
-      --radius: 22px;
-      --radius-sm: 16px;
+      --bg: #07111b;
+      --bg-soft: #0d1824;
+      --card: rgba(255,255,255,0.06);
+      --card-2: rgba(255,255,255,0.08);
+      --text: #f7fbff;
+      --muted: #aab7c6;
+      --line: rgba(255,255,255,0.11);
+      --primary: #7dd3fc;
+      --primary-2: #67e8f9;
+      --accent: #d8f5ff;
+      --success: #86efac;
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+      --radius: 24px;
+      --radius-sm: 18px;
       --max: 1180px;
     }
 
@@ -26,17 +28,21 @@
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "IBM Plex Sans Arabic", "Tajawal", "Cairo", Inter, system-ui, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(124, 156, 255, 0.18), transparent 35%),
-        radial-gradient(circle at 85% 15%, rgba(94, 234, 212, 0.14), transparent 25%),
-        linear-gradient(180deg, #09101f 0%, #0b1020 55%, #0d1328 100%);
+        radial-gradient(circle at top right, rgba(103,232,249,.14), transparent 28%),
+        radial-gradient(circle at top left, rgba(125,211,252,.14), transparent 32%),
+        linear-gradient(180deg, #07111b 0%, #091521 50%, #0a1722 100%);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.7;
+    }
+
+    body.en {
+      direction: ltr;
     }
 
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+    button, input, textarea, select { font: inherit; }
     .container {
       width: min(calc(100% - 2rem), var(--max));
       margin: 0 auto;
@@ -47,32 +53,32 @@
       top: 0;
       z-index: 50;
       backdrop-filter: blur(14px);
-      background: rgba(8, 12, 24, 0.65);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(5, 10, 17, .7);
+      border-bottom: 1px solid rgba(255,255,255,.07);
     }
 
     .nav {
+      min-height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      min-height: 74px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      gap: .85rem;
+      font-weight: 800;
+      letter-spacing: .02em;
     }
 
     .logo {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border-radius: 14px;
       background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      box-shadow: 0 12px 30px rgba(124, 156, 255, 0.35);
+      box-shadow: 0 14px 30px rgba(103,232,249,.22);
       position: relative;
       overflow: hidden;
     }
@@ -82,85 +88,89 @@
       position: absolute;
       inset: 1px;
       border-radius: 13px;
-      background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,0));
+      background: linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,0));
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 1.2rem;
+      gap: 1rem;
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: .95rem;
     }
 
     .nav-links a:hover,
-    .nav-links a:focus-visible {
+    .nav-links a:focus-visible,
+    .lang-toggle:hover,
+    .lang-toggle:focus-visible {
       color: var(--text);
     }
 
-    .nav-cta,
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .lang-toggle,
     .btn {
       border: 0;
       cursor: pointer;
+      min-height: 48px;
+      padding: 0 1.1rem;
+      border-radius: 999px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.6rem;
-      min-height: 48px;
-      padding: 0 1.15rem;
-      border-radius: 999px;
-      font-weight: 700;
-      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease, background .2s ease;
+      gap: .55rem;
+      transition: .2s ease;
+      font-weight: 800;
+    }
+
+    .lang-toggle {
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,.08);
     }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      color: #08101f;
-      box-shadow: 0 16px 40px rgba(124, 156, 255, 0.28);
-    }
-
-    .btn-primary:hover,
-    .btn-primary:focus-visible,
-    .btn-secondary:hover,
-    .btn-secondary:focus-visible,
-    .nav-cta:hover,
-    .nav-cta:focus-visible {
-      transform: translateY(-2px);
+      color: #031018;
+      box-shadow: 0 16px 40px rgba(103,232,249,.18);
     }
 
     .btn-secondary {
-      background: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,.05);
       color: var(--text);
-      border: 1px solid rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,.08);
     }
 
-    .nav-cta {
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      color: #08101f;
-      box-shadow: 0 16px 40px rgba(124, 156, 255, 0.24);
+    .btn:hover,
+    .lang-toggle:hover {
+      transform: translateY(-2px);
     }
 
     .hero {
-      padding: 5rem 0 3rem;
+      padding: 5rem 0 3.5rem;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 2rem;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 1.4rem;
       align-items: center;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 0.55rem;
-      padding: 0.5rem 0.9rem;
+      gap: .55rem;
+      padding: .48rem .9rem;
       border-radius: 999px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-      color: #d9e0f8;
-      font-size: 0.9rem;
+      background: rgba(255,255,255,.04);
+      color: #dff8ff;
+      font-size: .92rem;
       margin-bottom: 1rem;
     }
 
@@ -168,75 +178,72 @@
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: var(--primary-2);
-      box-shadow: 0 0 0 8px rgba(94, 234, 212, 0.12);
+      background: var(--success);
+      box-shadow: 0 0 0 8px rgba(134,239,172,.12);
     }
 
-    h1, h2, h3 {
-      line-height: 1.05;
-      margin: 0;
-      letter-spacing: -0.03em;
-    }
+    h1, h2, h3 { line-height: 1.08; margin: 0; letter-spacing: -.03em; }
+    h1 { font-size: clamp(2.3rem, 6vw, 5rem); max-width: 12ch; }
+    h2 { font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: .85rem; }
+    h3 { font-size: 1.16rem; margin-bottom: .55rem; }
 
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 5.2rem);
-      max-width: 12ch;
-    }
-
-    h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 0.9rem;
-    }
-
-    h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.65rem;
+    .hero p,
+    .section-lead,
+    .muted,
+    .faq-answer,
+    .testimonial-role,
+    .step-card p,
+    .card p,
+    li {
+      color: var(--muted);
     }
 
     .hero p {
-      color: var(--muted);
       font-size: 1.06rem;
-      max-width: 62ch;
-      margin: 1.2rem 0 1.6rem;
+      max-width: 60ch;
+      margin: 1.15rem 0 1.6rem;
     }
 
-    .hero-actions {
+    .hero-actions,
+    .proof,
+    .form-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.9rem;
-      margin-bottom: 1.4rem;
+      gap: .85rem;
     }
 
-    .hero-proof {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      color: #d9e0f8;
-      font-size: 0.94rem;
-    }
-
-    .hero-proof span {
-      padding: 0.55rem 0.8rem;
+    .proof span {
+      padding: .55rem .82rem;
       border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      color: #dce9f5;
+      font-size: .93rem;
+    }
+
+    .hero-card,
+    .card,
+    .form-card,
+    .video-card,
+    .final-cta {
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
     }
 
     .hero-card {
-      position: relative;
-      border-radius: 28px;
-      padding: 1.25rem;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: var(--shadow);
+      padding: 1.2rem;
       overflow: hidden;
+      position: relative;
     }
 
     .hero-card::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top right, rgba(124,156,255,0.2), transparent 30%);
+      background: radial-gradient(circle at top left, rgba(125,211,252,.18), transparent 30%);
       pointer-events: none;
     }
 
@@ -248,65 +255,53 @@
     }
 
     .metric-row,
-    .mini-grid,
-    .list-card {
+    .grid-3,
+    .grid-2,
+    .testimonial-grid,
+    .steps,
+    .faq-grid,
+    .form-grid,
+    .stats-grid {
       display: grid;
       gap: 1rem;
     }
 
-    .metric-row {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    .metric-row { grid-template-columns: repeat(3, 1fr); }
+    .grid-3, .steps, .testimonial-grid { grid-template-columns: repeat(3, 1fr); }
+    .grid-2, .form-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: 1.1fr .9fr; }
 
-    .mini-grid {
-      grid-template-columns: 1.15fr 0.85fr;
-    }
-
-    .panel {
-      background: rgba(10, 15, 31, 0.72);
-      border: 1px solid rgba(255,255,255,0.08);
+    .panel,
+    .step-card {
+      background: rgba(7,17,27,.62);
+      border: 1px solid rgba(255,255,255,.08);
       border-radius: 20px;
       padding: 1rem;
     }
 
-    .metric {
-      text-align: left;
-    }
-
-    .metric strong {
+    .metric strong,
+    .stat strong,
+    .step-result strong {
       display: block;
-      font-size: 1.5rem;
-      letter-spacing: -0.03em;
+      font-size: 1.45rem;
+      letter-spacing: -.03em;
+      color: var(--text);
     }
 
-    .metric small,
-    .panel p,
-    .panel li,
-    .section-lead,
-    .faq-answer,
-    .testimonial-role,
-    .muted {
-      color: var(--muted);
-    }
-
-    .bars {
-      display: grid;
-      gap: 0.8rem;
-      margin-top: 1rem;
-    }
-
+    .bars { display: grid; gap: .8rem; margin-top: 1rem; }
     .bar span {
       display: flex;
       justify-content: space-between;
-      font-size: 0.92rem;
-      margin-bottom: 0.45rem;
-      color: #e8edff;
+      gap: .75rem;
+      margin-bottom: .45rem;
+      color: #ebf8ff;
+      font-size: .93rem;
     }
 
     .bar-track {
       height: 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.08);
+      background: rgba(255,255,255,.08);
       overflow: hidden;
     }
 
@@ -316,169 +311,99 @@
       background: linear-gradient(90deg, var(--primary), var(--primary-2));
     }
 
-    .list-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 0.8rem;
-    }
-
-    .list-card li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      padding: 0.8rem 0.9rem;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.035);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .pill {
-      font-size: 0.8rem;
-      color: #08101f;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    section {
-      padding: 4.5rem 0;
-    }
-
-    .section-head {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-      align-items: flex-start;
-      margin-bottom: 2rem;
-    }
-
-    .section-kicker {
-      color: var(--primary-2);
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .section-lead {
-      max-width: 66ch;
-      margin: 0;
-    }
-
-    .grid-3,
-    .grid-2,
-    .testimonials,
-    .faq-grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    .grid-2 { grid-template-columns: repeat(2, 1fr); }
-    .testimonials { grid-template-columns: repeat(3, 1fr); }
-
-    .card {
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius);
-      padding: 1.35rem;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-    }
-
-    .icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      display: inline-grid;
-      place-items: center;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, rgba(124,156,255,0.18), rgba(94,234,212,0.18));
-      border: 1px solid rgba(255,255,255,0.08);
-      font-size: 1.25rem;
-    }
-
-    .service-list,
-    .bullet-list {
+    .list-clean,
+    .bullet-list,
+    .service-list {
       list-style: none;
       padding: 0;
       margin: 1rem 0 0;
       display: grid;
-      gap: 0.7rem;
+      gap: .72rem;
     }
 
-    .service-list li,
-    .bullet-list li {
+    .list-clean li,
+    .bullet-list li,
+    .service-list li {
       position: relative;
-      padding-left: 1.35rem;
-      color: var(--muted);
+      padding-inline-start: 1.25rem;
     }
 
-    .service-list li::before,
-    .bullet-list li::before {
+    .list-clean li::before,
+    .bullet-list li::before,
+    .service-list li::before {
       content: "";
       position: absolute;
-      left: 0;
-      top: 0.72rem;
+      inset-inline-start: 0;
+      top: .78rem;
       width: 8px;
       height: 8px;
       border-radius: 999px;
       background: linear-gradient(135deg, var(--primary), var(--primary-2));
     }
 
-    .process-step {
-      position: relative;
-      overflow: hidden;
+    section { padding: 4.5rem 0; }
+
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+
+    .kicker {
+      color: var(--primary-2);
+      font-size: .84rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, rgba(125,211,252,.16), rgba(103,232,249,.17));
+      border: 1px solid rgba(255,255,255,.08);
+      font-size: 1.15rem;
     }
 
     .step-number {
-      display: inline-flex;
       width: 42px;
       height: 42px;
       border-radius: 999px;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
       margin-bottom: 1rem;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.08);
+      font-weight: 800;
     }
 
-    .result-highlight {
-      padding: 1rem;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
+    .step-result {
       margin-top: 1rem;
-    }
-
-    .result-highlight strong {
-      display: block;
-      font-size: 1.35rem;
-      margin-bottom: 0.15rem;
+      padding: .95rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.06);
     }
 
     .testimonial {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: .95rem;
+      min-height: 100%;
     }
 
-    .stars {
-      letter-spacing: 0.12em;
-      color: #ffd76a;
-      font-size: 0.95rem;
-    }
-
+    .stars { color: #ffd66b; letter-spacing: .12em; }
     .testimonial-footer {
       display: flex;
       align-items: center;
-      gap: 0.85rem;
+      gap: .8rem;
       margin-top: auto;
     }
 
@@ -486,52 +411,40 @@
       width: 48px;
       height: 48px;
       border-radius: 999px;
-      background: linear-gradient(135deg, rgba(124,156,255,.28), rgba(94,234,212,.25));
-      border: 1px solid rgba(255,255,255,0.08);
       display: grid;
       place-items: center;
+      background: linear-gradient(135deg, rgba(125,211,252,.24), rgba(103,232,249,.22));
+      border: 1px solid rgba(255,255,255,.08);
       font-weight: 800;
-    }
-
-    .testimonial-role {
-      font-size: 0.93rem;
-    }
-
-    .faq-grid {
-      grid-template-columns: 1fr;
     }
 
     .faq-item {
       border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
       overflow: hidden;
     }
 
     .faq-question {
       width: 100%;
-      background: transparent;
       border: 0;
+      background: transparent;
       color: var(--text);
-      text-align: left;
-      font: inherit;
       padding: 1.1rem 1.15rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
       cursor: pointer;
+      text-align: inherit;
     }
 
-    .faq-question span:last-child {
-      font-size: 1.5rem;
-      line-height: 1;
+    .faq-question .plus {
+      font-size: 1.45rem;
       transition: transform .2s ease;
     }
 
-    .faq-item.active .faq-question span:last-child {
-      transform: rotate(45deg);
-    }
+    .faq-item.active .plus { transform: rotate(45deg); }
 
     .faq-answer {
       max-height: 0;
@@ -540,40 +453,90 @@
       padding: 0 1.15rem;
     }
 
-    .faq-answer p {
-      margin: 0 0 1.1rem;
+    .faq-answer p { margin: 0 0 1.1rem; }
+
+    .hidden-section { display: none; }
+    .show { display: block; }
+
+    .form-card,
+    .video-card,
+    .final-cta {
+      padding: 1.4rem;
     }
 
-    .cta-wrap {
-      position: relative;
-      overflow: hidden;
-      padding: 2rem;
-      border-radius: 30px;
-      background:
-        radial-gradient(circle at top right, rgba(124, 156, 255, 0.22), transparent 28%),
-        radial-gradient(circle at bottom left, rgba(94, 234, 212, 0.18), transparent 26%),
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: var(--shadow);
+    .form-card {
+      max-width: 860px;
+      margin: 0 auto;
     }
 
-    .cta-inner {
+    .field {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
+      flex-direction: column;
+      gap: .45rem;
     }
 
-    .cta-inner p {
-      margin: 0.8rem 0 0;
+    .field label {
+      font-weight: 700;
+      color: #e6f3fb;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      padding: .95rem 1rem;
+      outline: none;
+    }
+
+    .field textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder { color: #8ca1b5; }
+
+    .form-note {
+      margin-top: 1rem;
+      font-size: .95rem;
       color: var(--muted);
-      max-width: 52ch;
+    }
+
+    .video-box {
+      min-height: 260px;
+      border-radius: 20px;
+      border: 1px dashed rgba(255,255,255,.14);
+      background: rgba(255,255,255,.03);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--muted);
+    }
+
+    .video-box strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: .4rem;
+      font-size: 1.15rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .85rem;
+      margin-top: 1.2rem;
     }
 
     footer {
       padding: 2rem 0 3rem;
       color: var(--muted);
-      font-size: 0.94rem;
+      font-size: .94rem;
     }
 
     .footer-row {
@@ -581,8 +544,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 1.2rem;
     }
 
     .reveal {
@@ -598,79 +561,53 @@
 
     @media (max-width: 980px) {
       .hero-grid,
-      .mini-grid,
       .grid-3,
       .grid-2,
-      .testimonials,
-      .cta-inner {
+      .steps,
+      .testimonial-grid,
+      .form-grid,
+      .stats-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero-grid,
-      .cta-inner {
-        display: grid;
-      }
-
-      .metric-row {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      h1 {
-        max-width: 100%;
-      }
+      .metric-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      h1 { max-width: 100%; }
     }
 
     @media (max-width: 640px) {
-      .container {
-        width: min(calc(100% - 1.2rem), var(--max));
-      }
-
-      .hero {
-        padding-top: 3.8rem;
-      }
-
-      section {
-        padding: 3.6rem 0;
-      }
-
-      .card,
+      .container { width: min(calc(100% - 1.15rem), var(--max)); }
+      .hero { padding-top: 4rem; }
+      section { padding: 3.6rem 0; }
+      .footer-row { flex-direction: column; align-items: flex-start; }
+      .nav { min-height: 70px; }
       .hero-card,
-      .cta-wrap {
-        border-radius: 20px;
-      }
-
-      .nav {
-        min-height: 68px;
-      }
-
-      .footer-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .card,
+      .form-card,
+      .video-card,
+      .final-cta { border-radius: 20px; }
     }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a href="#top" class="brand" aria-label="Agency home">
+      <a href="#top" class="brand" aria-label="Oryx home">
         <span class="logo" aria-hidden="true"></span>
-        <span>YOUR AGENCY</span>
+        <span>ORYX</span>
       </a>
 
       <nav class="nav-links" aria-label="Primary navigation">
-        <a href="#services">Services</a>
-        <a href="#why-us">Why Us</a>
-        <a href="#process">Process</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#faq">FAQ</a>
+        <a href="#services" data-ar="الخدمات" data-en="Services">الخدمات</a>
+        <a href="#why" data-ar="لماذا Oryx" data-en="Why Oryx">لماذا Oryx</a>
+        <a href="#process" data-ar="الآلية" data-en="Process">الآلية</a>
+        <a href="#faq" data-ar="الأسئلة" data-en="FAQ">الأسئلة</a>
       </nav>
 
-      <a class="nav-cta" href="https://cal.com/your-booking-link" target="_blank" rel="noopener noreferrer">Book Free Call</a>
+      <div class="nav-actions">
+        <button class="lang-toggle" id="langToggle" type="button">English</button>
+        <a class="btn btn-primary" href="#lead-form" data-ar="ابدأ الآن" data-en="Get Started">ابدأ الآن</a>
+      </div>
     </div>
   </header>
 
@@ -680,23 +617,21 @@
         <div class="reveal">
           <div class="eyebrow">
             <span class="eyebrow-dot"></span>
-            <span>Built for local business growth</span>
+            <span data-ar="نظام ذكاء اصطناعي مخصص للعيادات والمنشآت الطبية" data-en="AI system built for clinics and medical businesses">نظام ذكاء اصطناعي مخصص للعيادات والمنشآت الطبية</span>
           </div>
 
-          <h1>Turn your local business into a lead-generating machine.</h1>
-          <p>
-            We build modern websites, sharpen your local presence, and install conversion systems that help more people discover you, trust you, and book with you.
-          </p>
+          <h1 data-ar="خلّ عيادتك تشتغل بذكاء أعلى وتجيب عملاء أكثر." data-en="Help your clinic run smarter and bring in more qualified leads.">خلّ عيادتك تشتغل بذكاء أعلى وتجيب عملاء أكثر.</h1>
+          <p data-ar="Oryx هو نظام ذكاء اصطناعي متكامل يساعد العيادات والقطاع الطبي على زيادة الليدز، رفع الحجوزات، تقليل التكاليف التشغيلية، وتحسين طريقة متابعة العملاء المحتملين من أول تواصل إلى الحجز." data-en="Oryx is a complete AI system for clinics and medical businesses. We help you generate more leads, increase bookings, reduce operating waste, and improve how prospects move from first contact to appointment.">Oryx هو نظام ذكاء اصطناعي متكامل يساعد العيادات والقطاع الطبي على زيادة الليدز، رفع الحجوزات، تقليل التكاليف التشغيلية، وتحسين طريقة متابعة العملاء المحتملين من أول تواصل إلى الحجز.</p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="https://cal.com/your-booking-link" target="_blank" rel="noopener noreferrer">Book a Free Consultation</a>
-            <a class="btn btn-secondary" href="#services">See Services</a>
+            <a class="btn btn-primary" href="#lead-form" data-ar="احجز مكالمة مبيعات" data-en="Book a Sales Call">احجز مكالمة مبيعات</a>
+            <a class="btn btn-secondary" href="#services" data-ar="شوف كيف نساعدك" data-en="See How We Help">شوف كيف نساعدك</a>
           </div>
 
-          <div class="hero-proof" aria-label="Trust indicators">
-            <span>Fast-loading websites</span>
-            <span>Local SEO focused</span>
-            <span>Conversion-first design</span>
+          <div class="proof">
+            <span data-ar="زيادة العملاء المحتملين" data-en="More qualified leads">زيادة العملاء المحتملين</span>
+            <span data-ar="تقليل المصاريف والهدر" data-en="Lower waste and costs">تقليل المصاريف والهدر</span>
+            <span data-ar="رفع الحجوزات والمتابعة" data-en="Higher bookings and follow-up">رفع الحجوزات والمتابعة</span>
           </div>
         </div>
 
@@ -704,46 +639,46 @@
           <div class="dashboard">
             <div class="metric-row">
               <div class="panel metric">
-                <small>More qualified leads</small>
-                <strong>+32%</strong>
+                <small data-ar="تحسين إدارة الليدز" data-en="Lead management improvement">تحسين إدارة الليدز</small>
+                <strong>+AI</strong>
               </div>
               <div class="panel metric">
-                <small>Faster response flow</small>
+                <small data-ar="متابعة أسرع وأكثر دقة" data-en="Faster, smarter follow-up">متابعة أسرع وأكثر دقة</small>
                 <strong>24/7</strong>
               </div>
               <div class="panel metric">
-                <small>Stronger online trust</small>
-                <strong>5★</strong>
+                <small data-ar="تقليل الهدر التشغيلي" data-en="Lower operational waste">تقليل الهدر التشغيلي</small>
+                <strong>-Cost</strong>
               </div>
             </div>
 
-            <div class="mini-grid">
+            <div class="stats-grid">
               <div class="panel">
-                <h3>Growth dashboard</h3>
-                <p>Designed to help local businesses look premium, rank better, and convert more visitors into calls.</p>
+                <h3 data-ar="ماذا يطور Oryx؟" data-en="What does Oryx improve?">ماذا يطور Oryx؟</h3>
+                <p data-ar="نظام مصمم للعيادات اللي تبي استقطاب أفضل، تشغيل أذكى، وعائد أعلى من كل فرصة مبيعات." data-en="A system built for clinics that want stronger acquisition, smarter operations, and more revenue from every sales opportunity.">نظام مصمم للعيادات اللي تبي استقطاب أفضل، تشغيل أذكى، وعائد أعلى من كل فرصة مبيعات.</p>
                 <div class="bars">
                   <div class="bar">
-                    <span><strong>Website conversion</strong><strong>84%</strong></span>
-                    <div class="bar-track"><div class="bar-fill" style="width:84%"></div></div>
+                    <span><strong data-ar="التعامل مع الليدز" data-en="Lead handling">التعامل مع الليدز</strong><strong>90%</strong></span>
+                    <div class="bar-track"><div class="bar-fill" style="width:90%"></div></div>
                   </div>
                   <div class="bar">
-                    <span><strong>Google visibility</strong><strong>71%</strong></span>
-                    <div class="bar-track"><div class="bar-fill" style="width:71%"></div></div>
+                    <span><strong data-ar="وضوح الرحلة البيعية" data-en="Sales journey clarity">وضوح الرحلة البيعية</strong><strong>82%</strong></span>
+                    <div class="bar-track"><div class="bar-fill" style="width:82%"></div></div>
                   </div>
                   <div class="bar">
-                    <span><strong>Lead follow-up</strong><strong>92%</strong></span>
-                    <div class="bar-track"><div class="bar-fill" style="width:92%"></div></div>
+                    <span><strong data-ar="كفاءة التشغيل" data-en="Operational efficiency">كفاءة التشغيل</strong><strong>88%</strong></span>
+                    <div class="bar-track"><div class="bar-fill" style="width:88%"></div></div>
                   </div>
                 </div>
               </div>
 
-              <div class="panel list-card">
-                <h3>What we improve</h3>
-                <ul>
-                  <li><span>Website experience</span><span class="pill">High impact</span></li>
-                  <li><span>Google Maps presence</span><span class="pill">Local growth</span></li>
-                  <li><span>Lead capture system</span><span class="pill">More calls</span></li>
-                  <li><span>Trust & positioning</span><span class="pill">Premium brand</span></li>
+              <div class="panel">
+                <h3 data-ar="يشمل الباكج" data-en="Package includes">يشمل الباكج</h3>
+                <ul class="list-clean">
+                  <li data-ar="نظام Oryx للذكاء الاصطناعي" data-en="Oryx AI system">نظام Oryx للذكاء الاصطناعي</li>
+                  <li data-ar="تدفق ليدز ومتابعة" data-en="Lead flow and follow-up">تدفق ليدز ومتابعة</li>
+                  <li data-ar="رفع جودة الحجوزات" data-en="Higher booking quality">رفع جودة الحجوزات</li>
+                  <li data-ar="هيكلة أقرب للإغلاق" data-en="Closer-to-close structure">هيكلة أقرب للإغلاق</li>
                 </ul>
               </div>
             </div>
@@ -755,72 +690,72 @@
     <section id="services">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-kicker">Services</span>
-          <h2>Everything you need to turn traffic into booked calls.</h2>
-          <p class="section-lead">We focus on the essentials that help local businesses grow online without wasting time on bloated marketing retainers.</p>
+          <span class="kicker" data-ar="الخدمات" data-en="Services">الخدمات</span>
+          <h2 data-ar="مو مجرد موقع. هذا نظام يساعد عيادتك تنمو." data-en="Not just a website. A system built to grow your clinic.">مو مجرد موقع. هذا نظام يساعد عيادتك تنمو.</h2>
+          <p class="section-lead" data-ar="أنت ما تبيع صفحة ويب. أنت تقدم Oryx كنظام ذكاء اصطناعي متكامل يرفع الأداء التجاري والتشغيلي للعيادات والمنشآت الطبية." data-en="You are not selling a basic website. You are offering Oryx as a complete AI system that improves both growth and operations for clinics and medical businesses.">أنت ما تبيع صفحة ويب. أنت تقدم Oryx كنظام ذكاء اصطناعي متكامل يرفع الأداء التجاري والتشغيلي للعيادات والمنشآت الطبية.</p>
         </div>
 
         <div class="grid-3">
           <article class="card reveal">
-            <div class="icon" aria-hidden="true">✦</div>
-            <h3>Modern Website Design</h3>
-            <p class="muted">Clean, premium one-page or multi-page websites built to load fast, look credible, and convert visitors into leads.</p>
+            <div class="icon">✦</div>
+            <h3 data-ar="زيادة الليدز الطبية" data-en="More medical leads">زيادة الليدز الطبية</h3>
+            <p data-ar="نصمم رحلة أوضح للعميل المحتمل من أول زيارة أو تواصل إلى خطوة الحجز الفعلية." data-en="We create a clearer path for prospects so they move from first touch to an actual booking with less friction.">نصمم رحلة أوضح للعميل المحتمل من أول زيارة أو تواصل إلى خطوة الحجز الفعلية.</p>
             <ul class="service-list">
-              <li>Mobile-first design</li>
-              <li>Clear calls to action</li>
-              <li>Fast and lightweight build</li>
+              <li data-ar="عرض واضح للخدمة" data-en="Clear offer positioning">عرض واضح للخدمة</li>
+              <li data-ar="ترتيب أقوى للرسائل" data-en="Stronger messaging flow">ترتيب أقوى للرسائل</li>
+              <li data-ar="رفع جودة العملاء المحتملين" data-en="Higher lead quality">رفع جودة العملاء المحتملين</li>
             </ul>
           </article>
 
           <article class="card reveal">
-            <div class="icon" aria-hidden="true">⌁</div>
-            <h3>Google Maps & Local SEO</h3>
-            <p class="muted">Show up stronger where local customers are already searching so your business becomes the obvious choice nearby.</p>
+            <div class="icon">⌁</div>
+            <h3 data-ar="أتمتة ومتابعة أذكى" data-en="Smarter automation and follow-up">أتمتة ومتابعة أذكى</h3>
+            <p data-ar="نساعدك تقلل التأخير، تضبط متابعة العملاء، وتخلي النظام يشتغل بشكل أكثر كفاءة." data-en="We help reduce delays, improve lead handling, and make your system run with more consistency and efficiency.">نساعدك تقلل التأخير، تضبط متابعة العملاء، وتخلي النظام يشتغل بشكل أكثر كفاءة.</p>
             <ul class="service-list">
-              <li>Local optimization</li>
-              <li>Profile improvement</li>
-              <li>Better visibility and trust</li>
+              <li data-ar="تقليل ضياع الفرص" data-en="Less lost opportunity">تقليل ضياع الفرص</li>
+              <li data-ar="تحسين التواصل الداخلي" data-en="Better internal coordination">تحسين التواصل الداخلي</li>
+              <li data-ar="تقوية رحلة العميل" data-en="Stronger patient journey">تقوية رحلة العميل</li>
             </ul>
           </article>
 
           <article class="card reveal">
-            <div class="icon" aria-hidden="true">↗</div>
-            <h3>Lead Capture Systems</h3>
-            <p class="muted">We help you turn website visitors into booked consultations with clear offer positioning and simple conversion flows.</p>
+            <div class="icon">↗</div>
+            <h3 data-ar="خفض التكاليف وزيادة العائد" data-en="Lower costs, increase revenue">خفض التكاليف وزيادة العائد</h3>
+            <p data-ar="Oryx يساعدك تستفيد من كل ليد بشكل أفضل، تقلل الهدر التشغيلي، وتبني نظام يوصل لصفقات أعلى قيمة." data-en="Oryx helps you get more value from every lead, reduce operational waste, and build a system better suited for higher-value deals.">Oryx يساعدك تستفيد من كل ليد بشكل أفضل، تقلل الهدر التشغيلي، وتبني نظام يوصل لصفقات أعلى قيمة.</p>
             <ul class="service-list">
-              <li>Lead forms and CTAs</li>
-              <li>Booking flow setup</li>
-              <li>Better follow-up experience</li>
+              <li data-ar="نظام أقرب للربحية" data-en="More profitable systems">نظام أقرب للربحية</li>
+              <li data-ar="تركيز على الصفقات العالية" data-en="Focus on higher-value deals">تركيز على الصفقات العالية</li>
+              <li data-ar="تحسين كفاءة الفريق" data-en="Improved team efficiency">تحسين كفاءة الفريق</li>
             </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="why-us">
+    <section id="why">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-kicker">Why choose us</span>
-          <h2>Premium execution without agency bloat.</h2>
-          <p class="section-lead">We keep things simple: clear messaging, strong positioning, fast pages, and a website experience that actually helps your business make money.</p>
+          <span class="kicker" data-ar="لماذا Oryx" data-en="Why Oryx">لماذا Oryx</span>
+          <h2 data-ar="لأن العيادات ما تحتاج حلول عامة. تحتاج نظام مصمم لها." data-en="Because clinics do not need generic solutions. They need a system built for them.">لأن العيادات ما تحتاج حلول عامة. تحتاج نظام مصمم لها.</h2>
+          <p class="section-lead" data-ar="أنت تستهدف عيادات وصفقات من 5000 إلى 7000 ريال، لذلك الموقع لازم يهيئ الزائر نفسيًا وعمليًا لمكالمة مبيعات حقيقية، وليس شراء مباشر." data-en="You are targeting clinics with 5000 to 7000 SAR deals, so the site should prepare the visitor for a real sales call, not a direct low-ticket purchase.">أنت تستهدف عيادات وصفقات من 5000 إلى 7000 ريال، لذلك الموقع لازم يهيئ الزائر نفسيًا وعمليًا لمكالمة مبيعات حقيقية، وليس شراء مباشر.</p>
         </div>
 
         <div class="grid-2">
           <article class="card reveal">
-            <h3>Built for local businesses</h3>
+            <h3 data-ar="هيكلة مناسبة للبيع الاستشاري" data-en="Built for consultative selling">هيكلة مناسبة للبيع الاستشاري</h3>
             <ul class="bullet-list">
-              <li>We focus on businesses that need more calls, more trust, and better local visibility.</li>
-              <li>Your site is designed around action, not just aesthetics.</li>
-              <li>Every section has one goal: move visitors toward booking.</li>
+              <li data-ar="الصفحة الأولى تشرح القيمة، وليس السعر فقط." data-en="The first page explains the value, not just a price.">الصفحة الأولى تشرح القيمة، وليس السعر فقط.</li>
+              <li data-ar="بعدها تجمع بيانات العميل قبل الحجز." data-en="Then it collects lead details before booking.">بعدها تجمع بيانات العميل قبل الحجز.</li>
+              <li data-ar="ثم ينتقل العميل إلى مكالمة الإغلاق وهو فاهم الفكرة أكثر." data-en="Then the lead moves to the booking stage with better understanding.">ثم ينتقل العميل إلى مكالمة الإغلاق وهو فاهم الفكرة أكثر.</li>
             </ul>
           </article>
 
           <article class="card reveal">
-            <h3>Fast, clear, conversion-focused</h3>
+            <h3 data-ar="مصمم للقطاع الطبي" data-en="Made for the medical sector">مصمم للقطاع الطبي</h3>
             <ul class="bullet-list">
-              <li>No cluttered pages, no confusing copy, no slow-loading designs.</li>
-              <li>Premium modern look that makes your business feel established and trustworthy.</li>
-              <li>Easy booking flow connected directly to your consultation page.</li>
+              <li data-ar="خطاب واضح للعيادات والمجال الصحي." data-en="Clear messaging for clinics and healthcare businesses.">خطاب واضح للعيادات والمجال الصحي.</li>
+              <li data-ar="تركيز على الليدز، التشغيل، والمردود المالي." data-en="Focused on leads, operations, and financial return.">تركيز على الليدز، التشغيل، والمردود المالي.</li>
+              <li data-ar="أقرب لتقديم Oryx كنظام متكامل، وليس خدمة مبعثرة." data-en="Positions Oryx as a complete system, not a fragmented service.">أقرب لتقديم Oryx كنظام متكامل، وليس خدمة مبعثرة.</li>
             </ul>
           </article>
         </div>
@@ -830,86 +765,85 @@
     <section id="process">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-kicker">Process</span>
-          <h2>A simple system designed to get you more qualified conversations.</h2>
-          <p class="section-lead">We make growth easier by focusing on the steps that matter most: a clear offer, a strong online presence, and an easy next action.</p>
+          <span class="kicker" data-ar="الآلية" data-en="Process">الآلية</span>
+          <h2 data-ar="كيف تتحول الزيارة إلى فرصة مبيعات فعلية؟" data-en="How does a visit become a real sales opportunity?">كيف تتحول الزيارة إلى فرصة مبيعات فعلية؟</h2>
+          <p class="section-lead" data-ar="الرحلة هنا مقصودة: فهم القيمة أولًا، إرسال البيانات ثانيًا، ثم حجز مكالمة مبيعات وأنت داخل المكالمة وأنت فاهم وش هو Oryx." data-en="This journey is intentional: understand the value first, submit your details second, then book a sales call already knowing what Oryx is and why it matters.">الرحلة هنا مقصودة: فهم القيمة أولًا، إرسال البيانات ثانيًا، ثم حجز مكالمة مبيعات وأنت داخل المكالمة وأنت فاهم وش هو Oryx.</p>
         </div>
 
-        <div class="grid-3">
-          <article class="card process-step reveal">
+        <div class="steps">
+          <article class="step-card reveal">
             <span class="step-number">01</span>
-            <h3>Clarify the offer</h3>
-            <p class="muted">We sharpen your messaging so visitors immediately understand what you do, why you’re credible, and why they should contact you.</p>
-            <div class="result-highlight">
-              <strong>Clear positioning</strong>
-              <span class="muted">Less confusion, more trust.</span>
+            <h3 data-ar="يفهم العيادة الفكرة" data-en="The clinic understands the offer">يفهم العيادة الفكرة</h3>
+            <p data-ar="يشوف الزائر كيف يساعد Oryx في زيادة الليدز، تحسين الحجز، وتقليل الهدر." data-en="The visitor sees how Oryx helps increase leads, improve bookings, and reduce waste.">يشوف الزائر كيف يساعد Oryx في زيادة الليدز، تحسين الحجز، وتقليل الهدر.</p>
+            <div class="step-result">
+              <strong data-ar="وضوح أعلى" data-en="More clarity">وضوح أعلى</strong>
+              <span class="muted" data-ar="فهم أسرع للقيمة الحقيقية." data-en="Faster understanding of the true value.">فهم أسرع للقيمة الحقيقية.</span>
             </div>
           </article>
 
-          <article class="card process-step reveal">
+          <article class="step-card reveal">
             <span class="step-number">02</span>
-            <h3>Build the lead flow</h3>
-            <p class="muted">We design a clean website structure with strategic sections, strong CTAs, and a direct path to your booking page.</p>
-            <div class="result-highlight">
-              <strong>Higher intent leads</strong>
-              <span class="muted">Visitors know exactly what to do next.</span>
+            <h3 data-ar="يرسل بياناته" data-en="Submits lead details">يرسل بياناته</h3>
+            <p data-ar="قبل الحجز، يعبّي الاسم، البريد، الجوال، واسم النشاط حتى تدخل مكالمة المبيعات وأنت عارف من أمامك." data-en="Before booking, the lead submits their name, email, phone number, and business name so you enter the sales call with context.">قبل الحجز، يعبّي الاسم، البريد، الجوال، واسم النشاط حتى تدخل مكالمة المبيعات وأنت عارف من أمامك.</p>
+            <div class="step-result">
+              <strong data-ar="تأهيل أفضل" data-en="Better qualification">تأهيل أفضل</strong>
+              <span class="muted" data-ar="معلومات أوضح قبل المكالمة." data-en="Clearer information before the call.">معلومات أوضح قبل المكالمة.</span>
             </div>
           </article>
 
-          <article class="card process-step reveal">
+          <article class="step-card reveal">
             <span class="step-number">03</span>
-            <h3>Drive consistent action</h3>
-            <p class="muted">With better positioning and a better web experience, your business is set up to capture more consultations over time.</p>
-            <div class="result-highlight">
-              <strong>More booked calls</strong>
-              <span class="muted">A smoother path from traffic to consultation.</span>
+            <h3 data-ar="يحجز مكالمة الإغلاق" data-en="Books the closing call">يحجز مكالمة الإغلاق</h3>
+            <p data-ar="بعد إرسال الفورم، ينتقل مباشرة إلى صفحة الحجز أو صفحة تمهيدية فيها فيديو بيع قصير ثم يحجز." data-en="After submitting the form, they move directly to the booking page or to a pre-sell page with a short video before they book.">بعد إرسال الفورم، ينتقل مباشرة إلى صفحة الحجز أو صفحة تمهيدية فيها فيديو بيع قصير ثم يحجز.</p>
+            <div class="step-result">
+              <strong data-ar="فرصة إغلاق أقوى" data-en="Stronger close potential">فرصة إغلاق أقوى</strong>
+              <span class="muted" data-ar="العميل يدخل المكالمة وهو أدفأ." data-en="The prospect enters the call warmer.">العميل يدخل المكالمة وهو أدفأ.</span>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="testimonials">
+    <section>
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-kicker">Testimonials</span>
-          <h2>What clients could say about working with you.</h2>
-          <p class="section-lead">Replace these placeholders with real client feedback once you start collecting testimonials.</p>
+          <span class="kicker" data-ar="آراء تجريبية" data-en="Placeholder testimonials">آراء تجريبية</span>
+          <h2 data-ar="أماكن جاهزة تضيف فيها شهادات عملاء لاحقًا." data-en="Ready sections where you can add client proof later.">أماكن جاهزة تضيف فيها شهادات عملاء لاحقًا.</h2>
         </div>
 
-        <div class="testimonials">
+        <div class="testimonial-grid">
           <article class="card testimonial reveal">
             <div class="stars">★★★★★</div>
-            <p>“Our website finally looks like a real business. It feels premium, clearer, and now people actually know what to do when they land on it.”</p>
+            <p data-ar="“صار عندنا وضوح أكبر في طريقة التعامل مع العملاء المحتملين، وصارت الرحلة البيعية أرتب بكثير.”" data-en="“We became much clearer in how we handle prospects, and the sales journey became far more organized.”">“صار عندنا وضوح أكبر في طريقة التعامل مع العملاء المحتملين، وصارت الرحلة البيعية أرتب بكثير.”</p>
             <div class="testimonial-footer">
-              <div class="avatar">A</div>
+              <div class="avatar">د</div>
               <div>
-                <strong>Ahmed</strong>
-                <div class="testimonial-role">Local Service Business Owner</div>
+                <strong data-ar="مدير عيادة" data-en="Clinic Manager">مدير عيادة</strong>
+                <div class="testimonial-role" data-ar="Placeholder testimonial" data-en="Placeholder testimonial">Placeholder testimonial</div>
               </div>
             </div>
           </article>
 
           <article class="card testimonial reveal">
             <div class="stars">★★★★★</div>
-            <p>“The booking flow became way simpler. Instead of just browsing, people started taking action faster and contacting us with better intent.”</p>
+            <p data-ar="“الطريقة كانت أوضح من مجرد موقع. حسّينا إن فيه نظام فعلي يساعدنا نرتب النمو والتشغيل.”" data-en="“This felt bigger than just a website. It felt like an actual system helping us organize growth and operations.”">“الطريقة كانت أوضح من مجرد موقع. حسّينا إن فيه نظام فعلي يساعدنا نرتب النمو والتشغيل.”</p>
             <div class="testimonial-footer">
-              <div class="avatar">S</div>
+              <div class="avatar">ط</div>
               <div>
-                <strong>Sara</strong>
-                <div class="testimonial-role">Clinic / Practice Manager</div>
+                <strong data-ar="صاحب منشأة طبية" data-en="Medical Business Owner">صاحب منشأة طبية</strong>
+                <div class="testimonial-role" data-ar="Placeholder testimonial" data-en="Placeholder testimonial">Placeholder testimonial</div>
               </div>
             </div>
           </article>
 
           <article class="card testimonial reveal">
             <div class="stars">★★★★★</div>
-            <p>“Clean design, fast results, and no unnecessary complexity. It gave our business a stronger presence online from day one.”</p>
+            <p data-ar="“دخلنا على المكالمة وإحنا فاهمين وش راح ناخذ تقريبًا، وهذا رفع جودة الحوار من البداية.”" data-en="“We entered the call already understanding the offer, which made the conversation better from the start.”">“دخلنا على المكالمة وإحنا فاهمين وش راح ناخذ تقريبًا، وهذا رفع جودة الحوار من البداية.”</p>
             <div class="testimonial-footer">
-              <div class="avatar">M</div>
+              <div class="avatar">م</div>
               <div>
-                <strong>Mohammed</strong>
-                <div class="testimonial-role">Local Brand Founder</div>
+                <strong data-ar="إدارة تشغيل" data-en="Operations Lead">إدارة تشغيل</strong>
+                <div class="testimonial-role" data-ar="Placeholder testimonial" data-en="Placeholder testimonial">Placeholder testimonial</div>
               </div>
             </div>
           </article>
@@ -920,49 +854,113 @@
     <section id="faq">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-kicker">FAQ</span>
-          <h2>Common questions before booking a free consultation.</h2>
+          <span class="kicker" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</span>
+          <h2 data-ar="أسئلة ممكن تجي في بال العيادة قبل الحجز." data-en="Questions a clinic may have before booking.">أسئلة ممكن تجي في بال العيادة قبل الحجز.</h2>
         </div>
 
         <div class="faq-grid reveal">
           <div class="faq-item active">
             <button class="faq-question" type="button" aria-expanded="true">
-              <span>What kind of businesses do you work with?</span>
-              <span>+</span>
+              <span data-ar="هل Oryx مجرد موقع إلكتروني؟" data-en="Is Oryx just a website?">هل Oryx مجرد موقع إلكتروني؟</span>
+              <span class="plus">+</span>
             </button>
             <div class="faq-answer">
-              <p>We primarily help local businesses that want better positioning online, more trust, and more qualified inbound calls or inquiries.</p>
+              <p data-ar="لا. الموقع هنا جزء من الرحلة فقط. Oryx يتم تقديمه كنظام ذكاء اصطناعي متكامل يساعد في الليدز، الحجز، المتابعة، وتحسين الكفاءة التشغيلية." data-en="No. The website is only one part of the journey. Oryx is positioned as a complete AI system that helps with leads, booking, follow-up, and operational efficiency.">لا. الموقع هنا جزء من الرحلة فقط. Oryx يتم تقديمه كنظام ذكاء اصطناعي متكامل يساعد في الليدز، الحجز، المتابعة، وتحسين الكفاءة التشغيلية.</p>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false">
-              <span>Do I need a full website redesign?</span>
-              <span>+</span>
+              <span data-ar="هل يصلح للعيادات فقط؟" data-en="Is it only for clinics?">هل يصلح للعيادات فقط؟</span>
+              <span class="plus">+</span>
             </button>
             <div class="faq-answer">
-              <p>Not always. Sometimes a one-page site or a cleaner lead flow is enough. We’ll look at your current setup and recommend the simplest path.</p>
+              <p data-ar="التركيز الحالي على العيادات والمنشآت الطبية لأن هذا القطاع يحتاج تنظيم أعلى في التعامل مع العملاء والفرص والحجوزات." data-en="The current positioning is focused on clinics and medical businesses because this sector benefits heavily from better lead handling, appointment flow, and operational structure.">التركيز الحالي على العيادات والمنشآت الطبية لأن هذا القطاع يحتاج تنظيم أعلى في التعامل مع العملاء والفرص والحجوزات.</p>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false">
-              <span>How does the free consultation work?</span>
-              <span>+</span>
+              <span data-ar="ليش فيه فورم قبل الحجز؟" data-en="Why is there a form before booking?">ليش فيه فورم قبل الحجز؟</span>
+              <span class="plus">+</span>
             </button>
             <div class="faq-answer">
-              <p>You book a call, we review your business goals and current online presence, and we show you where the main opportunities are.</p>
+              <p data-ar="عشان تدخل مكالمة المبيعات بمعلومات أوضح عن العميل المحتمل، ويصير الحوار أنسب وأقرب للإغلاق بدل ما يكون عام وعشوائي." data-en="So you enter the sales call with better context about the lead, making the conversation more relevant and more likely to close.">عشان تدخل مكالمة المبيعات بمعلومات أوضح عن العميل المحتمل، ويصير الحوار أنسب وأقرب للإغلاق بدل ما يكون عام وعشوائي.</p>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false">
-              <span>Can you connect this page to my booking link?</span>
-              <span>+</span>
+              <span data-ar="هل أقدر أضيف فيديو تمهيدي قبل رابط الحجز؟" data-en="Can I add a pre-sell video before the booking link?">هل أقدر أضيف فيديو تمهيدي قبل رابط الحجز؟</span>
+              <span class="plus">+</span>
             </button>
             <div class="faq-answer">
-              <p>Yes. Just replace the placeholder Cal.com URL in the buttons with your real booking link and the entire page is ready to send traffic to it.</p>
+              <p data-ar="نعم. الكود مجهز لصفحة ثانية بعد إرسال الفورم، وتقدر تضيف فيها فيديو يشرح الفكرة بشكل أعمق قبل ما يضغط العميل على رابط الحجز النهائي." data-en="Yes. The code is already structured for a second step after form submission, where you can add a video that explains the offer more deeply before the prospect clicks the final booking link.">نعم. الكود مجهز لصفحة ثانية بعد إرسال الفورم، وتقدر تضيف فيها فيديو يشرح الفكرة بشكل أعمق قبل ما يضغط العميل على رابط الحجز النهائي.</p>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lead-form">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker" data-ar="الخطوة التالية" data-en="Next step">الخطوة التالية</span>
+          <h2 data-ar="قبل الحجز، عرفنا عليك وعلى نشاطك." data-en="Before booking, tell us about you and your business.">قبل الحجز، عرفنا عليك وعلى نشاطك.</h2>
+          <p class="section-lead" data-ar="هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط مكالمة المبيعات." data-en="This step prepares a better sales call. After submitting the form, the visitor moves to a pre-booking page and then to the sales call link.">هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط مكالمة المبيعات.</p>
+        </div>
+
+        <form class="form-card reveal" id="leadCaptureForm">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name" data-ar="الاسم" data-en="Name">الاسم</label>
+              <input id="name" name="name" type="text" required data-ar-placeholder="اكتب اسمك" data-en-placeholder="Enter your name" placeholder="اكتب اسمك" />
+            </div>
+            <div class="field">
+              <label for="business" data-ar="اسم النشاط / العيادة" data-en="Business / Clinic Name">اسم النشاط / العيادة</label>
+              <input id="business" name="business" type="text" required data-ar-placeholder="اسم النشاط" data-en-placeholder="Business name" placeholder="اسم النشاط" />
+            </div>
+            <div class="field">
+              <label for="email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+              <input id="email" name="email" type="email" required data-ar-placeholder="name@example.com" data-en-placeholder="name@example.com" placeholder="name@example.com" />
+            </div>
+            <div class="field">
+              <label for="phone" data-ar="رقم الجوال" data-en="Phone Number">رقم الجوال</label>
+              <input id="phone" name="phone" type="tel" required data-ar-placeholder="05xxxxxxxx" data-en-placeholder="Phone number" placeholder="05xxxxxxxx" />
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:1rem;">
+            <label for="notes" data-ar="وش أكبر تحدي عندك الآن؟" data-en="What is your biggest challenge right now?">وش أكبر تحدي عندك الآن؟</label>
+            <textarea id="notes" name="notes" data-ar-placeholder="اكتب بشكل مختصر..." data-en-placeholder="Write a short note..." placeholder="اكتب بشكل مختصر..."></textarea>
+          </div>
+
+          <div class="cta-row">
+            <button class="btn btn-primary" type="submit" data-ar="أرسل وانتقل للخطوة الأخيرة" data-en="Submit and continue">أرسل وانتقل للخطوة الأخيرة</button>
+          </div>
+
+          <p class="form-note" data-ar="مهم: هذا النموذج حاليًا واجهة فقط. لاحقًا تقدر تربطه بـ Formspree أو Tally أو أي نظام يجمع البيانات فعليًا." data-en="Important: this form is currently front-end only. Later, you can connect it to Formspree, Tally, or any lead capture backend.">مهم: هذا النموذج حاليًا واجهة فقط. لاحقًا تقدر تربطه بـ Formspree أو Tally أو أي نظام يجمع البيانات فعليًا.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="prebook-section" class="hidden-section">
+      <div class="container">
+        <div class="video-card reveal show">
+          <span class="kicker" data-ar="قبل الحجز" data-en="Before you book">قبل الحجز</span>
+          <h2 data-ar="ممتاز. باقي خطوة أخيرة قبل مكالمة المبيعات." data-en="Great. One last step before the sales call.">ممتاز. باقي خطوة أخيرة قبل مكالمة المبيعات.</h2>
+          <p class="section-lead" data-ar="في هذه الصفحة تقدر تضيف فيديو يشرح Oryx بشكل أقوى ويهيئ العميل قبل الدخول على مكالمة الإغلاق." data-en="On this page, you can later add a video that explains Oryx more deeply and warms the prospect before the closing call.">في هذه الصفحة تقدر تضيف فيديو يشرح Oryx بشكل أقوى ويهيئ العميل قبل الدخول على مكالمة الإغلاق.</p>
+
+          <div class="video-box">
+            <div>
+              <strong data-ar="مكان الفيديو التمهيدي" data-en="Pre-sell video placeholder">مكان الفيديو التمهيدي</strong>
+              <span data-ar="أضف هنا لاحقًا فيديو يشرح قيمة Oryx، كيف يساعد العيادات، ولماذا مكالمة المبيعات تستحق وقتهم." data-en="Later, add a short video here explaining the value of Oryx, how it helps clinics, and why the sales call is worth their time.">أضف هنا لاحقًا فيديو يشرح قيمة Oryx، كيف يساعد العيادات، ولماذا مكالمة المبيعات تستحق وقتهم.</span>
+            </div>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" id="finalBookingLink" href="https://cal.com/your-booking-link" target="_blank" rel="noopener noreferrer" data-ar="الانتقال إلى مكالمة المبيعات" data-en="Continue to Sales Call">الانتقال إلى مكالمة المبيعات</a>
+            <a class="btn btn-secondary" href="#top" data-ar="الرجوع للأعلى" data-en="Back to top">الرجوع للأعلى</a>
           </div>
         </div>
       </div>
@@ -970,16 +968,12 @@
 
     <section>
       <div class="container">
-        <div class="cta-wrap reveal" id="contact">
-          <div class="cta-inner">
-            <div>
-              <span class="section-kicker">Final CTA</span>
-              <h2>Ready to get more local customers to book with you?</h2>
-              <p>Book a free consultation call and let’s see how your website, local presence, and lead flow can be upgraded for better results.</p>
-            </div>
-            <div>
-              <a class="btn btn-primary" href="https://cal.com/your-booking-link" target="_blank" rel="noopener noreferrer">Book Your Free Call</a>
-            </div>
+        <div class="final-cta reveal">
+          <span class="kicker" data-ar="دعوة أخيرة" data-en="Final CTA">دعوة أخيرة</span>
+          <h2 data-ar="إذا عندك عيادة أو منشأة طبية وتبي تشغيل أذكى ونمو أوضح، Oryx جاهز." data-en="If you run a clinic or medical business and want smarter operations with clearer growth, Oryx is ready.">إذا عندك عيادة أو منشأة طبية وتبي تشغيل أذكى ونمو أوضح، Oryx جاهز.</h2>
+          <p class="section-lead" data-ar="ابدأ من الفورم، وبعدها خذ مكالمة مبيعات نفهم فيها وضعك ونشوف إذا Oryx مناسب لك فعلاً." data-en="Start with the form, then book a sales call so we can understand your current setup and see whether Oryx is the right fit.">ابدأ من الفورم، وبعدها خذ مكالمة مبيعات نفهم فيها وضعك ونشوف إذا Oryx مناسب لك فعلاً.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#lead-form" data-ar="ابدأ الآن" data-en="Start now">ابدأ الآن</a>
           </div>
         </div>
       </div>
@@ -988,16 +982,46 @@
 
   <footer>
     <div class="container footer-row">
-      <div>© <span id="year"></span> Your Agency. All rights reserved.</div>
-      <a href="https://cal.com/your-booking-link" target="_blank" rel="noopener noreferrer">Contact / Book Consultation</a>
+      <div>© <span id="year"></span> Oryx</div>
+      <div data-ar="نظام ذكاء اصطناعي للعيادات والمنشآت الطبية" data-en="AI system for clinics and medical businesses">نظام ذكاء اصطناعي للعيادات والمنشآت الطبية</div>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    const body = document.body;
+    const langToggle = document.getElementById('langToggle');
+    let currentLang = 'ar';
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      const isArabic = lang === 'ar';
+      document.documentElement.lang = isArabic ? 'ar' : 'en';
+      document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+      body.classList.toggle('en', !isArabic);
+      langToggle.textContent = isArabic ? 'English' : 'العربية';
+      document.title = isArabic
+        ? 'Oryx | نظام ذكاء اصطناعي للعيادات والمجال الطبي'
+        : 'Oryx | AI System for Clinics and Medical Businesses';
+
+      document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = isArabic ? el.dataset.ar : el.dataset.en;
+      });
+
+      document.querySelectorAll('[data-ar-placeholder]').forEach(el => {
+        el.placeholder = isArabic ? el.dataset.arPlaceholder : el.dataset.enPlaceholder;
+      });
+    }
+
+    langToggle.addEventListener('click', () => {
+      applyLanguage(currentLang === 'ar' ? 'en' : 'ar');
+    });
+
+    applyLanguage('ar');
+
     const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach((item, index) => {
+    faqItems.forEach(item => {
       const button = item.querySelector('.faq-question');
       const answer = item.querySelector('.faq-answer');
 
@@ -1007,13 +1031,11 @@
 
       button.addEventListener('click', () => {
         const isActive = item.classList.contains('active');
-
-        faqItems.forEach((other) => {
+        faqItems.forEach(other => {
           other.classList.remove('active');
           other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
           other.querySelector('.faq-answer').style.maxHeight = null;
         });
-
         if (!isActive) {
           item.classList.add('active');
           button.setAttribute('aria-expanded', 'true');
@@ -1024,15 +1046,24 @@
 
     const revealElements = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.12 });
+    revealElements.forEach(el => observer.observe(el));
 
-    revealElements.forEach((el) => observer.observe(el));
+    const leadForm = document.getElementById('leadCaptureForm');
+    const prebookSection = document.getElementById('prebook-section');
+
+    leadForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      prebookSection.classList.add('show');
+      prebookSection.classList.remove('hidden-section');
+      prebookSection.scrollIntoView({ behavior: 'smooth' });
+    });
   </script>
 </body>
 </html>
