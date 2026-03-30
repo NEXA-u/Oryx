@@ -737,7 +737,7 @@
         <div class="section-head reveal">
           <span class="kicker" data-ar="لماذا Oryx" data-en="Why Oryx">لماذا Oryx</span>
           <h2 data-ar="لأن العيادات ما تحتاج حلول عامة. تحتاج نظام مصمم لها." data-en="Because clinics do not need generic solutions. They need a system built for them.">لأن العيادات ما تحتاج حلول عامة. تحتاج نظام مصمم لها.</h2>
-          <p class="section-lead" data-ar="أنت تستهدف عيادات وصفقات من 5000 إلى 7000 ريال، لذلك الموقع لازم يهيئ الزائر نفسيًا وعمليًا لمكالمة مبيعات حقيقية، وليس شراء مباشر." data-en="You are targeting clinics with 5000 to 7000 SAR deals, so the site should prepare the visitor for a real sales call, not a direct low-ticket purchase.">أنت تستهدف عيادات وصفقات من 5000 إلى 7000 ريال، لذلك الموقع لازم يهيئ الزائر نفسيًا وعمليًا لمكالمة مبيعات حقيقية، وليس شراء مباشر.</p>
+          <p class="section-lead" data-ar="صممنا هذه الرحلة بحيث يفهم الزائر قيمة Oryx أولًا، ثم يرسل بياناته، ثم ينتقل إلى مكالمة مبيعات مناسبة بشكل واضح واحترافي." data-en="This journey is designed so visitors first understand the value of Oryx, then submit their details, and then move into a clear, professional sales call.">صممنا هذه الرحلة بحيث يفهم الزائر قيمة Oryx أولًا، ثم يرسل بياناته، ثم ينتقل إلى مكالمة مبيعات مناسبة بشكل واضح واحترافي.</p>
         </div>
 
         <div class="grid-2">
@@ -910,7 +910,7 @@
           <p class="section-lead" data-ar="هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط مكالمة المبيعات." data-en="This step prepares a better sales call. After submitting the form, the visitor moves to a pre-booking page and then to the sales call link.">هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط مكالمة المبيعات.</p>
         </div>
 
-        <form class="form-card reveal" id="leadCaptureForm">
+        <form class="form-card reveal" id="leadCaptureForm" action="https://formspree.io/f/xeepgawk" method="POST">
           <div class="form-grid">
             <div class="field">
               <label for="name" data-ar="الاسم" data-en="Name">الاسم</label>
@@ -937,6 +937,7 @@
 
           <div class="cta-row">
             <button class="btn btn-primary" type="submit" data-ar="أرسل وانتقل للخطوة الأخيرة" data-en="Submit and continue">أرسل وانتقل للخطوة الأخيرة</button>
+            <input type="hidden" name="_next" value="#prebook-section" />
           </div>
 
           <p class="form-note" data-ar="مهم: هذا النموذج حاليًا واجهة فقط. لاحقًا تقدر تربطه بـ Formspree أو Tally أو أي نظام يجمع البيانات فعليًا." data-en="Important: this form is currently front-end only. Later, you can connect it to Formspree, Tally, or any lead capture backend.">مهم: هذا النموذج حاليًا واجهة فقط. لاحقًا تقدر تربطه بـ Formspree أو Tally أو أي نظام يجمع البيانات فعليًا.</p>
@@ -981,6 +982,17 @@
   </main>
 
   <footer>
+    <div class="container" style="margin-bottom: 1.2rem;">
+      <div class="card" style="padding:1.2rem;">
+        <span class="kicker" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</span>
+        <h3 style="margin-top:.4rem;" data-ar="معلومات التواصل" data-en="Contact Information">معلومات التواصل</h3>
+        <div class="cta-row" style="margin-top:1rem;">
+          <a class="btn btn-secondary" href="tel:0504397818">0504397818</a>
+          <a class="btn btn-secondary" href="https://www.instagram.com/orxy.00/?hl=ar" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a class="btn btn-secondary" href="#" aria-disabled="true">TikTok @orxy.00</a>
+        </div>
+      </div>
+    </div>
     <div class="container footer-row">
       <div>© <span id="year"></span> Oryx</div>
       <div data-ar="نظام ذكاء اصطناعي للعيادات والمنشآت الطبية" data-en="AI system for clinics and medical businesses">نظام ذكاء اصطناعي للعيادات والمنشآت الطبية</div>
@@ -1058,11 +1070,9 @@
     const leadForm = document.getElementById('leadCaptureForm');
     const prebookSection = document.getElementById('prebook-section');
 
-    leadForm.addEventListener('submit', function(e) {
-      e.preventDefault();
+    leadForm.addEventListener('submit', function() {
       prebookSection.classList.add('show');
       prebookSection.classList.remove('hidden-section');
-      prebookSection.scrollIntoView({ behavior: 'smooth' });
     });
   </script>
 </body>
