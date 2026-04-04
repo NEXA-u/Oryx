@@ -37,10 +37,12 @@
       line-height: 1.7;
     }
 
-    body.en { direction: ltr; }
+    body.en {
+      direction: ltr;
+    }
+
     a { color: inherit; text-decoration: none; }
     button, input, textarea, select { font: inherit; }
-
     .container {
       width: min(calc(100% - 2rem), var(--max));
       margin: 0 auto;
@@ -144,9 +146,13 @@
     }
 
     .btn:hover,
-    .lang-toggle:hover { transform: translateY(-2px); }
+    .lang-toggle:hover {
+      transform: translateY(-2px);
+    }
 
-    .hero { padding: 5rem 0 3.5rem; }
+    .hero {
+      padding: 5rem 0 3.5rem;
+    }
 
     .hero-grid {
       display: grid;
@@ -188,7 +194,9 @@
     .testimonial-role,
     .step-card p,
     .card p,
-    li { color: var(--muted); }
+    li {
+      color: var(--muted);
+    }
 
     .hero p {
       font-size: 1.06rem;
@@ -198,7 +206,7 @@
 
     .hero-actions,
     .proof,
-    .cta-row {
+    .form-row {
       display: flex;
       flex-wrap: wrap;
       gap: .85rem;
@@ -452,7 +460,9 @@
 
     .form-card,
     .video-card,
-    .final-cta { padding: 1.4rem; }
+    .final-cta {
+      padding: 1.4rem;
+    }
 
     .form-card {
       max-width: 860px;
@@ -497,16 +507,6 @@
       color: var(--muted);
     }
 
-    [data-fs-error][data-fs-active] {
-      color: #fca5a5;
-      margin-top: 1rem;
-      display: block;
-    }
-
-    [data-fs-field][aria-invalid='true'] {
-      border-color: #fca5a5;
-    }
-
     .video-box {
       min-height: 260px;
       border-radius: 20px;
@@ -524,6 +524,13 @@
       color: var(--text);
       margin-bottom: .4rem;
       font-size: 1.15rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .85rem;
+      margin-top: 1.2rem;
     }
 
     footer {
@@ -900,42 +907,41 @@
         <div class="section-head reveal">
           <span class="kicker" data-ar="الخطوة التالية" data-en="Next step">الخطوة التالية</span>
           <h2 data-ar="قبل الحجز، عرفنا عليك وعلى نشاطك." data-en="Before booking, tell us about you and your business.">قبل الحجز، عرفنا عليك وعلى نشاطك.</h2>
-          <p class="section-lead" data-ar="هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد نجاح الإرسال، تفتح لك مباشرة الخطوة الأخيرة داخل نفس الصفحة بدون ما يطلعك إلى Formspree." data-en="This step prepares a better sales call. After a successful submit, the final step opens directly on the same page without sending the visitor to Formspree.">هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد نجاح الإرسال، تفتح لك مباشرة الخطوة الأخيرة داخل نفس الصفحة بدون ما يطلعك إلى Formspree.</p>
+          <p class="section-lead" data-ar="هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط مكالمة المبيعات." data-en="This step prepares a better sales call. After submitting the form, the visitor moves to a pre-booking page and then to the sales call link.">هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط مكالمة المبيعات.</p>
         </div>
 
         <form class="form-card reveal" id="leadCaptureForm" action="https://formspree.io/f/xeepgawk" method="POST">
           <div class="form-grid">
             <div class="field">
               <label for="name" data-ar="الاسم" data-en="Name">الاسم</label>
-              <input id="name" name="name" type="text" data-fs-field required data-ar-placeholder="اكتب اسمك" data-en-placeholder="Enter your name" placeholder="اكتب اسمك" />
+              <input id="name" name="name" type="text" required data-ar-placeholder="اكتب اسمك" data-en-placeholder="Enter your name" placeholder="اكتب اسمك" />
             </div>
             <div class="field">
               <label for="business" data-ar="اسم النشاط / العيادة" data-en="Business / Clinic Name">اسم النشاط / العيادة</label>
-              <input id="business" name="business" type="text" data-fs-field required data-ar-placeholder="اسم النشاط" data-en-placeholder="Business name" placeholder="اسم النشاط" />
+              <input id="business" name="business" type="text" required data-ar-placeholder="اسم النشاط" data-en-placeholder="Business name" placeholder="اسم النشاط" />
             </div>
             <div class="field">
               <label for="email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
-              <input id="email" name="email" type="email" data-fs-field required data-ar-placeholder="name@example.com" data-en-placeholder="name@example.com" placeholder="name@example.com" />
+              <input id="email" name="email" type="email" required data-ar-placeholder="name@example.com" data-en-placeholder="name@example.com" placeholder="name@example.com" />
             </div>
             <div class="field">
-              <label for="phone" data-ar="رقم الجوال" data-en="Phone Number">رقم الجوال</label>
-              <input id="phone" name="phone" type="tel" data-fs-field required data-ar-placeholder="05xxxxxxxx" data-en-placeholder="Phone number" placeholder="05xxxxxxxx" />
+              <label for="phone" data-ar="📞 رقم الجوال" data-en="📞 Phone Number">📞 رقم الجوال</label>
+              <input id="phone" name="phone" type="tel" required data-ar-placeholder="05xxxxxxxx" data-en-placeholder="Phone number" placeholder="05xxxxxxxx" />
             </div>
           </div>
 
           <div class="field" style="margin-top:1rem;">
             <label for="notes" data-ar="وش أكبر تحدي عندك الآن؟" data-en="What is your biggest challenge right now?">وش أكبر تحدي عندك الآن؟</label>
-            <textarea id="notes" name="notes" data-fs-field data-ar-placeholder="اكتب بشكل مختصر..." data-en-placeholder="Write a short note..." placeholder="اكتب بشكل مختصر..."></textarea>
+            <textarea id="notes" name="notes" data-ar-placeholder="اكتب بشكل مختصر..." data-en-placeholder="Write a short note..." placeholder="اكتب بشكل مختصر..."></textarea>
           </div>
 
           <div class="cta-row">
-            <button class="btn btn-primary" id="submitLeadBtn" type="submit" data-fs-submit-btn data-ar="أرسل وانتقل للخطوة الأخيرة" data-en="Submit and continue">أرسل وانتقل للخطوة الأخيرة</button>
-            <span id="formSuccess" style="display:none; color: var(--success); font-weight:800; align-self:center;" data-ar="✓ تم إرسال بياناتك بنجاح" data-en="✓ Your details were sent successfully">✓ تم إرسال بياناتك بنجاح</span>
+            <button class="btn btn-primary" id="submitLeadBtn" type="submit" data-ar="أرسل وانتقل للخطوة الأخيرة" data-en="Submit and continue">أرسل وانتقل للخطوة الأخيرة</button>
+            <span id="formSuccess" style="display:none; color: var(--success); font-weight:800; align-self:center;" data-ar="✓ تم الإرسال بنجاح" data-en="✓ Submitted successfully">✓ تم الإرسال بنجاح</span>
           </div>
+          <p id="formError" class="form-note" style="display:none; color:#fca5a5;" data-ar="صار خطأ أثناء الإرسال. حاول مرة ثانية." data-en="Something went wrong while submitting. Please try again.">صار خطأ أثناء الإرسال. حاول مرة ثانية.</p>
 
-          <div data-fs-error class="form-note"></div>
-
-          <p class="form-note" data-ar="بعد الإرسال الناجح، تفتح لك خطوة الحجز مباشرة داخل نفس الموقع." data-en="After a successful submission, the booking step opens directly inside the same page.">بعد الإرسال الناجح، تفتح لك خطوة الحجز مباشرة داخل نفس الموقع.</p>
+          <p class="form-note" data-ar="مهم: هذا النموذج حاليًا واجهة فقط. لاحقًا تقدر تربطه بـ Formspree أو Tally أو أي نظام يجمع البيانات فعليًا." data-en="Important: this form is currently front-end only. Later, you can connect it to Formspree, Tally, or any lead capture backend.">مهم: هذا النموذج حاليًا واجهة فقط. لاحقًا تقدر تربطه بـ Formspree أو Tally أو أي نظام يجمع البيانات فعليًا.</p>
         </form>
       </div>
     </section>
@@ -954,8 +960,19 @@
             </div>
           </div>
 
-          <div class="cta-row">
-            <a class="btn btn-primary" id="finalBookingLink" href="https://cal.com/your-booking-link" target="_blank" rel="noopener noreferrer" data-ar="الانتقال إلى مكالمة المبيعات" data-en="Continue to Sales Call">الانتقال إلى مكالمة المبيعات</a>
+          <div class="cta-row" style="align-items:stretch; width:100%;">
+            <a class="btn btn-primary" href="https://calendly.com/nexa-conn/new-meeting-1" target="_blank" rel="noopener noreferrer" style="min-height:56px;">
+              <span>📞</span>
+              <span data-ar="مكالمة هاتفية - 5 دقائق" data-en="Phone Call - 5 min">مكالمة هاتفية - 5 دقائق</span>
+            </a>
+            <a class="btn btn-secondary" href="https://calendly.com/nexa-conn/new-meeting" target="_blank" rel="noopener noreferrer" style="min-height:56px;">
+              <span>🎥</span>
+              <span data-ar="اجتماع Zoom" data-en="Zoom Meeting">اجتماع Zoom</span>
+            </a>
+            <a class="btn btn-secondary" href="https://calendly.com/nexa-conn/30min" target="_blank" rel="noopener noreferrer" style="min-height:56px;">
+              <span>📹</span>
+              <span data-ar="اجتماع Google Meet" data-en="Google Meet Meeting">اجتماع Google Meet</span>
+            </a>
             <a class="btn btn-secondary" href="#top" data-ar="الرجوع للأعلى" data-en="Back to top">الرجوع للأعلى</a>
           </div>
         </div>
@@ -988,7 +1005,6 @@
         </div>
       </div>
     </div>
-
     <div class="container footer-row">
       <div>© <span id="year"></span> Oryx</div>
       <div data-ar="نظام ذكاء اصطناعي للعيادات والمنشآت الطبية" data-en="AI system for clinics and medical businesses">نظام ذكاء اصطناعي للعيادات والمنشآت الطبية</div>
@@ -1063,33 +1079,49 @@
     }, { threshold: 0.12 });
     revealElements.forEach(el => observer.observe(el));
 
+    const leadForm = document.getElementById('leadCaptureForm');
     const prebookSection = document.getElementById('prebook-section');
     const submitLeadBtn = document.getElementById('submitLeadBtn');
     const formSuccess = document.getElementById('formSuccess');
+    const formError = document.getElementById('formError');
 
-    window.formspree =
-      window.formspree ||
-      function () {
-        (formspree.q = formspree.q || []).push(arguments);
-      };
+    leadForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      formError.style.display = 'none';
+      formSuccess.style.display = 'none';
+      submitLeadBtn.disabled = true;
+      submitLeadBtn.style.opacity = '0.7';
 
-    formspree('initForm', {
-      formElement: '#leadCaptureForm',
-      formId: 'xeepgawk',
-      onSuccess: ({ form }) => {
-        if (submitLeadBtn) submitLeadBtn.style.display = 'none';
-        if (formSuccess) formSuccess.style.display = 'inline-flex';
-        form.reset();
+      const originalText = submitLeadBtn.textContent;
+      submitLeadBtn.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
+
+      try {
+        const formData = new FormData(leadForm);
+        const response = await fetch(leadForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Submission failed');
+        }
+
+        formSuccess.style.display = 'inline-flex';
+        submitLeadBtn.style.display = 'none';
+        leadForm.reset();
         prebookSection.classList.add('show');
         prebookSection.classList.remove('hidden-section');
         prebookSection.scrollIntoView({ behavior: 'smooth' });
+      } catch (error) {
+        formError.style.display = 'block';
+        submitLeadBtn.disabled = false;
+        submitLeadBtn.style.opacity = '1';
+        submitLeadBtn.textContent = originalText;
       }
     });
   </script>
-  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
-<!-- Calendly inline widget begin -->
-<div class="calendly-inline-widget" data-url="https://calendly.com/nexa-conn/new-meeting-1?text_color=000000&primary_color=259cb6" style="min-width:320px;height:700px;"></div>
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<!-- Calendly inline widget end --> 
