@@ -37,99 +37,600 @@
       line-height: 1.7;
     }
 
-    body.en { direction: ltr; }
+    body.en {
+      direction: ltr;
+    }
+
     a { color: inherit; text-decoration: none; }
     button, input, textarea, select { font: inherit; }
-    .container { width: min(calc(100% - 2rem), var(--max)); margin: 0 auto; }
-    .topbar { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px); background: rgba(5, 10, 17, .7); border-bottom: 1px solid rgba(255,255,255,.07); }
-    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-    .brand { display: flex; align-items: center; gap: .85rem; font-weight: 800; letter-spacing: .02em; }
-    .logo { width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, var(--primary), var(--primary-2)); box-shadow: 0 14px 30px rgba(103,232,249,.22); position: relative; overflow: hidden; }
-    .logo::after { content: ""; position: absolute; inset: 1px; border-radius: 13px; background: linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,0)); }
-    .nav-links { display: flex; align-items: center; gap: 1rem; color: var(--muted); font-size: .95rem; }
-    .nav-links a:hover, .nav-links a:focus-visible, .lang-toggle:hover, .lang-toggle:focus-visible { color: var(--text); }
-    .nav-actions { display: flex; align-items: center; gap: .75rem; }
-    .lang-toggle, .btn { border: 0; cursor: pointer; min-height: 48px; padding: 0 1.1rem; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; gap: .55rem; transition: .2s ease; font-weight: 800; }
-    .lang-toggle { background: rgba(255,255,255,.04); color: var(--muted); border: 1px solid rgba(255,255,255,.08); }
-    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-2)); color: #031018; box-shadow: 0 16px 40px rgba(103,232,249,.18); }
-    .btn-secondary { background: rgba(255,255,255,.05); color: var(--text); border: 1px solid rgba(255,255,255,.08); }
-    .btn:hover, .lang-toggle:hover { transform: translateY(-2px); }
-    .hero { padding: 5rem 0 3.5rem; }
-    .hero-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 1.4rem; align-items: center; }
-    .eyebrow { display: inline-flex; align-items: center; gap: .55rem; padding: .48rem .9rem; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.04); color: #dff8ff; font-size: .92rem; margin-bottom: 1rem; }
-    .eyebrow-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--success); box-shadow: 0 0 0 8px rgba(134,239,172,.12); }
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 10, 17, .7);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 14px 30px rgba(103,232,249,.22);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 13px;
+      background: linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,0));
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .lang-toggle:hover,
+    .lang-toggle:focus-visible {
+      color: var(--text);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .lang-toggle,
+    .btn {
+      border: 0;
+      cursor: pointer;
+      min-height: 48px;
+      padding: 0 1.1rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      transition: .2s ease;
+      font-weight: 800;
+    }
+
+    .lang-toggle {
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #031018;
+      box-shadow: 0 16px 40px rgba(103,232,249,.18);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .btn:hover,
+    .lang-toggle:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      padding: 5rem 0 3.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 1.4rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .48rem .9rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: #dff8ff;
+      font-size: .92rem;
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--success);
+      box-shadow: 0 0 0 8px rgba(134,239,172,.12);
+    }
+
     h1, h2, h3 { line-height: 1.08; margin: 0; letter-spacing: -.03em; }
     h1 { font-size: clamp(2.3rem, 6vw, 5rem); max-width: 12ch; }
     h2 { font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: .85rem; }
     h3 { font-size: 1.16rem; margin-bottom: .55rem; }
-    .hero p, .section-lead, .muted, .faq-answer, .testimonial-role, .step-card p, .card p, li { color: var(--muted); }
-    .hero p { font-size: 1.06rem; max-width: 60ch; margin: 1.15rem 0 1.6rem; }
-    .hero-actions, .proof, .form-row { display: flex; flex-wrap: wrap; gap: .85rem; }
-    .proof span { padding: .55rem .82rem; border-radius: 999px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); color: #dce9f5; font-size: .93rem; }
-    .hero-card, .card, .form-card, .video-card, .final-cta { background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(10px); }
-    .hero-card { padding: 1.2rem; overflow: hidden; position: relative; }
-    .hero-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at top left, rgba(125,211,252,.18), transparent 30%); pointer-events: none; }
-    .dashboard { position: relative; z-index: 1; display: grid; gap: 1rem; }
-    .metric-row, .grid-3, .grid-2, .testimonial-grid, .steps, .faq-grid, .form-grid, .stats-grid { display: grid; gap: 1rem; }
+
+    .hero p,
+    .section-lead,
+    .muted,
+    .faq-answer,
+    .testimonial-role,
+    .step-card p,
+    .card p,
+    li {
+      color: var(--muted);
+    }
+
+    .hero p {
+      font-size: 1.06rem;
+      max-width: 60ch;
+      margin: 1.15rem 0 1.6rem;
+    }
+
+    .hero-actions,
+    .proof,
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .85rem;
+    }
+
+    .proof span {
+      padding: .55rem .82rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      color: #dce9f5;
+      font-size: .93rem;
+    }
+
+    .hero-card,
+    .card,
+    .form-card,
+    .video-card,
+    .final-cta {
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card {
+      padding: 1.2rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(125,211,252,.18), transparent 30%);
+      pointer-events: none;
+    }
+
+    .dashboard {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .metric-row,
+    .grid-3,
+    .grid-2,
+    .testimonial-grid,
+    .steps,
+    .faq-grid,
+    .form-grid,
+    .stats-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
     .metric-row { grid-template-columns: repeat(3, 1fr); }
     .grid-3, .steps, .testimonial-grid { grid-template-columns: repeat(3, 1fr); }
     .grid-2, .form-grid { grid-template-columns: repeat(2, 1fr); }
     .stats-grid { grid-template-columns: 1.1fr .9fr; }
-    .panel, .step-card { background: rgba(7,17,27,.62); border: 1px solid rgba(255,255,255,.08); border-radius: 20px; padding: 1rem; }
-    .metric strong, .stat strong, .step-result strong { display: block; font-size: 1.45rem; letter-spacing: -.03em; color: var(--text); }
+
+    .panel,
+    .step-card {
+      background: rgba(7,17,27,.62);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      padding: 1rem;
+    }
+
+    .metric strong,
+    .stat strong,
+    .step-result strong {
+      display: block;
+      font-size: 1.45rem;
+      letter-spacing: -.03em;
+      color: var(--text);
+    }
+
     .bars { display: grid; gap: .8rem; margin-top: 1rem; }
-    .bar span { display: flex; justify-content: space-between; gap: .75rem; margin-bottom: .45rem; color: #ebf8ff; font-size: .93rem; }
-    .bar-track { height: 10px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; }
-    .bar-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--primary), var(--primary-2)); }
-    .list-clean, .bullet-list, .service-list { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .72rem; }
-    .list-clean li, .bullet-list li, .service-list li { position: relative; padding-inline-start: 1.25rem; }
-    .list-clean li::before, .bullet-list li::before, .service-list li::before { content: ""; position: absolute; inset-inline-start: 0; top: .78rem; width: 8px; height: 8px; border-radius: 999px; background: linear-gradient(135deg, var(--primary), var(--primary-2)); }
+    .bar span {
+      display: flex;
+      justify-content: space-between;
+      gap: .75rem;
+      margin-bottom: .45rem;
+      color: #ebf8ff;
+      font-size: .93rem;
+    }
+
+    .bar-track {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary), var(--primary-2));
+    }
+
+    .list-clean,
+    .bullet-list,
+    .service-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: .72rem;
+    }
+
+    .list-clean li,
+    .bullet-list li,
+    .service-list li {
+      position: relative;
+      padding-inline-start: 1.25rem;
+    }
+
+    .list-clean li::before,
+    .bullet-list li::before,
+    .service-list li::before {
+      content: "";
+      position: absolute;
+      inset-inline-start: 0;
+      top: .78rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    }
+
     section { padding: 4.5rem 0; }
-    .section-head { display: flex; flex-direction: column; gap: .8rem; align-items: flex-start; margin-bottom: 2rem; }
-    .kicker { color: var(--primary-2); font-size: .84rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
-    .icon { width: 50px; height: 50px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 1rem; background: linear-gradient(135deg, rgba(125,211,252,.16), rgba(103,232,249,.17)); border: 1px solid rgba(255,255,255,.08); font-size: 1.15rem; }
-    .step-number { width: 42px; height: 42px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); margin-bottom: 1rem; font-weight: 800; }
-    .step-result { margin-top: 1rem; padding: .95rem; border-radius: 18px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); }
-    .testimonial { display: flex; flex-direction: column; gap: .95rem; min-height: 100%; }
+
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+
+    .kicker {
+      color: var(--primary-2);
+      font-size: .84rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, rgba(125,211,252,.16), rgba(103,232,249,.17));
+      border: 1px solid rgba(255,255,255,.08);
+      font-size: 1.15rem;
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+
+    .step-result {
+      margin-top: 1rem;
+      padding: .95rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .testimonial {
+      display: flex;
+      flex-direction: column;
+      gap: .95rem;
+      min-height: 100%;
+    }
+
     .stars { color: #ffd66b; letter-spacing: .12em; }
-    .testimonial-footer { display: flex; align-items: center; gap: .8rem; margin-top: auto; }
-    .avatar { width: 48px; height: 48px; border-radius: 999px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(125,211,252,.24), rgba(103,232,249,.22)); border: 1px solid rgba(255,255,255,.08); font-weight: 800; }
-    .faq-item { border-radius: 20px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.04); overflow: hidden; }
-    .faq-question { width: 100%; border: 0; background: transparent; color: var(--text); padding: 1.1rem 1.15rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; cursor: pointer; text-align: inherit; }
-    .faq-question .plus { font-size: 1.45rem; transition: transform .2s ease; }
+    .testimonial-footer {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      margin-top: auto;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(125,211,252,.24), rgba(103,232,249,.22));
+      border: 1px solid rgba(255,255,255,.08);
+      font-weight: 800;
+    }
+
+    .faq-item {
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      padding: 1.1rem 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      cursor: pointer;
+      text-align: inherit;
+    }
+
+    .faq-question .plus {
+      font-size: 1.45rem;
+      transition: transform .2s ease;
+    }
+
     .faq-item.active .plus { transform: rotate(45deg); }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .28s ease; padding: 0 1.15rem; }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .28s ease;
+      padding: 0 1.15rem;
+    }
+
     .faq-answer p { margin: 0 0 1.1rem; }
+
     .hidden-section { display: none; }
     .show { display: block; }
-    .form-card, .video-card, .final-cta { padding: 1.4rem; }
-    .form-card { max-width: 860px; margin: 0 auto; }
-    .field { display: flex; flex-direction: column; gap: .45rem; }
-    .field label { font-weight: 700; color: #e6f3fb; }
-    .field input, .field textarea, .field select { width: 100%; min-height: 52px; border-radius: 16px; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.04); color: var(--text); padding: .95rem 1rem; outline: none; }
-    .field textarea { min-height: 130px; resize: vertical; }
-    .field input::placeholder, .field textarea::placeholder { color: #8ca1b5; }
-    .form-note { margin-top: 1rem; font-size: .95rem; color: var(--muted); }
-    .video-box { min-height: 260px; border-radius: 20px; border: 1px dashed rgba(255,255,255,.14); background: rgba(255,255,255,.03); display: grid; place-items: center; text-align: center; padding: 1.5rem; color: var(--muted); }
-    .video-box strong { display: block; color: var(--text); margin-bottom: .4rem; font-size: 1.15rem; }
-    .cta-row { display: flex; flex-wrap: wrap; gap: .85rem; margin-top: 1.2rem; }
-    footer { padding: 2rem 0 3rem; color: var(--muted); font-size: .94rem; }
-    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.2rem; }
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .form-card,
+    .video-card,
+    .final-cta {
+      padding: 1.4rem;
+    }
+
+    .form-card {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+    }
+
+    .field label {
+      font-weight: 700;
+      color: #e6f3fb;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      padding: .95rem 1rem;
+      outline: none;
+    }
+
+    .field textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder { color: #8ca1b5; }
+
+    .form-note {
+      margin-top: 1rem;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .video-box {
+      min-height: 260px;
+      border-radius: 20px;
+      border: 1px dashed rgba(255,255,255,.14);
+      background: rgba(255,255,255,.03);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--muted);
+    }
+
+    .video-box strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: .4rem;
+      font-size: 1.15rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .85rem;
+      margin-top: 1.2rem;
+    }
+
+    .pdf-embed-card {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .pdf-embed-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: .9rem;
+      flex-wrap: wrap;
+    }
+
+    .pdf-embed-title {
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+    }
+
+    .pdf-embed-title strong {
+      color: var(--text);
+      font-size: 1.02rem;
+    }
+
+    .pdf-embed-frame {
+      width: 100%;
+      height: 420px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+    }
+
+    .pdf-embed-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #0b1220;
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 1.2rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     @media (max-width: 980px) {
-      .hero-grid, .grid-3, .grid-2, .steps, .testimonial-grid, .form-grid, .stats-grid { grid-template-columns: 1fr; }
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .steps,
+      .testimonial-grid,
+      .form-grid,
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
       .metric-row { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       h1 { max-width: 100%; }
     }
+
     @media (max-width: 640px) {
       .container { width: min(calc(100% - 1.15rem), var(--max)); }
       .hero { padding-top: 4rem; }
       section { padding: 3.6rem 0; }
       .footer-row { flex-direction: column; align-items: flex-start; }
       .nav { min-height: 70px; }
-      .hero-card, .card, .form-card, .video-card, .final-cta { border-radius: 20px; }
+      .hero-card,
+      .card,
+      .form-card,
+      .video-card,
+      .final-cta { border-radius: 20px; }
     }
   </style>
 </head>
@@ -338,7 +839,7 @@
           <article class="step-card reveal">
             <span class="step-number">03</span>
             <h3 data-ar="يحجز مكالمة الإغلاق" data-en="Books the closing call">يحجز مكالمة الإغلاق</h3>
-            <p data-ar="بعد إرسال الفورم، ينتقل مباشرة إلى صفحة ما قبل الحجز ثم يختار نوع الاجتماع المناسب له." data-en="After submitting the form, they move directly to the pre-booking step and choose the meeting type that suits them.">بعد إرسال الفورم، ينتقل مباشرة إلى صفحة ما قبل الحجز ثم يختار نوع الاجتماع المناسب له.</p>
+            <p data-ar="بعد إرسال الفورم، ينتقل مباشرة إلى صفحة الحجز أو صفحة تمهيدية فيها فيديو بيع قصير ثم يحجز." data-en="After submitting the form, they move directly to the booking page or to a pre-sell page with a short video before they book.">بعد إرسال الفورم، ينتقل مباشرة إلى صفحة الحجز أو صفحة تمهيدية فيها فيديو بيع قصير ثم يحجز.</p>
             <div class="step-result">
               <strong data-ar="فرصة إغلاق أقوى" data-en="Stronger close potential">فرصة إغلاق أقوى</strong>
               <span class="muted" data-ar="العميل يدخل المكالمة وهو أدفأ." data-en="The prospect enters the call warmer.">العميل يدخل المكالمة وهو أدفأ.</span>
@@ -435,7 +936,7 @@
 
           <div class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false">
-              <span data-ar="هل أقدر أضيف فيديو تمهيدي قبل الحجز؟" data-en="Can I add a pre-sell video before the booking link?">هل أقدر أضيف فيديو تمهيدي قبل الحجز؟</span>
+              <span data-ar="هل أقدر أضيف فيديو تمهيدي قبل رابط الحجز؟" data-en="Can I add a pre-sell video before the booking link?">هل أقدر أضيف فيديو تمهيدي قبل رابط الحجز؟</span>
               <span class="plus">+</span>
             </button>
             <div class="faq-answer">
@@ -451,7 +952,7 @@
         <div class="section-head reveal">
           <span class="kicker" data-ar="الخطوة التالية" data-en="Next step">الخطوة التالية</span>
           <h2 data-ar="قبل الحجز، عرفنا عليك وعلى نشاطك." data-en="Before booking, tell us about you and your business.">قبل الحجز، عرفنا عليك وعلى نشاطك.</h2>
-          <p class="section-lead" data-ar="هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط الاجتماع المناسب." data-en="This step prepares a better sales call. After submitting the form, the visitor moves to the pre-booking step and then chooses the meeting link that suits them.">هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط الاجتماع المناسب.</p>
+          <p class="section-lead" data-ar="هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط مكالمة المبيعات." data-en="This step prepares a better sales call. After submitting the form, the visitor moves to a pre-booking page and then to the sales call link.">هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط مكالمة المبيعات.</p>
         </div>
 
         <form class="form-card reveal" id="leadCaptureForm" action="https://formspree.io/f/xeepgawk" method="POST">
@@ -485,7 +986,7 @@
           </div>
           <p id="formError" class="form-note" style="display:none; color:#fca5a5;" data-ar="صار خطأ أثناء الإرسال. حاول مرة ثانية." data-en="Something went wrong while submitting. Please try again.">صار خطأ أثناء الإرسال. حاول مرة ثانية.</p>
 
-          <p class="form-note" data-ar="بعد نجاح الإرسال، تظهر لك خطوة اختيار نوع الاجتماع مباشرة داخل نفس الصفحة." data-en="After a successful submission, the meeting-type choices appear directly inside the same page.">بعد نجاح الإرسال، تظهر لك خطوة اختيار نوع الاجتماع مباشرة داخل نفس الصفحة.</p>
+          <p class="form-note" data-ar="مهم: هذا النموذج حاليًا واجهة فقط. لاحقًا تقدر تربطه بـ Formspree أو Tally أو أي نظام يجمع البيانات فعليًا." data-en="Important: this form is currently front-end only. Later, you can connect it to Formspree, Tally, or any lead capture backend.">مهم: هذا النموذج حاليًا واجهة فقط. لاحقًا تقدر تربطه بـ Formspree أو Tally أو أي نظام يجمع البيانات فعليًا.</p>
         </form>
       </div>
     </section>
@@ -493,14 +994,14 @@
     <section id="prebook-section" class="hidden-section">
       <div class="container">
         <div class="video-card reveal show">
-          <span class="kicker" data-ar="الخطوة الأخيرة" data-en="Final step">الخطوة الأخيرة</span>
-          <h2 data-ar="اختر نوع الاجتماع المناسب لك." data-en="Choose the meeting type that suits you.">اختر نوع الاجتماع المناسب لك.</h2>
-          <p class="section-lead" data-ar="بعد إرسال البيانات، اختر الآن طريقة الاجتماع التي تناسبك لإكمال مكالمة المبيعات مع Oryx." data-en="After submitting your details, choose the meeting type that suits you to complete the sales call with Oryx.">بعد إرسال البيانات، اختر الآن طريقة الاجتماع التي تناسبك لإكمال مكالمة المبيعات مع Oryx.</p>
+          <span class="kicker" data-ar="قبل الحجز" data-en="Before you book">قبل الحجز</span>
+          <h2 data-ar="ممتاز. باقي خطوة أخيرة قبل مكالمة المبيعات." data-en="Great. One last step before the sales call.">ممتاز. باقي خطوة أخيرة قبل مكالمة المبيعات.</h2>
+          <p class="section-lead" data-ar="في هذه الصفحة تقدر تضيف فيديو يشرح Oryx بشكل أقوى ويهيئ العميل قبل الدخول على مكالمة الإغلاق." data-en="On this page, you can later add a video that explains Oryx more deeply and warms the prospect before the closing call.">في هذه الصفحة تقدر تضيف فيديو يشرح Oryx بشكل أقوى ويهيئ العميل قبل الدخول على مكالمة الإغلاق.</p>
 
           <div class="video-box">
             <div>
-              <strong data-ar="اختر طريقة التواصل" data-en="Choose your meeting type">اختر طريقة التواصل</strong>
-              <span data-ar="يمكنك اختيار مكالمة هاتفية سريعة، أو اجتماع Zoom، أو اجتماع Google Meet حسب ما يناسبك." data-en="You can choose a quick phone call, a Zoom meeting, or a Google Meet meeting depending on what suits you best.">يمكنك اختيار مكالمة هاتفية سريعة، أو اجتماع Zoom، أو اجتماع Google Meet حسب ما يناسبك.</span>
+              <strong data-ar="مكان الفيديو التمهيدي" data-en="Pre-sell video placeholder">مكان الفيديو التمهيدي</strong>
+              <span data-ar="أضف هنا لاحقًا فيديو يشرح قيمة Oryx، كيف يساعد العيادات، ولماذا مكالمة المبيعات تستحق وقتهم." data-en="Later, add a short video here explaining the value of Oryx, how it helps clinics, and why the sales call is worth their time.">أضف هنا لاحقًا فيديو يشرح قيمة Oryx، كيف يساعد العيادات، ولماذا مكالمة المبيعات تستحق وقتهم.</span>
             </div>
           </div>
 
@@ -519,6 +1020,20 @@
             </a>
             <a class="btn btn-secondary" href="#top" data-ar="الرجوع للأعلى" data-en="Back to top">الرجوع للأعلى</a>
           </div>
+
+          <div class="pdf-embed-card">
+            <div class="pdf-embed-toolbar">
+              <div class="pdf-embed-title">
+                <strong data-ar="استعراض البريزنتيشن الكامل" data-en="View the full presentation">استعراض البريزنتيشن الكامل</strong>
+                <span class="muted" data-ar="تقدر تتصفح العرض داخل الصفحة أو تفتحه بحجم كامل بدون ما تضيع من نفس المسار." data-en="You can scroll through the deck inside the page or open it full size without losing the flow.">تقدر تتصفح العرض داخل الصفحة أو تفتحه بحجم كامل بدون ما تضيع من نفس المسار.</span>
+              </div>
+              <a class="btn btn-secondary" href="Orxy-Sales-System.pdf" target="_blank" rel="noopener noreferrer" data-ar="فتح العرض كامل" data-en="Open full screen">فتح العرض كامل</a>
+            </div>
+
+            <div class="pdf-embed-frame">
+              <iframe src="Orxy-Sales-System.pdf#view=FitH" title="Oryx Sales System Presentation" loading="lazy"></iframe>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -528,7 +1043,7 @@
         <div class="final-cta reveal">
           <span class="kicker" data-ar="دعوة أخيرة" data-en="Final CTA">دعوة أخيرة</span>
           <h2 data-ar="إذا عندك عيادة أو منشأة طبية وتبي تشغيل أذكى ونمو أوضح، Oryx جاهز." data-en="If you run a clinic or medical business and want smarter operations with clearer growth, Oryx is ready.">إذا عندك عيادة أو منشأة طبية وتبي تشغيل أذكى ونمو أوضح، Oryx جاهز.</h2>
-          <p class="section-lead" data-ar="ابدأ من الفورم، وبعدها اختر نوع الاجتماع المناسب لناقش كيف يمكن لـ Oryx أن يخدم عيادتك." data-en="Start with the form, then choose the right meeting type to discuss how Oryx can support your clinic.">ابدأ من الفورم، وبعدها اختر نوع الاجتماع المناسب لناقش كيف يمكن لـ Oryx أن يخدم عيادتك.</p>
+          <p class="section-lead" data-ar="ابدأ من الفورم، وبعدها خذ مكالمة مبيعات نفهم فيها وضعك ونشوف إذا Oryx مناسب لك فعلاً." data-en="Start with the form, then book a sales call so we can understand your current setup and see whether Oryx is the right fit.">ابدأ من الفورم، وبعدها خذ مكالمة مبيعات نفهم فيها وضعك ونشوف إذا Oryx مناسب لك فعلاً.</p>
           <div class="cta-row">
             <a class="btn btn-primary" href="#lead-form" data-ar="ابدأ الآن" data-en="Start now">ابدأ الآن</a>
           </div>
@@ -644,10 +1159,14 @@
         const response = await fetch(leadForm.action, {
           method: 'POST',
           body: formData,
-          headers: { 'Accept': 'application/json' }
+          headers: {
+            'Accept': 'application/json'
+          }
         });
 
-        if (!response.ok) throw new Error('Submission failed');
+        if (!response.ok) {
+          throw new Error('Submission failed');
+        }
 
         formSuccess.style.display = 'inline-flex';
         submitLeadBtn.style.display = 'none';
