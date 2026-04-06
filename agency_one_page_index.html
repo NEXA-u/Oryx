@@ -533,7 +533,7 @@
       margin-top: 1.2rem;
     }
 
-    .pdf-embed-card {
+    .presentation-card {
       margin-top: 1.25rem;
       padding: 1rem;
       border-radius: 20px;
@@ -541,7 +541,7 @@
       border: 1px solid rgba(255,255,255,.08);
     }
 
-    .pdf-embed-toolbar {
+    .presentation-toolbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -550,32 +550,65 @@
       flex-wrap: wrap;
     }
 
-    .pdf-embed-title {
+    .presentation-title {
       display: flex;
       flex-direction: column;
       gap: .25rem;
     }
 
-    .pdf-embed-title strong {
+    .presentation-title strong {
       color: var(--text);
       font-size: 1.02rem;
     }
 
-    .pdf-embed-frame {
+    .presentation-frame {
       width: 100%;
-      height: 420px;
+      height: 430px;
       border-radius: 18px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,.08);
       background: rgba(255,255,255,.02);
+      position: relative;
     }
 
-    .pdf-embed-frame iframe {
+    .presentation-scroll {
       width: 100%;
       height: 100%;
-      border: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: .5rem;
+      scroll-behavior: smooth;
+      background: #07111b;
+    }
+
+    .presentation-image {
+      width: 100%;
+      height: auto;
       display: block;
-      background: #0b1220;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.06);
+      margin-bottom: .75rem;
+      background: #07111b;
+    }
+
+    .presentation-image:last-child {
+      margin-bottom: 0;
+    }
+
+    .presentation-frame:fullscreen {
+      height: 100vh;
+      border-radius: 0;
+      border: 0;
+    }
+
+    .presentation-frame:fullscreen .presentation-scroll {
+      padding: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .presentation-frame {
+        height: 320px;
+      }
     }
 
     footer {
@@ -1021,19 +1054,37 @@
             <a class="btn btn-secondary" href="#top" data-ar="الرجوع للأعلى" data-en="Back to top">الرجوع للأعلى</a>
           </div>
 
-          <div class="pdf-embed-card">
-            <div class="pdf-embed-toolbar">
-              <div class="pdf-embed-title">
-                <strong data-ar="استعراض البريزنتيشن الكامل" data-en="View the full presentation">استعراض البريزنتيشن الكامل</strong>
-                <span class="muted" data-ar="تقدر تتصفح العرض داخل الصفحة أو تفتحه بحجم كامل بدون ما تضيع من نفس المسار." data-en="You can scroll through the deck inside the page or open it full size without losing the flow.">تقدر تتصفح العرض داخل الصفحة أو تفتحه بحجم كامل بدون ما تضيع من نفس المسار.</span>
+          <div class="presentation-card">
+            <div class="presentation-toolbar">
+              <div class="presentation-title">
+                <strong data-ar="استعراض البريزنتيشن داخل الصفحة" data-en="View the presentation inside the page">استعراض البريزنتيشن داخل الصفحة</strong>
+                <span class="muted" data-ar="تقدر تنزل داخل العرض من نفس الصفحة، ومعك زر Full Screen لو تبي تشوفه أكبر." data-en="You can scroll through the deck inside the same page, and use Full Screen if you want a bigger view.">تقدر تنزل داخل العرض من نفس الصفحة، ومعك زر Full Screen لو تبي تشوفه أكبر.</span>
               </div>
-              <a class="btn btn-secondary" href="orxy-sales-system.pdf.pdf" target="_blank" rel="noopener noreferrer" data-ar="فتح العرض كامل" data-en="Open full screen">فتح العرض كامل</a>
+              <button class="btn btn-secondary" type="button" id="presentationFullscreenBtn" data-ar="فتح Full Screen" data-en="Open Full Screen">فتح Full Screen</button>
             </div>
 
-            <div class="pdf-embed-frame">
-              <iframe src="orxy-sales-system.pdf.pdf#view=FitH" title="Oryx Sales System Presentation" loading="lazy"></iframe>
+            <div class="presentation-frame" id="presentationFrame">
+              <div class="presentation-scroll">
+                <img class="presentation-image" src="Screenshot 2026-04-06 163047.jpg" alt="Oryx presentation slide 1" loading="lazy" />
+                <img class="presentation-image" src="Screenshot2.jpg" alt="Oryx presentation slide 2" loading="lazy" />
+                <img class="presentation-image" src="Screenshot 3.jpg" alt="Oryx presentation slide 3" loading="lazy" />
+                <img class="presentation-image" src="Screenshot 4.jpg" alt="Oryx presentation slide 4" loading="lazy" />
+                <img class="presentation-image" src="Screenshot 5.jpg" alt="Oryx presentation slide 5" loading="lazy" />
+                <img class="presentation-image" src="Screenshot 6.jpg" alt="Oryx presentation slide 6" loading="lazy" />
+                <img class="presentation-image" src="Screenshot 7.jpg" alt="Oryx presentation slide 7" loading="lazy" />
+                <img class="presentation-image" src="Screenshot 8.jpg" alt="Oryx presentation slide 8" loading="lazy" />
+                <img class="presentation-image" src="Screenshot 9.jpg" alt="Oryx presentation slide 9" loading="lazy" />
+                <img class="presentation-image" src="Screenshot 10.jpg" alt="Oryx presentation slide 10" loading="lazy" />
+                <img class="presentation-image" src="Screenshot 11.jpg" alt="Oryx presentation slide 11" loading="lazy" />
+                <img class="presentation-image" src="Screenshot12.jpg" alt="Oryx presentation slide 12" loading="lazy" />
+                <img class="presentation-image" src="Screenshot 13.jpg" alt="Oryx presentation slide 13" loading="lazy" />
+                <img class="presentation-image" src="Screenshot 14.jpg" alt="Oryx presentation slide 14" loading="lazy" />
+                <img class="presentation-image" src="Screenshot 15.jpg" alt="Oryx presentation slide 15" loading="lazy" />
+                <img class="presentation-image" src="Screenshot 16.jpg" alt="Oryx presentation slide 16" loading="lazy" />
+              </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </section>
@@ -1137,6 +1188,19 @@
       });
     }, { threshold: 0.12 });
     revealElements.forEach(el => observer.observe(el));
+
+    const presentationFrame = document.getElementById('presentationFrame');
+    const presentationFullscreenBtn = document.getElementById('presentationFullscreenBtn');
+
+    if (presentationFullscreenBtn && presentationFrame) {
+      presentationFullscreenBtn.addEventListener('click', async () => {
+        if (!document.fullscreenElement) {
+          await presentationFrame.requestFullscreen();
+        } else {
+          await document.exitFullscreen();
+        }
+      });
+    }
 
     const leadForm = document.getElementById('leadCaptureForm');
     const prebookSection = document.getElementById('prebook-section');
