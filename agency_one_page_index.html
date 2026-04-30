@@ -15,213 +15,103 @@
   <script>
     const CONFIG = {
       brand: "ORXY AI",
+      // ما قدرت أجيب بياناتك القديمة من الذاكرة/الملفات، فحطيت أماكنها هنا فقط
       email: "YOUR_EMAIL_HERE",
       phone: "+966XXXXXXXXX",
       instagram: "https://instagram.com/YOUR_USERNAME",
       tiktok: "https://www.tiktok.com/@YOUR_USERNAME",
       whatsapp: "https://wa.me/9665XXXXXXXX",
       pdf: "./orxy-sales-system.pdf.pdf",
+      // حط رابط الحجز العادي ورابط حجز المكالمة هنا
       booking: "YOUR_BOOKING_LINK",
       callBooking: "YOUR_CALL_BOOKING_LINK",
+      // Formspree/Formspace endpoint مثل: https://formspree.io/f/xxxxxxx
       formEndpoint: ""
+    };
+
+    let LANG = localStorage.getItem('orxy_lang') || 'ar';
+
+    const T = {
+      ar: {
+        dir: 'rtl', langLabel: 'English', navHome: 'الرئيسية', navSystems: 'الأنظمة', navStart: 'ابدأ', ctaApply: 'قدّم أولاً ←',
+        pill: '✦ استقبال ذكي · حجز · متابعة', heroTitle: 'حوّل رسائل العيادة إلى مواعيد محجوزة.',
+        heroLead: 'نبني أنظمة ذكاء اصطناعي بسيطة للعيادات: ردود واتساب فورية، فهم احتياج المريض، تنظيم الحجز، التذكير، والمتابعة.',
+        apply2: 'قدّم في دقيقتين ←', viewPdf: 'عرض ملف PDF', ch1: '✓ عربي + إنجليزي', ch2: '✓ مناسب للواتساب', ch3: '✓ بدون ادعاءات وهمية',
+        chatTitle: 'محادثة مريض', online: 'متصل الآن', m1: 'هل عندكم مواعيد هذا الأسبوع؟', m2: 'نعم. أقدر أساعدك تختار الخدمة المناسبة وأتأكد من الأوقات المتاحة.', m3: 'مهتم بالليزر.', m4: 'تمام. بسألك ٣ أسئلة سريعة، وبعدها أعطيك الخطوة المناسبة للحجز.',
+        s1: 'ردود فورية', s2: 'قدّم أولاً', s3: 'عيادات تجريبية', s4: 'شرح النظام', problemEyebrow: 'المشكلة', problemTitle: 'أغلب الفرص تضيع بعد أول رسالة.', problemLead: 'العيادات ما تحتاج أدوات كثيرة وعشوائية. تحتاج مسار واضح من الاهتمام إلى الحجز.',
+        p1t: 'رد متأخر', p1d: 'المريض يسأل، والرد يتأخر، فتضيع الفرصة.', p2t: 'حجز غير مرتب', p2d: 'المريض يبغى طريقة سهلة يسأل ويختار ويحجز بدون تعقيد.', p3t: 'ما فيه متابعة', p3d: 'إذا اختفى العميل، المفروض النظام يرجعه بطريقة ذكية.',
+        flowEyebrow: 'المسار', flowTitle: 'قدّم أولاً. بعدها يفتح الحجز.', flowLead: 'كذا المكالمة تكون جدية وواضحة. أول شيء نعرف نوع العيادة والمشكلة، بعدين يفتح له رابط الحجز.', startNow: 'ابدأ الآن ←',
+        f1t: 'التقديم', f1d: 'العيادة تكتب نوعها، خدماتها، ومشكلتها الحالية في الحجز أو الردود.', f2t: 'المراجعة', f2d: 'نحدد أبسط نظام AI يقدر يعطي نتيجة أولاً.', f3t: 'الحجز', f3d: 'بعد الفورم يقدر يحجز مكالمة أو يطلب ديمو.',
+        systemsEyebrow: 'الأنظمة', systemsTitle: 'أنظمة AI بسيطة للعيادات.', systemsLead: 'ابدأ بنظام واحد، وبعدها اربط الباقي.',
+        sys1: 'موظف استقبال AI', sys1d: 'يرد على الأسئلة، يشرح الخدمات، وينقل المريض للخطوة التالية.', sys2: 'مسار الحجز', sys2d: 'يجمع بيانات المريض قبل المكالمة ويخلي الحجز أنظف.', sys3: 'متابعة العملاء', sys3d: 'يتابع المهتمين اللي ما حجزوا بدون إزعاج.', sys4: 'عقل الأسئلة المتكررة', sys4d: 'يحافظ على إجابات ثابتة: الخدمات، الأسعار، الموقع، السياسات، والأوقات.', sys5: 'من المحتوى إلى العميل', sys5d: 'يربط إنستغرام وتيك توك بالفورم والواتساب والحجز.', sys6: 'لوحة العملاء', sys6d: 'تعرض مصدر العملاء ومن يحتاج متابعة.', goal: 'الهدف', status: 'الحالة', soon: 'قريباً', faster: 'رد أسرع', better: 'مكالمات أفضل', lost: 'فرص أقل ضياعاً', clean: 'إجابات أوضح', funnel: 'مسار واضح',
+        startPill: '✦ الخطوة الأولى: قدّم في دقيقتين', startTitle: 'قدّم أولاً. الحجز يفتح بعد الفورم.', startLead: 'هذا يخلي المكالمة مركزة. نحتاج نعرف نوع العيادة والخدمات والمشكلة قبل تحديد الموعد.',
+        email: 'الإيميل', phone: 'الجوال', pdf: 'PDF', openPdf: 'فتح ملف شرح النظام', formEyebrow: 'نموذج التقديم', formTitle: 'فورم سريع للعيادة', name: 'الاسم', clinic: 'اسم العيادة', type: 'نوع العيادة', improve: 'وش تبغى تحسن؟', submit: 'إرسال الطلب ←', done: 'تم. روابط الحجز فتحت الآن.',
+        bookTitle: 'الخطوة الثانية: احجز بعد التقديم', locked: 'عبّ الفورم أولاً، بعدها تفتح أزرار الحجز.', unlocked: 'وصل الطلب. تقدر تحجز الآن.', bookConsult: 'حجز استشارة', bookCall: 'حجز مكالمة', footer: 'أنظمة AI للعيادات في السعودية.'
+      },
+      en: {
+        dir: 'ltr', langLabel: 'عربي', navHome: 'Home', navSystems: 'Systems', navStart: 'Start', ctaApply: 'Apply first →',
+        pill: '✦ AI Reception · Booking · Follow-up', heroTitle: 'Turn clinic messages into booked appointments.',
+        heroLead: 'We build simple AI systems for clinics: instant WhatsApp replies, patient qualification, booking flow, reminders, and follow-up.',
+        apply2: 'Apply in 2 minutes →', viewPdf: 'View PDF', ch1: '✓ Arabic + English', ch2: '✓ WhatsApp-first', ch3: '✓ No fake client claims',
+        chatTitle: 'Patient Chat', online: 'online now', m1: 'Do you have appointments this week?', m2: 'Yes. I can help you choose the right service and check available times.', m3: 'I’m interested in laser.', m4: 'Perfect. I’ll ask 3 quick questions, then send the correct next step.',
+        s1: 'Instant replies', s2: 'Apply first', s3: 'Pilot clinics', s4: 'System overview', problemEyebrow: 'The problem', problemTitle: 'Most leads are lost after the first message.', problemLead: 'Clinics do not need more random tools. They need one clear path from attention to booking.',
+        p1t: 'Slow replies', p1d: 'Patients ask. The clinic replies late. The opportunity gets cold.', p2t: 'Messy booking', p2d: 'People want a fast way to choose, ask, and book without confusion.', p3t: 'No follow-up', p3d: 'If they disappear, the system should bring them back automatically.',
+        flowEyebrow: 'The flow', flowTitle: 'Apply first. Then book the call.', flowLead: 'This keeps the call serious. The clinic fills the form first, then the booking links unlock.', startNow: 'Start now →',
+        f1t: 'Apply', f1d: 'Clinic shares its service, lead source, and current booking problem.', f2t: 'Review', f2d: 'We map the simplest AI system that can help first.', f3t: 'Book', f3d: 'After the form, they can book a call or request the demo.',
+        systemsEyebrow: 'Systems', systemsTitle: 'Simple AI systems for clinics.', systemsLead: 'Start with one system, then connect the rest later.',
+        sys1: 'AI Receptionist', sys1d: 'Answers common questions, explains services, and moves patients to the next step.', sys2: 'Booking Flow', sys2d: 'Collects patient details before the call and keeps the process cleaner.', sys3: 'Lead Follow-up', sys3d: 'Follows up with interested patients who did not book yet.', sys4: 'Clinic FAQ Brain', sys4d: 'Keeps answers consistent: services, prices, location, policies, and working hours.', sys5: 'Content-to-Lead Path', sys5d: 'Connects Instagram/TikTok attention to form, WhatsApp, and booking.', sys6: 'Lead Dashboard', sys6d: 'Shows where leads came from and who needs follow-up next.', goal: 'Goal', status: 'Status', soon: 'Coming soon', faster: 'Faster replies', better: 'Better calls', lost: 'Less lost leads', clean: 'Clean answers', funnel: 'Clear funnel',
+        startPill: '✦ Step 1: apply in 2 minutes', startTitle: 'Apply first. Booking unlocks after the form.', startLead: 'This makes the call focused. We need to know the clinic type, services, and current problem before scheduling.',
+        email: 'Email', phone: 'Phone', pdf: 'PDF', openPdf: 'Open system PDF', formEyebrow: 'Application form', formTitle: 'Quick clinic form', name: 'Name', clinic: 'Clinic name', type: 'Clinic type', improve: 'What do you want to improve?', submit: 'Submit application →', done: 'Done. Booking links are unlocked.',
+        bookTitle: 'Step 2: book after applying', locked: 'Complete the form first. Then booking buttons will unlock.', unlocked: 'Application received. You can book now.', bookConsult: 'Book consultation', bookCall: 'Book call', footer: 'AI automation systems for clinics in Saudi Arabia.'
+      }
     };
   </script>
 
   <header class="topbar">
     <div class="container nav">
       <div class="brand" onclick="go('home')">
-        <div class="mark">✦</div>
-        <div><strong class="brandName">ORXY AI</strong><span>AI agents for clinics</span></div>
+        <div class="mark">✦</div><div><strong class="brandName">ORXY AI</strong><span>AI agents for clinics</span></div>
       </div>
       <nav class="menu">
-        <a href="#home" data-page="home" class="active">Home</a>
-        <a href="#systems" data-page="systems">Systems</a>
-        <a href="#start" data-page="start">Start</a>
+        <a href="#home" data-page="home" class="active" data-t="navHome"></a><a href="#systems" data-page="systems" data-t="navSystems"></a><a href="#start" data-page="start" data-t="navStart"></a>
       </nav>
-      <div class="actions">
-        <a class="icon ig" target="_blank">IG</a>
-        <a class="btn primary" href="#start" onclick="go('start')">Apply first →</a>
-      </div>
+      <div class="actions"><button class="icon" onclick="toggleLang()" id="langBtn">EN</button><a class="btn primary" href="#start" onclick="go('start')" data-t="ctaApply"></a></div>
     </div>
   </header>
 
   <main id="home" class="page active">
     <div class="container hero">
-      <div>
-        <div class="pill">✦ AI Reception · Booking · Follow-up</div>
-        <h1>Turn clinic messages into booked appointments.</h1>
-        <p class="lead">We build simple AI systems for clinics: instant WhatsApp replies, patient qualification, booking flow, reminders, and follow-up.</p>
-        <div class="heroBtns">
-          <a class="btn primary" href="#start" onclick="go('start')">Apply in 2 minutes →</a>
-          <a class="btn secondary pdf" target="_blank">View PDF</a>
-        </div>
-        <div class="checks"><span>✓ Arabic + English</span><span>✓ WhatsApp-first</span><span>✓ No fake client claims</span></div>
-      </div>
-      <div class="card chatCard">
-        <div class="chatInner">
-          <div class="chatHead">
-            <div class="chatProfile"><div class="avatar">AI</div><div><strong>Patient Chat</strong><p style="color:#a5f3fc99;font-size:14px;margin-top:3px">online now</p></div></div>
-            <span class="live">Live</span>
-          </div>
-          <div class="messages">
-            <div class="msg user">Do you have appointments this week?</div>
-            <div class="msg ai">Yes. I can help you choose the right service and check available times.</div>
-            <div class="msg user">I’m interested in laser.</div>
-            <div class="msg ai blue">Perfect. I’ll ask 3 quick questions, then send the correct next step.</div>
-          </div>
-        </div>
-        <div class="stats">
-          <div class="stat"><strong>24/7</strong><span>Instant replies</span></div>
-          <div class="stat"><strong>2 min</strong><span>Apply first</span></div>
-          <div class="stat"><strong>Soon</strong><span>Pilot clinics</span></div>
-          <div class="stat"><strong>PDF</strong><span>System overview</span></div>
-        </div>
-      </div>
+      <div><div class="pill" data-t="pill"></div><h1 data-t="heroTitle"></h1><p class="lead" data-t="heroLead"></p><div class="heroBtns"><a class="btn primary" href="#start" onclick="go('start')" data-t="apply2"></a><a class="btn secondary pdf" target="_blank" data-t="viewPdf"></a></div><div class="checks"><span data-t="ch1"></span><span data-t="ch2"></span><span data-t="ch3"></span></div></div>
+      <div class="card chatCard"><div class="chatInner"><div class="chatHead"><div class="chatProfile"><div class="avatar">AI</div><div><strong data-t="chatTitle"></strong><p style="color:#a5f3fc99;font-size:14px;margin-top:3px" data-t="online"></p></div></div><span class="live">Live</span></div><div class="messages"><div class="msg user" data-t="m1"></div><div class="msg ai" data-t="m2"></div><div class="msg user" data-t="m3"></div><div class="msg ai blue" data-t="m4"></div></div></div><div class="stats"><div class="stat"><strong>24/7</strong><span data-t="s1"></span></div><div class="stat"><strong>2 min</strong><span data-t="s2"></span></div><div class="stat"><strong>Soon</strong><span data-t="s3"></span></div><div class="stat"><strong>PDF</strong><span data-t="s4"></span></div></div></div>
     </div>
-
-    <section>
-      <div class="container">
-        <div class="sectionHead"><div class="eyebrow">The problem</div><h2>Most leads are lost after the first message.</h2><p>Clinics do not need more random tools. They need one clear path from attention to booking.</p></div>
-        <div class="grid3">
-          <div class="card mini"><div class="miniIcon">💬</div><h3>Slow replies</h3><p class="muted">Patients ask. The clinic replies late. The opportunity gets cold.</p></div>
-          <div class="card mini"><div class="miniIcon">📅</div><h3>Messy booking</h3><p class="muted">People want a fast way to choose, ask, and book without confusion.</p></div>
-          <div class="card mini"><div class="miniIcon">⚡</div><h3>No follow-up</h3><p class="muted">If they disappear, the system should bring them back automatically.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="card flow">
-          <div><div class="eyebrow">The flow</div><h2>Apply first. Then book the call.</h2><p class="lead">This keeps the call serious. The clinic fills the form first, then the booking links unlock.</p><div class="heroBtns"><a class="btn primary" href="#start" onclick="go('start')">Start now →</a><a class="btn secondary tiktok" target="_blank">TikTok</a></div></div>
-          <div class="steps">
-            <div class="card step"><div class="stepFlex"><div class="num">01</div><div><h3>Apply</h3><p class="muted">Clinic shares its service, lead source, and current booking problem.</p></div></div></div>
-            <div class="card step"><div class="stepFlex"><div class="num">02</div><div><h3>Review</h3><p class="muted">We map the simplest AI system that can help first.</p></div></div></div>
-            <div class="card step"><div class="stepFlex"><div class="num">03</div><div><h3>Book</h3><p class="muted">After the form, they can book a call or request the demo.</p></div></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <section><div class="container"><div class="sectionHead"><div class="eyebrow" data-t="problemEyebrow"></div><h2 data-t="problemTitle"></h2><p data-t="problemLead"></p></div><div class="grid3"><div class="card mini"><div class="miniIcon">💬</div><h3 data-t="p1t"></h3><p class="muted" data-t="p1d"></p></div><div class="card mini"><div class="miniIcon">📅</div><h3 data-t="p2t"></h3><p class="muted" data-t="p2d"></p></div><div class="card mini"><div class="miniIcon">⚡</div><h3 data-t="p3t"></h3><p class="muted" data-t="p3d"></p></div></div></div></section>
+    <section><div class="container"><div class="card flow"><div><div class="eyebrow" data-t="flowEyebrow"></div><h2 data-t="flowTitle"></h2><p class="lead" data-t="flowLead"></p><div class="heroBtns"><a class="btn primary" href="#start" onclick="go('start')" data-t="startNow"></a><a class="btn secondary tiktok" target="_blank">TikTok</a></div></div><div class="steps"><div class="card step"><div class="stepFlex"><div class="num">01</div><div><h3 data-t="f1t"></h3><p class="muted" data-t="f1d"></p></div></div></div><div class="card step"><div class="stepFlex"><div class="num">02</div><div><h3 data-t="f2t"></h3><p class="muted" data-t="f2d"></p></div></div></div><div class="card step"><div class="stepFlex"><div class="num">03</div><div><h3 data-t="f3t"></h3><p class="muted" data-t="f3d"></p></div></div></div></div></div></div></section>
   </main>
 
-  <main id="systems" class="page">
-    <section>
-      <div class="container">
-        <div class="sectionHead"><div class="eyebrow">Systems</div><h2>Simple AI systems for clinics.</h2><p>Start with one system, then connect the rest later.</p></div>
-        <div class="grid3">
-          <div class="card system"><div class="systemTop"><span class="badge">Core</span><div class="miniIcon">🤖</div></div><h3>AI Receptionist</h3><p class="muted">Answers common questions, explains services, and moves patients to the next step.</p><div class="outcome"><small>Goal</small><strong>Faster replies</strong></div></div>
-          <div class="card system"><div class="systemTop"><span class="badge">Booking</span><div class="miniIcon">📅</div></div><h3>Booking Flow</h3><p class="muted">Collects patient details before the call and keeps the process cleaner.</p><div class="outcome"><small>Goal</small><strong>Better calls</strong></div></div>
-          <div class="card system"><div class="systemTop"><span class="badge">Sales</span><div class="miniIcon">⚡</div></div><h3>Lead Follow-up</h3><p class="muted">Follows up with interested patients who did not book yet.</p><div class="outcome"><small>Goal</small><strong>Less lost leads</strong></div></div>
-          <div class="card system"><div class="systemTop"><span class="badge">Knowledge</span><div class="miniIcon">🧠</div></div><h3>Clinic FAQ Brain</h3><p class="muted">Keeps answers consistent: services, prices, location, policies, and working hours.</p><div class="outcome"><small>Goal</small><strong>Clean answers</strong></div></div>
-          <div class="card system"><div class="systemTop"><span class="badge">Social</span><div class="miniIcon">▶</div></div><h3>Content-to-Lead Path</h3><p class="muted">Connects Instagram/TikTok attention to form, WhatsApp, and booking.</p><div class="outcome"><small>Goal</small><strong>Clear funnel</strong></div></div>
-          <div class="card system"><div class="systemTop"><span class="badge">Soon</span><div class="miniIcon">📊</div></div><h3>Lead Dashboard</h3><p class="muted">Shows where leads came from and who needs follow-up next.</p><div class="outcome"><small>Status</small><strong>Coming soon</strong></div></div>
-        </div>
-      </div>
-    </section>
-  </main>
+  <main id="systems" class="page"><section><div class="container"><div class="sectionHead"><div class="eyebrow" data-t="systemsEyebrow"></div><h2 data-t="systemsTitle"></h2><p data-t="systemsLead"></p></div><div class="grid3">
+    <div class="card system"><div class="systemTop"><span class="badge">Core</span><div class="miniIcon">🤖</div></div><h3 data-t="sys1"></h3><p class="muted" data-t="sys1d"></p><div class="outcome"><small data-t="goal"></small><strong data-t="faster"></strong></div></div>
+    <div class="card system"><div class="systemTop"><span class="badge">Booking</span><div class="miniIcon">📅</div></div><h3 data-t="sys2"></h3><p class="muted" data-t="sys2d"></p><div class="outcome"><small data-t="goal"></small><strong data-t="better"></strong></div></div>
+    <div class="card system"><div class="systemTop"><span class="badge">Sales</span><div class="miniIcon">⚡</div></div><h3 data-t="sys3"></h3><p class="muted" data-t="sys3d"></p><div class="outcome"><small data-t="goal"></small><strong data-t="lost"></strong></div></div>
+    <div class="card system"><div class="systemTop"><span class="badge">Knowledge</span><div class="miniIcon">🧠</div></div><h3 data-t="sys4"></h3><p class="muted" data-t="sys4d"></p><div class="outcome"><small data-t="goal"></small><strong data-t="clean"></strong></div></div>
+    <div class="card system"><div class="systemTop"><span class="badge">Social</span><div class="miniIcon">▶</div></div><h3 data-t="sys5"></h3><p class="muted" data-t="sys5d"></p><div class="outcome"><small data-t="goal"></small><strong data-t="funnel"></strong></div></div>
+    <div class="card system"><div class="systemTop"><span class="badge" data-t="soon"></span><div class="miniIcon">📊</div></div><h3 data-t="sys6"></h3><p class="muted" data-t="sys6d"></p><div class="outcome"><small data-t="status"></small><strong data-t="soon"></strong></div></div>
+  </div></div></section></main>
 
-  <main id="start" class="page">
-    <div class="container contact">
-      <div>
-        <div class="pill">✦ Step 1: apply in 2 minutes</div>
-        <h1>Apply first. Booking unlocks after the form.</h1>
-        <p class="lead">This makes the call focused. We need to know the clinic type, services, and current problem before scheduling.</p>
-        <div class="contactList">
-          <div class="contactItem"><span>Email</span><a class="emailText"></a></div>
-          <div class="contactItem"><span>Phone</span><a class="phoneText"></a></div>
-          <div class="contactItem"><span>PDF</span><a class="pdf" target="_blank">Open system PDF</a></div>
-        </div>
-      </div>
+  <main id="start" class="page"><div class="container contact"><div><div class="pill" data-t="startPill"></div><h1 data-t="startTitle"></h1><p class="lead" data-t="startLead"></p><div class="contactList"><div class="contactItem"><span data-t="email"></span><a class="emailText"></a></div><div class="contactItem"><span data-t="phone"></span><a class="phoneText"></a></div><div class="contactItem"><span data-t="pdf"></span><a class="pdf" target="_blank" data-t="openPdf"></a></div></div></div>
+  <div><div class="card formCard"><div class="eyebrow" data-t="formEyebrow"></div><h3 style="font-size:30px" data-t="formTitle"></h3><form id="leadForm" class="formGrid"><div class="field"><label data-t="name"></label><input name="name" required placeholder="..." /></div><div class="field"><label data-t="clinic"></label><input name="clinic" required placeholder="..." /></div><div class="field"><label data-t="phone"></label><input name="phone" required placeholder="05xxxxxxxx" /></div><div class="field"><label data-t="email"></label><input type="email" name="email" placeholder="name@email.com" /></div><div class="field full"><label data-t="type"></label><select name="type" required><option value="">—</option><option>Dental</option><option>Dermatology / Aesthetic</option><option>General clinic</option><option>Medical center</option><option>Other</option></select></div><div class="field full"><label data-t="improve"></label><textarea name="message" required placeholder="..."></textarea></div><div class="field full"><button class="btn primary" type="submit" data-t="submit"></button></div></form><div id="formStatus" class="status" data-t="done"></div></div>
+  <div class="card locked"><h3 data-t="bookTitle"></h3><p class="muted" id="lockText" data-t="locked"></p><div class="lockedBtns"><a id="bookBtn" class="btn secondary disabled" target="_blank" data-t="bookConsult"></a><a id="callBtn" class="btn secondary disabled" target="_blank" data-t="bookCall"></a><a class="btn secondary whatsapp" target="_blank">WhatsApp</a><a class="btn secondary pdf" target="_blank">PDF</a></div></div></div></div></main>
 
-      <div>
-        <div class="card formCard">
-          <div class="eyebrow">Application form</div>
-          <h3 style="font-size:30px">Quick clinic form</h3>
-          <form id="leadForm" class="formGrid">
-            <div class="field"><label>Name</label><input name="name" required placeholder="Your name" /></div>
-            <div class="field"><label>Clinic name</label><input name="clinic" required placeholder="Clinic name" /></div>
-            <div class="field"><label>Phone</label><input name="phone" required placeholder="05xxxxxxxx" /></div>
-            <div class="field"><label>Email</label><input type="email" name="email" placeholder="name@email.com" /></div>
-            <div class="field full"><label>Clinic type</label><select name="type" required><option value="">Choose one</option><option>Dental</option><option>Dermatology / Aesthetic</option><option>General clinic</option><option>Medical center</option><option>Other</option></select></div>
-            <div class="field full"><label>What do you want to improve?</label><textarea name="message" required placeholder="Example: faster WhatsApp replies, booking, follow-up, missed leads..."></textarea></div>
-            <div class="field full"><button class="btn primary" type="submit">Submit application →</button></div>
-          </form>
-          <div id="formStatus" class="status">Done. Booking links are unlocked.</div>
-        </div>
-
-        <div class="card locked">
-          <h3>Step 2: book after applying</h3>
-          <p class="muted" id="lockText">Complete the form first. Then booking buttons will unlock.</p>
-          <div class="lockedBtns">
-            <a id="bookBtn" class="btn secondary disabled" target="_blank">Book consultation</a>
-            <a id="callBtn" class="btn secondary disabled" target="_blank">Book call</a>
-            <a class="btn secondary whatsapp" target="_blank">WhatsApp</a>
-            <a class="btn secondary pdf" target="_blank">PDF</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    <div class="container footerFlex">
-      <div><strong style="color:#fff" class="brandName">ORXY AI</strong><p style="margin-top:6px">AI automation systems for clinics in Saudi Arabia.</p></div>
-      <div class="footerLinks"><a href="#home" onclick="go('home')">Home</a><a href="#systems" onclick="go('systems')">Systems</a><a href="#start" onclick="go('start')">Start</a><a class="ig" target="_blank">Instagram</a><a class="tiktok" target="_blank">TikTok</a></div>
-    </div>
-  </footer>
+  <footer><div class="container footerFlex"><div><strong style="color:#fff" class="brandName">ORXY AI</strong><p style="margin-top:6px" data-t="footer"></p></div><div class="footerLinks"><a href="#home" onclick="go('home')" data-t="navHome"></a><a href="#systems" onclick="go('systems')" data-t="navSystems"></a><a href="#start" onclick="go('start')" data-t="navStart"></a><a class="ig" target="_blank">Instagram</a><a class="tiktok" target="_blank">TikTok</a></div></div></footer>
 
   <script>
-    function setLinks(){
-      document.querySelectorAll('.brandName').forEach(x=>x.textContent=CONFIG.brand);
-      document.querySelectorAll('.ig').forEach(x=>x.href=CONFIG.instagram);
-      document.querySelectorAll('.tiktok').forEach(x=>x.href=CONFIG.tiktok);
-      document.querySelectorAll('.whatsapp').forEach(x=>x.href=CONFIG.whatsapp);
-      document.querySelectorAll('.pdf').forEach(x=>x.href=CONFIG.pdf);
-      document.querySelectorAll('.emailText').forEach(x=>{x.textContent=CONFIG.email;x.href='mailto:'+CONFIG.email});
-      document.querySelectorAll('.phoneText').forEach(x=>{x.textContent=CONFIG.phone;x.href='tel:'+CONFIG.phone});
-      document.getElementById('bookBtn').href=CONFIG.booking;
-      document.getElementById('callBtn').href=CONFIG.callBooking;
-    }
-
-    function go(id){
-      document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelectorAll('.menu a').forEach(a=>a.classList.toggle('active',a.dataset.page===id));
-      history.replaceState(null,'','#'+id);
-      window.scrollTo({top:0,behavior:'smooth'});
-    }
-
-    function unlockBooking(){
-      document.getElementById('bookBtn').classList.remove('disabled');
-      document.getElementById('callBtn').classList.remove('disabled');
-      document.getElementById('lockText').textContent='Application received. You can book now.';
-      document.getElementById('formStatus').style.display='block';
-    }
-
-    document.getElementById('leadForm').addEventListener('submit', async function(e){
-      e.preventDefault();
-      const data = new FormData(this);
-      if(CONFIG.formEndpoint){
-        try{await fetch(CONFIG.formEndpoint,{method:'POST',body:data,mode:'no-cors'});}catch(err){}
-      }
-      localStorage.setItem('orxy_application_done','yes');
-      unlockBooking();
-    });
-
-    document.querySelectorAll('#bookBtn,#callBtn').forEach(btn=>{
-      btn.addEventListener('click',function(e){
-        if(!localStorage.getItem('orxy_application_done')){
-          e.preventDefault();
-          go('start');
-          document.getElementById('leadForm').scrollIntoView({behavior:'smooth',block:'center'});
-        }
-      });
-    });
-
-    setLinks();
-    if(localStorage.getItem('orxy_application_done')) unlockBooking();
-    const startPage = location.hash ? location.hash.replace('#','') : 'home';
-    if(['home','systems','start'].includes(startPage)) go(startPage);
+    function applyLang(){const d=T[LANG];document.documentElement.lang=LANG;document.documentElement.dir=d.dir;document.body.style.direction=d.dir;document.getElementById('langBtn').textContent=d.langLabel;document.querySelectorAll('[data-t]').forEach(el=>{el.textContent=d[el.dataset.t]||''});const lock=document.getElementById('lockText');if(lock&&localStorage.getItem('orxy_application_done')) lock.textContent=d.unlocked;}
+    function toggleLang(){LANG=LANG==='ar'?'en':'ar';localStorage.setItem('orxy_lang',LANG);applyLang();}
+    function setLinks(){document.querySelectorAll('.brandName').forEach(x=>x.textContent=CONFIG.brand);document.querySelectorAll('.ig').forEach(x=>x.href=CONFIG.instagram);document.querySelectorAll('.tiktok').forEach(x=>x.href=CONFIG.tiktok);document.querySelectorAll('.whatsapp').forEach(x=>x.href=CONFIG.whatsapp);document.querySelectorAll('.pdf').forEach(x=>x.href=CONFIG.pdf);document.querySelectorAll('.emailText').forEach(x=>{x.textContent=CONFIG.email;x.href='mailto:'+CONFIG.email});document.querySelectorAll('.phoneText').forEach(x=>{x.textContent=CONFIG.phone;x.href='tel:'+CONFIG.phone});document.getElementById('bookBtn').href=CONFIG.booking;document.getElementById('callBtn').href=CONFIG.callBooking;}
+    function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.menu a').forEach(a=>a.classList.toggle('active',a.dataset.page===id));history.replaceState(null,'','#'+id);window.scrollTo({top:0,behavior:'smooth'});}
+    function unlockBooking(){document.getElementById('bookBtn').classList.remove('disabled');document.getElementById('callBtn').classList.remove('disabled');document.getElementById('formStatus').style.display='block';document.getElementById('lockText').textContent=T[LANG].unlocked;}
+    document.getElementById('leadForm').addEventListener('submit',async function(e){e.preventDefault();const data=new FormData(this);if(CONFIG.formEndpoint){try{await fetch(CONFIG.formEndpoint,{method:'POST',body:data,headers:{'Accept':'application/json'}});}catch(err){}}localStorage.setItem('orxy_application_done','yes');unlockBooking();});
+    document.querySelectorAll('#bookBtn,#callBtn').forEach(btn=>btn.addEventListener('click',function(e){if(!localStorage.getItem('orxy_application_done')){e.preventDefault();go('start');document.getElementById('leadForm').scrollIntoView({behavior:'smooth',block:'center'});}}));
+    setLinks();applyLang();if(localStorage.getItem('orxy_application_done'))unlockBooking();const startPage=location.hash?location.hash.replace('#',''):'home';if(['home','systems','start'].includes(startPage))go(startPage);
   </script>
 </body>
 </html>
