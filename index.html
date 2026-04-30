@@ -1,564 +1,1181 @@
-import React, { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowRight,
-  BarChart3,
-  Bot,
-  CalendarCheck,
-  CheckCircle2,
-  Clock3,
-  ExternalLink,
-  Instagram,
-  MessageCircle,
-  PhoneCall,
-  Play,
-  ShieldCheck,
-  Sparkles,
-  Stethoscope,
-  Users,
-  Workflow,
-  Zap,
-} from "lucide-react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClinicAI | AI Agents for Clinics</title>
 
-const LINKS = {
-  form: "https://forms.gle/YOUR_FORM_LINK",
-  booking: "https://calendly.com/YOUR_BOOKING_LINK",
-  instagram: "https://instagram.com/YOUR_USERNAME",
-  tiktok: "https://tiktok.com/@YOUR_USERNAME",
-  whatsapp: "https://wa.me/9665XXXXXXXX",
-};
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-const navItems = [
-  { id: "home", label: "Home" },
-  { id: "systems", label: "AI Systems" },
-  { id: "contact", label: "Start" },
-];
+    html {
+      scroll-behavior: smooth;
+    }
 
-const problems = [
-  {
-    title: "Patients Ask the Same Questions Daily",
-    desc: "Prices, services, working hours, doctor availability, location, and booking questions repeat all day.",
-    icon: MessageCircle,
-  },
-  {
-    title: "Leads Disappear Before Booking",
-    desc: "A patient sends a message, waits too long, then books with another clinic that replied faster.",
-    icon: Clock3,
-  },
-  {
-    title: "Your Team Is Busy With Manual Follow-Up",
-    desc: "Reception and marketing teams waste time copying messages, checking calendars, and reminding patients manually.",
-    icon: Workflow,
-  },
-  {
-    title: "Marketing Brings Leads, But Not Enough Calls",
-    desc: "Ads and content generate interest, but without smart follow-up, many opportunities stay cold.",
-    icon: BarChart3,
-  },
-  {
-    title: "Booking Is Not Smooth Enough",
-    desc: "Patients want fast answers, clear options, and an easy way to pick the right treatment or appointment.",
-    icon: CalendarCheck,
-  },
-  {
-    title: "No Clear System for Missed Opportunities",
-    desc: "No automatic tracking for who asked, who replied, who booked, and who needs another follow-up.",
-    icon: Users,
-  },
-];
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #050711;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
 
-const systems = [
-  {
-    badge: "Most Popular",
-    title: "WhatsApp AI Receptionist",
-    desc: "A bilingual AI agent that answers patients, explains services, qualifies interest, and sends them to booking.",
-    result: "24/7 replies",
-    icon: Bot,
-  },
-  {
-    badge: "High Impact",
-    title: "Smart Booking Assistant",
-    desc: "Helps patients choose the right service, collects details, and routes them to the right appointment flow.",
-    result: "More booked calls",
-    icon: CalendarCheck,
-  },
-  {
-    badge: "Sales Follow-Up",
-    title: "Lead Recovery System",
-    desc: "Automatically follows up with people who asked but did not book, without sounding robotic or spammy.",
-    result: "Less lost leads",
-    icon: Zap,
-  },
-  {
-    badge: "Operations",
-    title: "Patient FAQ Knowledge Base",
-    desc: "Turns your clinic info into a clean AI brain: services, prices, offers, doctors, policies, and location.",
-    result: "Consistent answers",
-    icon: ShieldCheck,
-  },
-  {
-    badge: "Marketing",
-    title: "Content-to-Lead Funnel",
-    desc: "Connect TikTok, Instagram, forms, and booking links into one simple path that turns attention into calls.",
-    result: "Cleaner funnel",
-    icon: Play,
-  },
-  {
-    badge: "Reporting",
-    title: "Clinic Lead Dashboard",
-    desc: "Track where leads came from, what they asked about, and which ones need follow-up next.",
-    result: "Better decisions",
-    icon: BarChart3,
-  },
-];
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-const previewFeedback = [
-  {
-    name: "Clinic Manager Preview",
-    label: "Demo feedback — not a client result",
-    quote: "The flow feels like a real receptionist. It answers fast, keeps the patient moving, and makes booking easier.",
-  },
-  {
-    name: "Marketing Team Preview",
-    label: "Demo feedback — not a client result",
-    quote: "This is exactly the missing link between our social media leads and actual appointments.",
-  },
-  {
-    name: "Operations Preview",
-    label: "Demo feedback — not a client result",
-    quote: "The best part is that the answers stay consistent instead of every employee replying differently.",
-  },
-];
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(0, 225, 255, 0.20), transparent 32%),
+        radial-gradient(circle at 90% 18%, rgba(44, 103, 255, 0.22), transparent 35%),
+        radial-gradient(circle at 45% 90%, rgba(0, 255, 170, 0.10), transparent 35%),
+        #050711;
+    }
 
-function Glow() {
-  return (
-    <div className="pointer-events-none fixed inset-0 overflow-hidden bg-[#060711]">
-      <div className="absolute left-[-10%] top-[-10%] h-[420px] w-[420px] rounded-full bg-cyan-500/20 blur-[120px]" />
-      <div className="absolute right-[-12%] top-[10%] h-[480px] w-[480px] rounded-full bg-blue-600/20 blur-[130px]" />
-      <div className="absolute bottom-[-15%] left-[35%] h-[420px] w-[420px] rounded-full bg-emerald-400/10 blur-[130px]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.10),transparent_35%),linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:100%_100%,54px_54px,54px_54px]" />
-    </div>
-  );
-}
+    .bg-glow::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
 
-function Pill({ children }) {
-  return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-sm text-cyan-100 shadow-lg shadow-cyan-950/20 backdrop-blur-xl">
-      <Sparkles className="h-4 w-4 text-cyan-300" />
-      {children}
-    </span>
-  );
-}
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: auto;
+    }
 
-function ButtonLink({ href, children, variant = "primary", onClick }) {
-  const classes =
-    variant === "primary"
-      ? "bg-cyan-300 text-slate-950 hover:bg-white shadow-[0_0_40px_rgba(103,232,249,0.25)]"
-      : "border border-white/10 bg-white/[0.06] text-white hover:bg-white/[0.1]";
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(22px);
+      background: rgba(5, 7, 17, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
 
-  if (onClick) {
-    return (
-      <button
-        onClick={onClick}
-        className={`inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition ${classes}`}
-      >
-        {children}
-      </button>
-    );
-  }
+    .nav {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
 
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer"
-      className={`inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition ${classes}`}
-    >
-      {children}
-    </a>
-  );
-}
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
 
-function Stat({ number, label }) {
-  return (
-    <div className="rounded-3xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur-xl">
-      <div className="text-3xl font-black tracking-tight text-white">{number}</div>
-      <div className="mt-1 text-sm leading-5 text-slate-400">{label}</div>
-    </div>
-  );
-}
+    .logo-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: #67e8f9;
+      color: #07111f;
+      font-size: 23px;
+      box-shadow: 0 0 35px rgba(103,232,249,0.35);
+    }
 
-function Card({ children, className = "" }) {
-  return (
-    <div className={`rounded-[2rem] border border-white/10 bg-white/[0.055] p-6 shadow-2xl shadow-black/20 backdrop-blur-xl ${className}`}>
-      {children}
-    </div>
-  );
-}
+    .logo strong {
+      display: block;
+      font-size: 19px;
+      letter-spacing: -0.5px;
+    }
 
-function SectionHeader({ eyebrow, title, desc }) {
-  return (
-    <div className="mx-auto mb-10 max-w-3xl text-center">
-      <div className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300/80">{eyebrow}</div>
-      <h2 className="text-3xl font-black tracking-tight text-white md:text-5xl">{title}</h2>
-      <p className="mt-4 text-base leading-7 text-slate-400 md:text-lg">{desc}</p>
-    </div>
-  );
-}
+    .logo span {
+      display: block;
+      margin-top: 2px;
+      color: rgba(165,243,252,0.75);
+      font-size: 12px;
+    }
 
-function Header({ activePage, setActivePage }) {
-  return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#060711]/70 backdrop-blur-2xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
-        <button onClick={() => setActivePage("home")} className="flex items-center gap-3">
-          <div className="grid h-11 w-11 place-items-center rounded-2xl bg-cyan-300 text-slate-950 shadow-[0_0_30px_rgba(103,232,249,0.35)]">
-            <Bot className="h-6 w-6" />
-          </div>
-          <div className="text-left">
-            <div className="text-lg font-black leading-5 text-white">ClinicAI</div>
-            <div className="text-xs text-cyan-200/70">AI Agents for Clinics</div>
-          </div>
-        </button>
+    .menu {
+      display: flex;
+      gap: 6px;
+      padding: 6px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.045);
+      border-radius: 18px;
+    }
 
-        <nav className="hidden items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-1 md:flex">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setActivePage(item.id)}
-              className={`rounded-xl px-4 py-2 text-sm font-medium transition ${
-                activePage === item.id ? "bg-white text-slate-950" : "text-slate-300 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
+    .menu button {
+      border: 0;
+      cursor: pointer;
+      color: #cbd5e1;
+      padding: 10px 16px;
+      border-radius: 13px;
+      background: transparent;
+      font-weight: 700;
+      transition: 0.2s;
+    }
 
-        <div className="flex items-center gap-2">
-          <a href={LINKS.instagram} target="_blank" rel="noreferrer" className="hidden rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-slate-300 transition hover:bg-white/10 hover:text-white sm:block">
-            <Instagram className="h-5 w-5" />
-          </a>
-          <ButtonLink href={LINKS.form}>Get Started <ArrowRight className="h-4 w-4" /></ButtonLink>
-        </div>
-      </div>
-    </header>
-  );
-}
+    .menu button:hover,
+    .menu button.active {
+      background: #ffffff;
+      color: #07111f;
+    }
 
-function HomePage({ setActivePage }) {
-  return (
-    <main>
-      <section className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-[1.1fr_0.9fr] md:px-8 md:py-24">
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
-          <Pill>AI Reception + Booking + Follow-Up · Saudi Clinics</Pill>
-          <h1 className="mt-7 max-w-5xl text-5xl font-black leading-[0.92] tracking-tight text-white md:text-7xl">
-            AI Agents That Turn Clinic Messages Into Booked Appointments.
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 md:text-xl">
-            We build clean AI systems for clinics: WhatsApp replies, patient qualification, service recommendations, booking flow, reminders, and follow-up — all working together.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href={LINKS.form}>Apply in 2 Minutes <ArrowRight className="h-4 w-4" /></ButtonLink>
-            <ButtonLink href={LINKS.booking} variant="secondary">Book a Call <PhoneCall className="h-4 w-4" /></ButtonLink>
-          </div>
-          <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-slate-400">
-            <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-cyan-300" /> Arabic + English</span>
-            <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-cyan-300" /> WhatsApp-first</span>
-            <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-cyan-300" /> Built for medical services</span>
-          </div>
-        </motion.div>
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.65, delay: 0.1 }}>
-          <Card className="relative overflow-hidden p-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/15 via-transparent to-blue-500/10" />
-            <div className="relative p-5">
-              <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/70 p-5">
-                <div className="mb-5 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-300 text-slate-950">
-                      <Stethoscope className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <div className="font-bold text-white">Patient Chat</div>
-                      <div className="text-sm text-cyan-200/70">AI receptionist online now</div>
-                    </div>
-                  </div>
-                  <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-semibold text-emerald-200">Live</span>
-                </div>
+    .icon-link {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.045);
+      color: #dbeafe;
+      transition: 0.2s;
+    }
 
-                <div className="space-y-3">
-                  <div className="ml-auto max-w-[82%] rounded-2xl rounded-tr-md bg-white px-4 py-3 text-sm text-slate-950">
-                    Hi, do you have laser appointments this week?
-                  </div>
-                  <div className="max-w-[88%] rounded-2xl rounded-tl-md border border-white/10 bg-white/[0.06] px-4 py-3 text-sm leading-6 text-slate-100">
-                    Yes. I can help you choose the right laser option and check available times. Is this your first session with us?
-                  </div>
-                  <div className="ml-auto max-w-[70%] rounded-2xl rounded-tr-md bg-white px-4 py-3 text-sm text-slate-950">
-                    Yes, first time.
-                  </div>
-                  <div className="max-w-[92%] rounded-2xl rounded-tl-md border border-cyan-300/20 bg-cyan-300/10 px-4 py-3 text-sm leading-6 text-cyan-50">
-                    Perfect. I’ll ask 3 quick questions, then send you the booking link with the best option.
-                  </div>
-                </div>
-              </div>
+    .icon-link:hover {
+      background: rgba(255,255,255,0.10);
+      transform: translateY(-2px);
+    }
 
-              <div className="mt-5 grid grid-cols-2 gap-3">
-                <Stat number="24/7" label="Patient replies" />
-                <Stat number="3x" label="Faster follow-up" />
-                <Stat number="0" label="Fake testimonials" />
-                <Stat number="Soon" label="Pilot partners" />
-              </div>
-            </div>
-          </Card>
-        </motion.div>
-      </section>
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 0;
+      cursor: pointer;
+      border-radius: 18px;
+      padding: 13px 20px;
+      font-size: 14px;
+      font-weight: 900;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
 
-      <section className="mx-auto max-w-7xl px-4 py-12 md:px-8">
-        <SectionHeader
-          eyebrow="The Problem"
-          title="Clinics Don’t Lose Patients Because of Bad Services. They Lose Them Because of Slow Systems."
-          desc="Your marketing can be strong, but if the reply, booking, and follow-up process is slow, the opportunity disappears."
-        />
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {problems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <Card key={item.title}>
-                <div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-white/[0.07] text-cyan-300">
-                  <Icon className="h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                <p className="mt-3 leading-7 text-slate-400">{item.desc}</p>
-              </Card>
-            );
-          })}
-        </div>
-      </section>
+    .btn-primary {
+      background: #67e8f9;
+      color: #06111f;
+      box-shadow: 0 0 40px rgba(103,232,249,0.25);
+    }
 
-      <section className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-        <Card className="overflow-hidden p-0">
-          <div className="grid gap-8 p-8 md:grid-cols-[0.9fr_1.1fr] md:p-10">
-            <div>
-              <div className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300/80">The Upgrade</div>
-              <h2 className="mt-4 text-3xl font-black tracking-tight text-white md:text-5xl">One System. Three Simple Steps.</h2>
-              <p className="mt-5 text-lg leading-8 text-slate-400">
-                Instead of random tools everywhere, your clinic gets one clean flow from social media attention to booked appointment.
-              </p>
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <ButtonLink onClick={() => setActivePage("systems")}>See Systems <ArrowRight className="h-4 w-4" /></ButtonLink>
-                <ButtonLink href={LINKS.tiktok} variant="secondary">Watch TikTok <Play className="h-4 w-4" /></ButtonLink>
-              </div>
-            </div>
-            <div className="grid gap-4">
-              {[
-                ["01", "Patient sees your TikTok/Instagram", "The content creates interest and sends them to the right form or chat."],
-                ["02", "AI answers and qualifies", "The agent replies fast, asks smart questions, and recommends the next step."],
-                ["03", "Booking + follow-up happens", "The patient gets the booking path, reminders, and follow-up if they disappear."],
-              ].map(([num, title, desc]) => (
-                <div key={num} className="rounded-3xl border border-white/10 bg-slate-950/50 p-5">
-                  <div className="flex gap-4">
-                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-cyan-300 text-lg font-black text-slate-950">{num}</div>
-                    <div>
-                      <h3 className="font-bold text-white">{title}</h3>
-                      <p className="mt-1 leading-6 text-slate-400">{desc}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Card>
-      </section>
-    </main>
-  );
-}
+    .btn-primary:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+    }
 
-function SystemsPage() {
-  return (
-    <main className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-24">
-      <SectionHeader
-        eyebrow="AI Systems"
-        title="Built for Clinics That Want More Appointments Without More Manual Work."
-        desc="Pick one system first, then connect the rest later. The goal is simple: faster replies, cleaner booking, and better follow-up."
-      />
+    .btn-secondary {
+      background: rgba(255,255,255,0.055);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.10);
+    }
 
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {systems.map((item) => {
-          const Icon = item.icon;
-          return (
-            <motion.div key={item.title} whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 260, damping: 18 }}>
-              <Card className="h-full">
-                <div className="mb-5 flex items-center justify-between gap-3">
-                  <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-semibold text-cyan-200">{item.badge}</span>
-                  <div className="grid h-11 w-11 place-items-center rounded-2xl bg-white/[0.07] text-cyan-300">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                </div>
-                <h3 className="text-2xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 min-h-[112px] leading-7 text-slate-400">{item.desc}</p>
-                <div className="mt-6 rounded-2xl border border-white/10 bg-slate-950/50 p-4">
-                  <div className="text-sm text-slate-500">Expected outcome</div>
-                  <div className="mt-1 text-lg font-black text-cyan-200">{item.result}</div>
-                </div>
-              </Card>
-            </motion.div>
-          );
-        })}
-      </div>
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.11);
+      transform: translateY(-2px);
+    }
 
-      <div className="mt-14 grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
-        <Card>
-          <div className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300/80">Coming Soon</div>
-          <h3 className="mt-4 text-3xl font-black text-white">Pilot Clinics & Case Studies</h3>
-          <p className="mt-4 leading-7 text-slate-400">
-            Since we’re still early, this area should not show fake company logos. Keep it honest: “Pilot partners coming soon” and replace it with real results after the first clients.
-          </p>
-          <div className="mt-6 grid gap-3">
-            {["Dermatology clinic", "Dental clinic", "Aesthetic medical center"].map((x) => (
-              <div key={x} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-slate-300">
-                <span>{x}</span>
-                <span className="rounded-full bg-white/[0.06] px-3 py-1 text-xs text-cyan-200">Soon</span>
-              </div>
-            ))}
-          </div>
-        </Card>
+    .page {
+      display: none;
+      animation: fadeUp 0.35s ease;
+    }
 
-        <div className="grid gap-5 md:grid-cols-3">
-          {previewFeedback.map((item) => (
-            <Card key={item.name}>
-              <div className="mb-4 flex gap-1 text-cyan-300">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Sparkles key={i} className="h-4 w-4" />
-                ))}
-              </div>
-              <p className="leading-7 text-slate-300">“{item.quote}”</p>
-              <div className="mt-5 border-t border-white/10 pt-4">
-                <div className="font-bold text-white">{item.name}</div>
-                <div className="mt-1 text-xs leading-5 text-cyan-200/70">{item.label}</div>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </main>
-  );
-}
+    .page.active {
+      display: block;
+    }
 
-function ContactPage() {
-  const contactSteps = [
-    ["01", "Fill the quick form", "Tell us your clinic type, services, and what you want automated."],
-    ["02", "We review your flow", "We look at your Instagram/TikTok, booking process, and patient questions."],
-    ["03", "You get a clear demo", "You see how the AI agent would reply, qualify, and move patients to booking."],
-  ];
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-  return (
-    <main className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-24">
-      <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+    .hero {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 54px;
+      align-items: center;
+      padding: 82px 0 52px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border-radius: 999px;
+      padding: 10px 15px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.06);
+      color: #cffafe;
+      font-size: 14px;
+      box-shadow: 0 16px 45px rgba(0,0,0,0.20);
+    }
+
+    h1 {
+      margin-top: 28px;
+      font-size: clamp(46px, 7vw, 82px);
+      line-height: 0.93;
+      letter-spacing: -4px;
+      font-weight: 1000;
+    }
+
+    .hero p {
+      margin-top: 24px;
+      max-width: 660px;
+      color: #cbd5e1;
+      font-size: 20px;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .checks {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    .checks span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .card {
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.055);
+      border-radius: 32px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.28);
+      backdrop-filter: blur(22px);
+    }
+
+    .chat-card {
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .chat-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(103,232,249,0.16), transparent, rgba(37,99,235,0.12));
+    }
+
+    .chat-inner {
+      position: relative;
+      border-radius: 25px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(2,6,23,0.70);
+      padding: 22px;
+    }
+
+    .chat-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .chat-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: #67e8f9;
+      color: #06111f;
+      font-size: 22px;
+    }
+
+    .live {
+      background: rgba(52,211,153,0.15);
+      color: #bbf7d0;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .messages {
+      display: grid;
+      gap: 12px;
+    }
+
+    .msg {
+      padding: 14px 16px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 88%;
+    }
+
+    .msg.user {
+      margin-left: auto;
+      background: #ffffff;
+      color: #07111f;
+      border-top-right-radius: 6px;
+    }
+
+    .msg.ai {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: #f8fafc;
+      border-top-left-radius: 6px;
+    }
+
+    .msg.ai.blue {
+      background: rgba(103,232,249,0.11);
+      border-color: rgba(103,232,249,0.22);
+      color: #ecfeff;
+    }
+
+    .stats {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .stat {
+      border-radius: 24px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.055);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 28px;
+      color: #ffffff;
+      letter-spacing: -1px;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 4px;
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    section {
+      padding: 58px 0;
+    }
+
+    .section-head {
+      max-width: 780px;
+      margin: 0 auto 42px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: rgba(103,232,249,0.85);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .section-head p {
+      margin-top: 16px;
+      color: #94a3b8;
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 17px;
+    }
+
+    .problem-card,
+    .system-card,
+    .feedback-card,
+    .step-card {
+      padding: 26px;
+    }
+
+    .mini-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 19px;
+      background: rgba(255,255,255,0.07);
+      color: #67e8f9;
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 22px;
+      line-height: 1.18;
+      letter-spacing: -0.7px;
+    }
+
+    .muted {
+      margin-top: 12px;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    .upgrade {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 36px;
+      padding: 36px;
+      align-items: center;
+    }
+
+    .steps {
+      display: grid;
+      gap: 14px;
+    }
+
+    .step-card {
+      background: rgba(2,6,23,0.48);
+    }
+
+    .step-flex {
+      display: flex;
+      gap: 16px;
+    }
+
+    .num {
+      width: 50px;
+      height: 50px;
+      flex: 0 0 50px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: #67e8f9;
+      color: #06111f;
+      font-weight: 1000;
+      font-size: 18px;
+    }
+
+    .systems-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .system-card {
+      min-height: 330px;
+      transition: 0.2s;
+    }
+
+    .system-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(103,232,249,0.35);
+    }
+
+    .system-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 7px 11px;
+      background: rgba(103,232,249,0.10);
+      border: 1px solid rgba(103,232,249,0.20);
+      color: #a5f3fc;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .outcome {
+      margin-top: 22px;
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(2,6,23,0.50);
+    }
+
+    .outcome small {
+      color: #64748b;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .outcome strong {
+      color: #a5f3fc;
+      font-size: 18px;
+    }
+
+    .coming-grid {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 18px;
+    }
+
+    .soon-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .soon-item {
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #cbd5e1;
+    }
+
+    .soon-item b {
+      color: #a5f3fc;
+      font-size: 12px;
+      background: rgba(255,255,255,0.07);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .quote {
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+
+    .quote-name {
+      margin-top: 18px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .quote-name strong {
+      display: block;
+    }
+
+    .quote-name span {
+      display: block;
+      margin-top: 4px;
+      color: rgba(165,243,252,0.70);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 34px;
+      padding: 82px 0;
+    }
+
+    .contact-actions {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .note {
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 28px;
+      background: rgba(103,232,249,0.10);
+      border: 1px solid rgba(103,232,249,0.20);
+      color: #ecfeff;
+    }
+
+    .note p {
+      margin-top: 8px;
+      color: rgba(236,254,255,0.78);
+      line-height: 1.7;
+    }
+
+    .whatsapp-box {
+      margin-top: 18px;
+      padding: 20px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.045);
+    }
+
+    .whatsapp-btn {
+      margin-top: 16px;
+      width: 100%;
+      background: #86efac;
+      color: #052e16;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding: 34px 0;
+      color: #94a3b8;
+    }
+
+    .footer-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .footer-links button,
+    .footer-links a {
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.045);
+      color: #cbd5e1;
+      padding: 10px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .upgrade,
+      .coming-grid,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3,
+      .systems-grid,
+      .feedback-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu {
+        display: none;
+      }
+
+      .icon-link {
+        display: none;
+      }
+
+      h1 {
+        letter-spacing: -2.5px;
+      }
+
+      .footer-flex {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nav {
+        height: auto;
+        padding: 14px 0;
+      }
+
+      .logo span {
+        display: none;
+      }
+
+      .btn {
+        padding: 12px 14px;
+      }
+
+      .hero {
+        padding-top: 55px;
+      }
+
+      .stats,
+      .contact-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- غير الروابط هنا -->
+  <script>
+    const LINKS = {
+      form: "https://forms.gle/YOUR_FORM_LINK",
+      booking: "https://calendly.com/YOUR_BOOKING_LINK",
+      instagram: "https://instagram.com/YOUR_USERNAME",
+      tiktok: "https://tiktok.com/@YOUR_USERNAME",
+      whatsapp: "https://wa.me/9665XXXXXXXX"
+    };
+  </script>
+
+  <header>
+    <div class="container nav">
+      <div class="logo" onclick="showPage('home')">
+        <div class="logo-icon">✦</div>
         <div>
-          <Pill>Start small. Upgrade fast.</Pill>
-          <h1 className="mt-6 text-5xl font-black leading-[0.95] tracking-tight text-white md:text-7xl">Ready to Build Your Clinic AI Agent?</h1>
-          <p className="mt-6 text-lg leading-8 text-slate-300">
-            Send your clinic details through the form, or book a call directly. We’ll map the simplest AI system that can create value first.
-          </p>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            <ButtonLink href={LINKS.form}>Open Form App <ExternalLink className="h-4 w-4" /></ButtonLink>
-            <ButtonLink href={LINKS.booking} variant="secondary">Book a Call <CalendarCheck className="h-4 w-4" /></ButtonLink>
-            <ButtonLink href={LINKS.instagram} variant="secondary">Instagram <Instagram className="h-4 w-4" /></ButtonLink>
-            <ButtonLink href={LINKS.tiktok} variant="secondary">TikTok <Play className="h-4 w-4" /></ButtonLink>
-          </div>
+          <strong>ClinicAI</strong>
+          <span>AI Agents for Clinics</span>
+        </div>
+      </div>
 
-          <div className="mt-8 rounded-[2rem] border border-cyan-300/20 bg-cyan-300/10 p-5 text-cyan-50">
-            <div className="font-bold">Note for the website</div>
-            <p className="mt-2 leading-7 text-cyan-50/80">
-              Replace the placeholder links at the top of the code with your real TikTok, Instagram, booking, form, and WhatsApp links.
-            </p>
-          </div>
+      <div class="menu">
+        <button class="nav-btn active" onclick="showPage('home')">Home</button>
+        <button class="nav-btn" onclick="showPage('systems')">AI Systems</button>
+        <button class="nav-btn" onclick="showPage('contact')">Start</button>
+      </div>
+
+      <div class="nav-actions">
+        <a class="icon-link instagram-link" target="_blank">IG</a>
+        <a class="btn btn-primary form-link" target="_blank">Get Started →</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="home" class="page active">
+    <div class="container hero">
+      <div>
+        <div class="pill">✦ AI Reception + Booking + Follow-Up · Saudi Clinics</div>
+
+        <h1>AI Agents That Turn Clinic Messages Into Booked Appointments.</h1>
+
+        <p>
+          We build clean AI systems for clinics: WhatsApp replies, patient qualification,
+          service recommendations, booking flow, reminders, and follow-up — all working together.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary form-link" target="_blank">Apply in 2 Minutes →</a>
+          <a class="btn btn-secondary booking-link" target="_blank">Book a Call ☎</a>
         </div>
 
-        <Card>
-          <div className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300/80">How It Works</div>
-          <div className="mt-6 space-y-4">
-            {contactSteps.map(([num, title, desc]) => (
-              <div key={num} className="rounded-3xl border border-white/10 bg-slate-950/50 p-5">
-                <div className="flex gap-4">
-                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-lg font-black text-slate-950">{num}</div>
-                  <div>
-                    <h3 className="text-xl font-black text-white">{title}</h3>
-                    <p className="mt-2 leading-7 text-slate-400">{desc}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div class="checks">
+          <span>✓ Arabic + English</span>
+          <span>✓ WhatsApp-first</span>
+          <span>✓ Built for medical services</span>
+        </div>
+      </div>
 
-          <div className="mt-6 rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-            <div className="flex items-center gap-3">
-              <div className="grid h-11 w-11 place-items-center rounded-2xl bg-emerald-400/15 text-emerald-200">
-                <MessageCircle className="h-5 w-5" />
-              </div>
+      <div class="card chat-card">
+        <div class="chat-inner">
+          <div class="chat-head">
+            <div class="chat-profile">
+              <div class="chat-avatar">⚕</div>
               <div>
-                <div className="font-black text-white">Prefer WhatsApp?</div>
-                <div className="text-sm text-slate-400">Send a quick message and we’ll continue there.</div>
+                <strong>Patient Chat</strong>
+                <p style="color:#a5f3fc99; font-size:14px; margin-top:3px;">AI receptionist online now</p>
               </div>
             </div>
-            <a href={LINKS.whatsapp} target="_blank" rel="noreferrer" className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-300 px-5 py-3 text-sm font-black text-slate-950 transition hover:bg-white">
-              Message on WhatsApp <ArrowRight className="h-4 w-4" />
-            </a>
+            <span class="live">Live</span>
           </div>
-        </Card>
-      </div>
-    </main>
-  );
-}
 
-function Footer({ setActivePage }) {
-  return (
-    <footer className="border-t border-white/10 px-4 py-10 md:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
-        <div>
-          <div className="text-lg font-black text-white">ClinicAI</div>
-          <p className="mt-1 text-sm text-slate-400">AI automation systems for clinics in Saudi Arabia.</p>
+          <div class="messages">
+            <div class="msg user">Hi, do you have laser appointments this week?</div>
+            <div class="msg ai">
+              Yes. I can help you choose the right laser option and check available times.
+              Is this your first session with us?
+            </div>
+            <div class="msg user">Yes, first time.</div>
+            <div class="msg ai blue">
+              Perfect. I’ll ask 3 quick questions, then send you the booking link with the best option.
+            </div>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {navItems.map((item) => (
-            <button key={item.id} onClick={() => setActivePage(item.id)} className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-300 hover:bg-white/10 hover:text-white">
-              {item.label}
-            </button>
-          ))}
-          <a href={LINKS.instagram} target="_blank" rel="noreferrer" className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-300 hover:bg-white/10 hover:text-white">Instagram</a>
-          <a href={LINKS.tiktok} target="_blank" rel="noreferrer" className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-300 hover:bg-white/10 hover:text-white">TikTok</a>
+
+        <div class="stats">
+          <div class="stat"><strong>24/7</strong><span>Patient replies</span></div>
+          <div class="stat"><strong>3x</strong><span>Faster follow-up</span></div>
+          <div class="stat"><strong>0</strong><span>Fake testimonials</span></div>
+          <div class="stat"><strong>Soon</strong><span>Pilot partners</span></div>
         </div>
-      </div>
-    </footer>
-  );
-}
-
-export default function App() {
-  const [activePage, setActivePage] = useState("home");
-  const page = useMemo(() => {
-    if (activePage === "systems") return <SystemsPage />;
-    if (activePage === "contact") return <ContactPage />;
-    return <HomePage setActivePage={setActivePage} />;
-  }, [activePage]);
-
-  return (
-    <div className="min-h-screen bg-[#060711] font-sans text-white">
-      <Glow />
-      <div className="relative z-10">
-        <Header activePage={activePage} setActivePage={setActivePage} />
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activePage}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.25 }}
-          >
-            {page}
-          </motion.div>
-        </AnimatePresence>
-        <Footer setActivePage={setActivePage} />
       </div>
     </div>
-  );
-}
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">The Problem</div>
+          <h2>Clinics Don’t Lose Patients Because of Bad Services. They Lose Them Because of Slow Systems.</h2>
+          <p>
+            Your marketing can be strong, but if the reply, booking, and follow-up process is slow,
+            the opportunity disappears.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card problem-card">
+            <div class="mini-icon">💬</div>
+            <h3>Patients Ask the Same Questions Daily</h3>
+            <p class="muted">Prices, services, working hours, doctor availability, location, and booking questions repeat all day.</p>
+          </div>
+
+          <div class="card problem-card">
+            <div class="mini-icon">⏱</div>
+            <h3>Leads Disappear Before Booking</h3>
+            <p class="muted">A patient sends a message, waits too long, then books with another clinic that replied faster.</p>
+          </div>
+
+          <div class="card problem-card">
+            <div class="mini-icon">⚙</div>
+            <h3>Your Team Is Busy With Manual Follow-Up</h3>
+            <p class="muted">Reception and marketing teams waste time copying messages, checking calendars, and reminding patients manually.</p>
+          </div>
+
+          <div class="card problem-card">
+            <div class="mini-icon">📈</div>
+            <h3>Marketing Brings Leads, But Not Enough Calls</h3>
+            <p class="muted">Ads and content generate interest, but without smart follow-up, many opportunities stay cold.</p>
+          </div>
+
+          <div class="card problem-card">
+            <div class="mini-icon">📅</div>
+            <h3>Booking Is Not Smooth Enough</h3>
+            <p class="muted">Patients want fast answers, clear options, and an easy way to pick the right treatment or appointment.</p>
+          </div>
+
+          <div class="card problem-card">
+            <div class="mini-icon">👥</div>
+            <h3>No Clear System for Missed Opportunities</h3>
+            <p class="muted">No automatic tracking for who asked, who replied, who booked, and who needs another follow-up.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="card upgrade">
+          <div>
+            <div class="eyebrow">The Upgrade</div>
+            <h2>One System. Three Simple Steps.</h2>
+            <p class="muted" style="font-size:18px;">
+              Instead of random tools everywhere, your clinic gets one clean flow from social media attention to booked appointment.
+            </p>
+
+            <div class="hero-actions">
+              <button class="btn btn-primary" onclick="showPage('systems')">See Systems →</button>
+              <a class="btn btn-secondary tiktok-link" target="_blank">Watch TikTok ▶</a>
+            </div>
+          </div>
+
+          <div class="steps">
+            <div class="card step-card">
+              <div class="step-flex">
+                <div class="num">01</div>
+                <div>
+                  <h3>Patient sees your TikTok/Instagram</h3>
+                  <p class="muted">The content creates interest and sends them to the right form or chat.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card step-card">
+              <div class="step-flex">
+                <div class="num">02</div>
+                <div>
+                  <h3>AI answers and qualifies</h3>
+                  <p class="muted">The agent replies fast, asks smart questions, and recommends the next step.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card step-card">
+              <div class="step-flex">
+                <div class="num">03</div>
+                <div>
+                  <h3>Booking + follow-up happens</h3>
+                  <p class="muted">The patient gets the booking path, reminders, and follow-up if they disappear.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <main id="systems" class="page">
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">AI Systems</div>
+          <h2>Built for Clinics That Want More Appointments Without More Manual Work.</h2>
+          <p>
+            Pick one system first, then connect the rest later. The goal is simple:
+            faster replies, cleaner booking, and better follow-up.
+          </p>
+        </div>
+
+        <div class="systems-grid">
+          <div class="card system-card">
+            <div class="system-top">
+              <span class="badge">Most Popular</span>
+              <div class="mini-icon">🤖</div>
+            </div>
+            <h3>WhatsApp AI Receptionist</h3>
+            <p class="muted">A bilingual AI agent that answers patients, explains services, qualifies interest, and sends them to booking.</p>
+            <div class="outcome"><small>Expected outcome</small><strong>24/7 replies</strong></div>
+          </div>
+
+          <div class="card system-card">
+            <div class="system-top">
+              <span class="badge">High Impact</span>
+              <div class="mini-icon">📅</div>
+            </div>
+            <h3>Smart Booking Assistant</h3>
+            <p class="muted">Helps patients choose the right service, collects details, and routes them to the right appointment flow.</p>
+            <div class="outcome"><small>Expected outcome</small><strong>More booked calls</strong></div>
+          </div>
+
+          <div class="card system-card">
+            <div class="system-top">
+              <span class="badge">Sales Follow-Up</span>
+              <div class="mini-icon">⚡</div>
+            </div>
+            <h3>Lead Recovery System</h3>
+            <p class="muted">Automatically follows up with people who asked but did not book, without sounding robotic or spammy.</p>
+            <div class="outcome"><small>Expected outcome</small><strong>Less lost leads</strong></div>
+          </div>
+
+          <div class="card system-card">
+            <div class="system-top">
+              <span class="badge">Operations</span>
+              <div class="mini-icon">🧠</div>
+            </div>
+            <h3>Patient FAQ Knowledge Base</h3>
+            <p class="muted">Turns your clinic info into a clean AI brain: services, prices, offers, doctors, policies, and location.</p>
+            <div class="outcome"><small>Expected outcome</small><strong>Consistent answers</strong></div>
+          </div>
+
+          <div class="card system-card">
+            <div class="system-top">
+              <span class="badge">Marketing</span>
+              <div class="mini-icon">▶</div>
+            </div>
+            <h3>Content-to-Lead Funnel</h3>
+            <p class="muted">Connect TikTok, Instagram, forms, and booking links into one simple path that turns attention into calls.</p>
+            <div class="outcome"><small>Expected outcome</small><strong>Cleaner funnel</strong></div>
+          </div>
+
+          <div class="card system-card">
+            <div class="system-top">
+              <span class="badge">Reporting</span>
+              <div class="mini-icon">📊</div>
+            </div>
+            <h3>Clinic Lead Dashboard</h3>
+            <p class="muted">Track where leads came from, what they asked about, and which ones need follow-up next.</p>
+            <div class="outcome"><small>Expected outcome</small><strong>Better decisions</strong></div>
+          </div>
+        </div>
+
+        <div class="coming-grid">
+          <div class="card problem-card">
+            <div class="eyebrow">Coming Soon</div>
+            <h3 style="font-size:34px;">Pilot Clinics & Case Studies</h3>
+            <p class="muted">
+              Since we’re still early, this area should stay honest: “Pilot partners coming soon”
+              and later you replace it with real results.
+            </p>
+
+            <div class="soon-list">
+              <div class="soon-item">Dermatology clinic <b>Soon</b></div>
+              <div class="soon-item">Dental clinic <b>Soon</b></div>
+              <div class="soon-item">Aesthetic medical center <b>Soon</b></div>
+            </div>
+          </div>
+
+          <div class="feedback-grid">
+            <div class="card feedback-card">
+              <p class="quote">“The flow feels like a real receptionist. It answers fast, keeps the patient moving, and makes booking easier.”</p>
+              <div class="quote-name">
+                <strong>Clinic Manager Preview</strong>
+                <span>Demo feedback — not a client result</span>
+              </div>
+            </div>
+
+            <div class="card feedback-card">
+              <p class="quote">“This is exactly the missing link between our social media leads and actual appointments.”</p>
+              <div class="quote-name">
+                <strong>Marketing Team Preview</strong>
+                <span>Demo feedback — not a client result</span>
+              </div>
+            </div>
+
+            <div class="card feedback-card">
+              <p class="quote">“The best part is that the answers stay consistent instead of every employee replying differently.”</p>
+              <div class="quote-name">
+                <strong>Operations Preview</strong>
+                <span>Demo feedback — not a client result</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <main id="contact" class="page">
+    <div class="container contact">
+      <div>
+        <div class="pill">✦ Start small. Upgrade fast.</div>
+        <h1>Ready to Build Your Clinic AI Agent?</h1>
+
+        <p class="muted" style="font-size:19px;">
+          Send your clinic details through the form, or book a call directly.
+          We’ll map the simplest AI system that can create value first.
+        </p>
+
+        <div class="contact-actions">
+          <a class="btn btn-primary form-link" target="_blank">Open Form App ↗</a>
+          <a class="btn btn-secondary booking-link" target="_blank">Book a Call 📅</a>
+          <a class="btn btn-secondary instagram-link" target="_blank">Instagram</a>
+          <a class="btn btn-secondary tiktok-link" target="_blank">TikTok</a>
+        </div>
+
+        <div class="note">
+          <strong>Important</strong>
+          <p>
+            Replace the placeholder links inside the code with your real TikTok,
+            Instagram, booking, form, and WhatsApp links.
+          </p>
+        </div>
+      </div>
+
+      <div class="card problem-card">
+        <div class="eyebrow">How It Works</div>
+
+        <div class="steps" style="margin-top:20px;">
+          <div class="card step-card">
+            <div class="step-flex">
+              <div class="num">01</div>
+              <div>
+                <h3>Fill the quick form</h3>
+                <p class="muted">Tell us your clinic type, services, and what you want automated.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card step-card">
+            <div class="step-flex">
+              <div class="num">02</div>
+              <div>
+                <h3>We review your flow</h3>
+                <p class="muted">We look at your Instagram/TikTok, booking process, and patient questions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card step-card">
+            <div class="step-flex">
+              <div class="num">03</div>
+              <div>
+                <h3>You get a clear demo</h3>
+                <p class="muted">You see how the AI agent would reply, qualify, and move patients to booking.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="whatsapp-box">
+          <h3>Prefer WhatsApp?</h3>
+          <p class="muted">Send a quick message and we’ll continue there.</p>
+          <a class="btn whatsapp-btn whatsapp-link" target="_blank">Message on WhatsApp →</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-flex">
+      <div>
+        <strong style="color:white;">ClinicAI</strong>
+        <p style="margin-top:6px;">AI automation systems for clinics in Saudi Arabia.</p>
+      </div>
+
+      <div class="footer-links">
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('systems')">AI Systems</button>
+        <button onclick="showPage('contact')">Start</button>
+        <a class="instagram-link" target="_blank">Instagram</a>
+        <a class="tiktok-link" target="_blank">TikTok</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+      });
+
+      document.getElementById(pageId).classList.add("active");
+
+      document.querySelectorAll(".nav-btn").forEach(btn => {
+        btn.classList.remove("active");
+      });
+
+      if (pageId === "home") document.querySelectorAll(".nav-btn")[0].classList.add("active");
+      if (pageId === "systems") document.querySelectorAll(".nav-btn")[1].classList.add("active");
+      if (pageId === "contact") document.querySelectorAll(".nav-btn")[2].classList.add("active");
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.querySelectorAll(".form-link").forEach(a => a.href = LINKS.form);
+    document.querySelectorAll(".booking-link").forEach(a => a.href = LINKS.booking);
+    document.querySelectorAll(".instagram-link").forEach(a => a.href = LINKS.instagram);
+    document.querySelectorAll(".tiktok-link").forEach(a => a.href = LINKS.tiktok);
+    document.querySelectorAll(".whatsapp-link").forEach(a => a.href = LINKS.whatsapp);
+  </script>
+</body>
+</html>
