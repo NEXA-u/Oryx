@@ -1,117 +1,1186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ORXY AI | AI Agents for Clinics</title>
-  <meta name="description" content="AI agents for clinics: WhatsApp replies, booking, follow-up, and lead conversion." />
+  <title>Oryx | نظام ذكاء اصطناعي للعيادات والمجال الطبي</title>
+  <meta name="description" content="Oryx يساعد العيادات والمنشآت الطبية على زيادة العملاء المحتملين، رفع الحجوزات، تقليل الهدر، وتحسين التشغيل باستخدام أنظمة الذكاء الاصطناعي." />
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:Inter,Arial,sans-serif;background:#050711;color:#fff;overflow-x:hidden}a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}.bg{position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 12% 10%,rgba(0,225,255,.22),transparent 32%),radial-gradient(circle at 88% 18%,rgba(44,103,255,.24),transparent 36%),radial-gradient(circle at 42% 92%,rgba(0,255,170,.10),transparent 35%),#050711}.bg:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(to bottom,#000,transparent 92%)}.container{width:min(1160px,calc(100% - 32px));margin:auto}.topbar{position:sticky;top:0;z-index:50;background:rgba(5,7,17,.74);backdrop-filter:blur(22px);border-bottom:1px solid rgba(255,255,255,.10)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px;cursor:pointer}.mark{width:46px;height:46px;border-radius:18px;display:grid;place-items:center;background:#67e8f9;color:#06111f;font-weight:1000;box-shadow:0 0 35px rgba(103,232,249,.35)}.brand strong{display:block;font-size:19px;letter-spacing:-.5px}.brand span{display:block;margin-top:2px;color:rgba(165,243,252,.74);font-size:12px}.menu{display:flex;gap:6px;padding:6px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);border-radius:18px}.menu a{padding:10px 16px;border-radius:13px;color:#cbd5e1;font-weight:800;font-size:14px;transition:.2s}.menu a:hover,.menu a.active{background:#fff;color:#07111f}.actions{display:flex;gap:10px;align-items:center}.icon{width:43px;height:43px;border-radius:16px;display:grid;place-items:center;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);color:#dbeafe;font-weight:900}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;cursor:pointer;border-radius:18px;padding:13px 19px;font-size:14px;font-weight:1000;transition:.2s;white-space:nowrap}.btn:hover{transform:translateY(-2px)}.primary{background:#67e8f9;color:#06111f;box-shadow:0 0 40px rgba(103,232,249,.24)}.primary:hover{background:#fff}.secondary{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.10);color:#fff}.secondary:hover{background:rgba(255,255,255,.11)}.disabled{opacity:.52;pointer-events:none}.page{display:none;animation:fade .28s ease}.page.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}.hero{display:grid;grid-template-columns:1.07fr .93fr;gap:48px;align-items:center;padding:82px 0 56px}.pill{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:10px 15px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.06);color:#cffafe;font-size:14px;box-shadow:0 16px 45px rgba(0,0,0,.20)}h1{margin-top:26px;font-size:clamp(44px,7vw,80px);line-height:.93;letter-spacing:-4px;font-weight:1000}h2{font-size:clamp(32px,5vw,54px);line-height:1;letter-spacing:-2px}.lead{margin-top:22px;color:#cbd5e1;font-size:19px;line-height:1.72;max-width:660px}.heroBtns{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px}.checks{margin-top:18px;display:flex;flex-wrap:wrap;gap:12px;color:#94a3b8;font-size:14px}.checks span{display:inline-flex;gap:7px;align-items:center}.card{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.055);border-radius:32px;box-shadow:0 30px 80px rgba(0,0,0,.28);backdrop-filter:blur(22px)}.chatCard{position:relative;overflow:hidden;padding:20px}.chatCard:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(103,232,249,.16),transparent,rgba(37,99,235,.12))}.chatInner{position:relative;border-radius:25px;border:1px solid rgba(255,255,255,.10);background:rgba(2,6,23,.72);padding:22px}.chatHead{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:21px}.avatar{width:50px;height:50px;border-radius:18px;display:grid;place-items:center;background:#67e8f9;color:#06111f;font-weight:1000}.chatProfile{display:flex;gap:12px;align-items:center}.live{background:rgba(52,211,153,.15);color:#bbf7d0;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:1000}.messages{display:grid;gap:12px}.msg{padding:14px 16px;border-radius:18px;font-size:14px;line-height:1.6;max-width:88%}.user{margin-left:auto;background:#fff;color:#07111f;border-top-right-radius:6px}.ai{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);color:#f8fafc;border-top-left-radius:6px}.blue{background:rgba(103,232,249,.11);border-color:rgba(103,232,249,.22);color:#ecfeff}.stats{position:relative;margin-top:14px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.stat{border-radius:24px;padding:18px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.055)}.stat strong{display:block;font-size:28px;letter-spacing:-1px}.stat span{display:block;margin-top:4px;color:#94a3b8;font-size:13px;line-height:1.4}section{padding:58px 0}.sectionHead{text-align:center;max-width:760px;margin:0 auto 40px}.eyebrow{color:rgba(103,232,249,.85);text-transform:uppercase;letter-spacing:4px;font-size:13px;font-weight:1000;margin-bottom:14px}.sectionHead p,.muted{color:#94a3b8;line-height:1.72}.sectionHead p{margin-top:16px;font-size:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:17px}.mini{padding:25px}.miniIcon{width:50px;height:50px;border-radius:18px;background:rgba(255,255,255,.07);display:grid;place-items:center;color:#67e8f9;margin-bottom:17px;font-size:23px}h3{font-size:22px;line-height:1.18;letter-spacing:-.7px}.flow{padding:34px;display:grid;grid-template-columns:.88fr 1.12fr;gap:30px;align-items:center}.steps{display:grid;gap:13px}.step{padding:19px;background:rgba(2,6,23,.48)}.stepFlex{display:flex;gap:15px}.num{width:48px;height:48px;flex:0 0 48px;border-radius:17px;background:#67e8f9;color:#06111f;display:grid;place-items:center;font-weight:1000}.system{padding:25px;min-height:275px;transition:.2s}.system:hover{transform:translateY(-6px);border-color:rgba(103,232,249,.34)}.systemTop{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}.badge{display:inline-flex;border-radius:999px;padding:7px 11px;background:rgba(103,232,249,.10);border:1px solid rgba(103,232,249,.20);color:#a5f3fc;font-size:12px;font-weight:1000}.outcome{margin-top:20px;padding:15px;border-radius:20px;border:1px solid rgba(255,255,255,.10);background:rgba(2,6,23,.50)}.outcome small{display:block;color:#64748b;margin-bottom:4px}.outcome strong{color:#a5f3fc;font-size:17px}.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;padding:72px 0}.formCard{padding:25px}.formGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}label{color:#cbd5e1;font-size:13px;font-weight:900}input,textarea,select{width:100%;border:1px solid rgba(255,255,255,.11);background:rgba(2,6,23,.55);color:#fff;border-radius:16px;padding:13px 14px;outline:none}textarea{min-height:105px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:rgba(103,232,249,.45);box-shadow:0 0 0 4px rgba(103,232,249,.08)}.status{margin-top:14px;padding:14px;border-radius:18px;background:rgba(103,232,249,.10);border:1px solid rgba(103,232,249,.18);color:#cffafe;display:none}.locked{padding:22px;margin-top:18px;background:rgba(2,6,23,.45)}.lockedBtns{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}.contactList{display:grid;gap:10px;margin-top:20px}.contactItem{padding:14px;border-radius:18px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);display:flex;justify-content:space-between;gap:12px;color:#cbd5e1}footer{border-top:1px solid rgba(255,255,255,.10);padding:32px 0;color:#94a3b8}.footerFlex{display:flex;justify-content:space-between;align-items:center;gap:18px}.footerLinks{display:flex;flex-wrap:wrap;gap:8px}.footerLinks a{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);color:#cbd5e1;padding:10px 14px;border-radius:14px}@media(max-width:900px){.hero,.flow,.contact{grid-template-columns:1fr}.grid3,.grid2{grid-template-columns:1fr}.menu{display:none}.icon{display:none}.footerFlex{align-items:flex-start;flex-direction:column}h1{letter-spacing:-2.5px}}@media(max-width:520px){.nav{height:auto;padding:14px 0}.brand span{display:none}.stats,.formGrid,.lockedBtns{grid-template-columns:1fr}.hero{padding-top:52px}.btn{padding:12px 14px}}
+    :root {
+      --bg: #07111b;
+      --bg-soft: #0d1824;
+      --card: rgba(255,255,255,0.06);
+      --card-2: rgba(255,255,255,0.08);
+      --text: #f7fbff;
+      --muted: #aab7c6;
+      --line: rgba(255,255,255,0.11);
+      --primary: #7dd3fc;
+      --primary-2: #67e8f9;
+      --accent: #d8f5ff;
+      --success: #86efac;
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+      --radius: 24px;
+      --radius-sm: 18px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans Arabic", "Tajawal", "Cairo", Inter, system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(103,232,249,.14), transparent 28%),
+        radial-gradient(circle at top left, rgba(125,211,252,.14), transparent 32%),
+        linear-gradient(180deg, #07111b 0%, #091521 50%, #0a1722 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    body.en {
+      direction: ltr;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 10, 17, .7);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 14px 30px rgba(103,232,249,.22);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 13px;
+      background: linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,0));
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .lang-toggle:hover,
+    .lang-toggle:focus-visible {
+      color: var(--text);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .lang-toggle,
+    .btn {
+      border: 0;
+      cursor: pointer;
+      min-height: 48px;
+      padding: 0 1.1rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      transition: .2s ease;
+      font-weight: 800;
+    }
+
+    .lang-toggle {
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #031018;
+      box-shadow: 0 16px 40px rgba(103,232,249,.18);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .btn:hover,
+    .lang-toggle:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      padding: 5rem 0 3.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 1.4rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .48rem .9rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: #dff8ff;
+      font-size: .92rem;
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--success);
+      box-shadow: 0 0 0 8px rgba(134,239,172,.12);
+    }
+
+    h1, h2, h3 { line-height: 1.08; margin: 0; letter-spacing: -.03em; }
+    h1 { font-size: clamp(2.3rem, 6vw, 5rem); max-width: 12ch; }
+    h2 { font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: .85rem; }
+    h3 { font-size: 1.16rem; margin-bottom: .55rem; }
+
+    .hero p,
+    .section-lead,
+    .muted,
+    .faq-answer,
+    .testimonial-role,
+    .step-card p,
+    .card p,
+    li {
+      color: var(--muted);
+    }
+
+    .hero p {
+      font-size: 1.06rem;
+      max-width: 60ch;
+      margin: 1.15rem 0 1.6rem;
+    }
+
+    .hero-actions,
+    .proof,
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .85rem;
+    }
+
+    .proof span {
+      padding: .55rem .82rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      color: #dce9f5;
+      font-size: .93rem;
+    }
+
+    .hero-card,
+    .card,
+    .form-card,
+    .video-card,
+    .final-cta {
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card {
+      padding: 1.2rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(125,211,252,.18), transparent 30%);
+      pointer-events: none;
+    }
+
+    .dashboard {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .metric-row,
+    .grid-3,
+    .grid-2,
+    .testimonial-grid,
+    .steps,
+    .faq-grid,
+    .form-grid,
+    .stats-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .metric-row { grid-template-columns: repeat(3, 1fr); }
+    .grid-3, .steps, .testimonial-grid { grid-template-columns: repeat(3, 1fr); }
+    .grid-2, .form-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: 1.1fr .9fr; }
+
+    .panel,
+    .step-card {
+      background: rgba(7,17,27,.62);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      padding: 1rem;
+    }
+
+    .metric strong,
+    .stat strong,
+    .step-result strong {
+      display: block;
+      font-size: 1.45rem;
+      letter-spacing: -.03em;
+      color: var(--text);
+    }
+
+    .bars { display: grid; gap: .8rem; margin-top: 1rem; }
+    .bar span {
+      display: flex;
+      justify-content: space-between;
+      gap: .75rem;
+      margin-bottom: .45rem;
+      color: #ebf8ff;
+      font-size: .93rem;
+    }
+
+    .bar-track {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary), var(--primary-2));
+    }
+
+    .list-clean,
+    .bullet-list,
+    .service-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: .72rem;
+    }
+
+    .list-clean li,
+    .bullet-list li,
+    .service-list li {
+      position: relative;
+      padding-inline-start: 1.25rem;
+    }
+
+    .list-clean li::before,
+    .bullet-list li::before,
+    .service-list li::before {
+      content: "";
+      position: absolute;
+      inset-inline-start: 0;
+      top: .78rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    }
+
+    section { padding: 4.5rem 0; }
+
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+
+    .kicker {
+      color: var(--primary-2);
+      font-size: .84rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, rgba(125,211,252,.16), rgba(103,232,249,.17));
+      border: 1px solid rgba(255,255,255,.08);
+      font-size: 1.15rem;
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+
+    .step-result {
+      margin-top: 1rem;
+      padding: .95rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .testimonial {
+      display: flex;
+      flex-direction: column;
+      gap: .95rem;
+      min-height: 100%;
+    }
+
+    .stars { color: #ffd66b; letter-spacing: .12em; }
+    .testimonial-footer {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      margin-top: auto;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(125,211,252,.24), rgba(103,232,249,.22));
+      border: 1px solid rgba(255,255,255,.08);
+      font-weight: 800;
+    }
+
+    .faq-item {
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      padding: 1.1rem 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      cursor: pointer;
+      text-align: inherit;
+    }
+
+    .faq-question .plus {
+      font-size: 1.45rem;
+      transition: transform .2s ease;
+    }
+
+    .faq-item.active .plus { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .28s ease;
+      padding: 0 1.15rem;
+    }
+
+    .faq-answer p { margin: 0 0 1.1rem; }
+
+    .hidden-section { display: none; }
+    .show { display: block; }
+
+    .form-card,
+    .video-card,
+    .final-cta {
+      padding: 1.4rem;
+    }
+
+    .form-card {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+    }
+
+    .field label {
+      font-weight: 700;
+      color: #e6f3fb;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      padding: .95rem 1rem;
+      outline: none;
+    }
+
+    .field textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder { color: #8ca1b5; }
+
+    .form-note {
+      margin-top: 1rem;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .video-box {
+      min-height: 260px;
+      border-radius: 20px;
+      border: 1px dashed rgba(255,255,255,.14);
+      background: rgba(255,255,255,.03);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--muted);
+    }
+
+    .video-box strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: .4rem;
+      font-size: 1.15rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .85rem;
+      margin-top: 1.2rem;
+    }
+
+    .pdf-embed-card {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .pdf-embed-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: .9rem;
+      flex-wrap: wrap;
+    }
+
+    .pdf-embed-title {
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+    }
+
+    .pdf-embed-title strong {
+      color: var(--text);
+      font-size: 1.02rem;
+    }
+
+    .pdf-embed-frame {
+      width: 100%;
+      height: 420px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+    }
+
+    .pdf-embed-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #0b1220;
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 1.2rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .steps,
+      .testimonial-grid,
+      .form-grid,
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      h1 { max-width: 100%; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(calc(100% - 1.15rem), var(--max)); }
+      .hero { padding-top: 4rem; }
+      section { padding: 3.6rem 0; }
+      .footer-row { flex-direction: column; align-items: flex-start; }
+      .nav { min-height: 70px; }
+      .hero-card,
+      .card,
+      .form-card,
+      .video-card,
+      .final-cta { border-radius: 20px; }
+    }
   </style>
 </head>
 <body>
-  <div class="bg"></div>
-
-  <script>
-    const CONFIG = {
-      brand: "ORXY AI",
-      // ما قدرت أجيب بياناتك القديمة من الذاكرة/الملفات، فحطيت أماكنها هنا فقط
-      email: "YOUR_EMAIL_HERE",
-      phone: "+966XXXXXXXXX",
-      instagram: "https://instagram.com/YOUR_USERNAME",
-      tiktok: "https://www.tiktok.com/@YOUR_USERNAME",
-      whatsapp: "https://wa.me/9665XXXXXXXX",
-      pdf: "./orxy-sales-system.pdf.pdf",
-      // حط رابط الحجز العادي ورابط حجز المكالمة هنا
-      booking: "YOUR_BOOKING_LINK",
-      callBooking: "YOUR_CALL_BOOKING_LINK",
-      // Formspree/Formspace endpoint مثل: https://formspree.io/f/xxxxxxx
-      formEndpoint: ""
-    };
-
-    let LANG = localStorage.getItem('orxy_lang') || 'ar';
-
-    const T = {
-      ar: {
-        dir: 'rtl', langLabel: 'English', navHome: 'الرئيسية', navSystems: 'الأنظمة', navStart: 'ابدأ', ctaApply: 'قدّم أولاً ←',
-        pill: '✦ استقبال ذكي · حجز · متابعة', heroTitle: 'حوّل رسائل العيادة إلى مواعيد محجوزة.',
-        heroLead: 'نبني أنظمة ذكاء اصطناعي بسيطة للعيادات: ردود واتساب فورية، فهم احتياج المريض، تنظيم الحجز، التذكير، والمتابعة.',
-        apply2: 'قدّم في دقيقتين ←', viewPdf: 'عرض ملف PDF', ch1: '✓ عربي + إنجليزي', ch2: '✓ مناسب للواتساب', ch3: '✓ بدون ادعاءات وهمية',
-        chatTitle: 'محادثة مريض', online: 'متصل الآن', m1: 'هل عندكم مواعيد هذا الأسبوع؟', m2: 'نعم. أقدر أساعدك تختار الخدمة المناسبة وأتأكد من الأوقات المتاحة.', m3: 'مهتم بالليزر.', m4: 'تمام. بسألك ٣ أسئلة سريعة، وبعدها أعطيك الخطوة المناسبة للحجز.',
-        s1: 'ردود فورية', s2: 'قدّم أولاً', s3: 'عيادات تجريبية', s4: 'شرح النظام', problemEyebrow: 'المشكلة', problemTitle: 'أغلب الفرص تضيع بعد أول رسالة.', problemLead: 'العيادات ما تحتاج أدوات كثيرة وعشوائية. تحتاج مسار واضح من الاهتمام إلى الحجز.',
-        p1t: 'رد متأخر', p1d: 'المريض يسأل، والرد يتأخر، فتضيع الفرصة.', p2t: 'حجز غير مرتب', p2d: 'المريض يبغى طريقة سهلة يسأل ويختار ويحجز بدون تعقيد.', p3t: 'ما فيه متابعة', p3d: 'إذا اختفى العميل، المفروض النظام يرجعه بطريقة ذكية.',
-        flowEyebrow: 'المسار', flowTitle: 'قدّم أولاً. بعدها يفتح الحجز.', flowLead: 'كذا المكالمة تكون جدية وواضحة. أول شيء نعرف نوع العيادة والمشكلة، بعدين يفتح له رابط الحجز.', startNow: 'ابدأ الآن ←',
-        f1t: 'التقديم', f1d: 'العيادة تكتب نوعها، خدماتها، ومشكلتها الحالية في الحجز أو الردود.', f2t: 'المراجعة', f2d: 'نحدد أبسط نظام AI يقدر يعطي نتيجة أولاً.', f3t: 'الحجز', f3d: 'بعد الفورم يقدر يحجز مكالمة أو يطلب ديمو.',
-        systemsEyebrow: 'الأنظمة', systemsTitle: 'أنظمة AI بسيطة للعيادات.', systemsLead: 'ابدأ بنظام واحد، وبعدها اربط الباقي.',
-        sys1: 'موظف استقبال AI', sys1d: 'يرد على الأسئلة، يشرح الخدمات، وينقل المريض للخطوة التالية.', sys2: 'مسار الحجز', sys2d: 'يجمع بيانات المريض قبل المكالمة ويخلي الحجز أنظف.', sys3: 'متابعة العملاء', sys3d: 'يتابع المهتمين اللي ما حجزوا بدون إزعاج.', sys4: 'عقل الأسئلة المتكررة', sys4d: 'يحافظ على إجابات ثابتة: الخدمات، الأسعار، الموقع، السياسات، والأوقات.', sys5: 'من المحتوى إلى العميل', sys5d: 'يربط إنستغرام وتيك توك بالفورم والواتساب والحجز.', sys6: 'لوحة العملاء', sys6d: 'تعرض مصدر العملاء ومن يحتاج متابعة.', goal: 'الهدف', status: 'الحالة', soon: 'قريباً', faster: 'رد أسرع', better: 'مكالمات أفضل', lost: 'فرص أقل ضياعاً', clean: 'إجابات أوضح', funnel: 'مسار واضح',
-        startPill: '✦ الخطوة الأولى: قدّم في دقيقتين', startTitle: 'قدّم أولاً. الحجز يفتح بعد الفورم.', startLead: 'هذا يخلي المكالمة مركزة. نحتاج نعرف نوع العيادة والخدمات والمشكلة قبل تحديد الموعد.',
-        email: 'الإيميل', phone: 'الجوال', pdf: 'PDF', openPdf: 'فتح ملف شرح النظام', formEyebrow: 'نموذج التقديم', formTitle: 'فورم سريع للعيادة', name: 'الاسم', clinic: 'اسم العيادة', type: 'نوع العيادة', improve: 'وش تبغى تحسن؟', submit: 'إرسال الطلب ←', done: 'تم. روابط الحجز فتحت الآن.',
-        bookTitle: 'الخطوة الثانية: احجز بعد التقديم', locked: 'عبّ الفورم أولاً، بعدها تفتح أزرار الحجز.', unlocked: 'وصل الطلب. تقدر تحجز الآن.', bookConsult: 'حجز استشارة', bookCall: 'حجز مكالمة', footer: 'أنظمة AI للعيادات في السعودية.'
-      },
-      en: {
-        dir: 'ltr', langLabel: 'عربي', navHome: 'Home', navSystems: 'Systems', navStart: 'Start', ctaApply: 'Apply first →',
-        pill: '✦ AI Reception · Booking · Follow-up', heroTitle: 'Turn clinic messages into booked appointments.',
-        heroLead: 'We build simple AI systems for clinics: instant WhatsApp replies, patient qualification, booking flow, reminders, and follow-up.',
-        apply2: 'Apply in 2 minutes →', viewPdf: 'View PDF', ch1: '✓ Arabic + English', ch2: '✓ WhatsApp-first', ch3: '✓ No fake client claims',
-        chatTitle: 'Patient Chat', online: 'online now', m1: 'Do you have appointments this week?', m2: 'Yes. I can help you choose the right service and check available times.', m3: 'I’m interested in laser.', m4: 'Perfect. I’ll ask 3 quick questions, then send the correct next step.',
-        s1: 'Instant replies', s2: 'Apply first', s3: 'Pilot clinics', s4: 'System overview', problemEyebrow: 'The problem', problemTitle: 'Most leads are lost after the first message.', problemLead: 'Clinics do not need more random tools. They need one clear path from attention to booking.',
-        p1t: 'Slow replies', p1d: 'Patients ask. The clinic replies late. The opportunity gets cold.', p2t: 'Messy booking', p2d: 'People want a fast way to choose, ask, and book without confusion.', p3t: 'No follow-up', p3d: 'If they disappear, the system should bring them back automatically.',
-        flowEyebrow: 'The flow', flowTitle: 'Apply first. Then book the call.', flowLead: 'This keeps the call serious. The clinic fills the form first, then the booking links unlock.', startNow: 'Start now →',
-        f1t: 'Apply', f1d: 'Clinic shares its service, lead source, and current booking problem.', f2t: 'Review', f2d: 'We map the simplest AI system that can help first.', f3t: 'Book', f3d: 'After the form, they can book a call or request the demo.',
-        systemsEyebrow: 'Systems', systemsTitle: 'Simple AI systems for clinics.', systemsLead: 'Start with one system, then connect the rest later.',
-        sys1: 'AI Receptionist', sys1d: 'Answers common questions, explains services, and moves patients to the next step.', sys2: 'Booking Flow', sys2d: 'Collects patient details before the call and keeps the process cleaner.', sys3: 'Lead Follow-up', sys3d: 'Follows up with interested patients who did not book yet.', sys4: 'Clinic FAQ Brain', sys4d: 'Keeps answers consistent: services, prices, location, policies, and working hours.', sys5: 'Content-to-Lead Path', sys5d: 'Connects Instagram/TikTok attention to form, WhatsApp, and booking.', sys6: 'Lead Dashboard', sys6d: 'Shows where leads came from and who needs follow-up next.', goal: 'Goal', status: 'Status', soon: 'Coming soon', faster: 'Faster replies', better: 'Better calls', lost: 'Less lost leads', clean: 'Clean answers', funnel: 'Clear funnel',
-        startPill: '✦ Step 1: apply in 2 minutes', startTitle: 'Apply first. Booking unlocks after the form.', startLead: 'This makes the call focused. We need to know the clinic type, services, and current problem before scheduling.',
-        email: 'Email', phone: 'Phone', pdf: 'PDF', openPdf: 'Open system PDF', formEyebrow: 'Application form', formTitle: 'Quick clinic form', name: 'Name', clinic: 'Clinic name', type: 'Clinic type', improve: 'What do you want to improve?', submit: 'Submit application →', done: 'Done. Booking links are unlocked.',
-        bookTitle: 'Step 2: book after applying', locked: 'Complete the form first. Then booking buttons will unlock.', unlocked: 'Application received. You can book now.', bookConsult: 'Book consultation', bookCall: 'Book call', footer: 'AI automation systems for clinics in Saudi Arabia.'
-      }
-    };
-  </script>
-
   <header class="topbar">
     <div class="container nav">
-      <div class="brand" onclick="go('home')">
-        <div class="mark">✦</div><div><strong class="brandName">ORXY AI</strong><span>AI agents for clinics</span></div>
-      </div>
-      <nav class="menu">
-        <a href="#home" data-page="home" class="active" data-t="navHome"></a><a href="#systems" data-page="systems" data-t="navSystems"></a><a href="#start" data-page="start" data-t="navStart"></a>
+      <a href="#top" class="brand" aria-label="Oryx home">
+        <span class="logo" aria-hidden="true"></span>
+        <span>ORYX</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#services" data-ar="الخدمات" data-en="Services">الخدمات</a>
+        <a href="#why" data-ar="لماذا Oryx" data-en="Why Oryx">لماذا Oryx</a>
+        <a href="#process" data-ar="الآلية" data-en="Process">الآلية</a>
+        <a href="#faq" data-ar="الأسئلة" data-en="FAQ">الأسئلة</a>
       </nav>
-      <div class="actions"><button class="icon" onclick="toggleLang()" id="langBtn">EN</button><a class="btn primary" href="#start" onclick="go('start')" data-t="ctaApply"></a></div>
+
+      <div class="nav-actions">
+        <button class="lang-toggle" id="langToggle" type="button">English</button>
+        <a class="btn btn-primary" href="#lead-form" data-ar="ابدأ الآن" data-en="Get Started">ابدأ الآن</a>
+      </div>
     </div>
   </header>
 
-  <main id="home" class="page active">
-    <div class="container hero">
-      <div><div class="pill" data-t="pill"></div><h1 data-t="heroTitle"></h1><p class="lead" data-t="heroLead"></p><div class="heroBtns"><a class="btn primary" href="#start" onclick="go('start')" data-t="apply2"></a><a class="btn secondary pdf" target="_blank" data-t="viewPdf"></a></div><div class="checks"><span data-t="ch1"></span><span data-t="ch2"></span><span data-t="ch3"></span></div></div>
-      <div class="card chatCard"><div class="chatInner"><div class="chatHead"><div class="chatProfile"><div class="avatar">AI</div><div><strong data-t="chatTitle"></strong><p style="color:#a5f3fc99;font-size:14px;margin-top:3px" data-t="online"></p></div></div><span class="live">Live</span></div><div class="messages"><div class="msg user" data-t="m1"></div><div class="msg ai" data-t="m2"></div><div class="msg user" data-t="m3"></div><div class="msg ai blue" data-t="m4"></div></div></div><div class="stats"><div class="stat"><strong>24/7</strong><span data-t="s1"></span></div><div class="stat"><strong>2 min</strong><span data-t="s2"></span></div><div class="stat"><strong>Soon</strong><span data-t="s3"></span></div><div class="stat"><strong>PDF</strong><span data-t="s4"></span></div></div></div>
-    </div>
-    <section><div class="container"><div class="sectionHead"><div class="eyebrow" data-t="problemEyebrow"></div><h2 data-t="problemTitle"></h2><p data-t="problemLead"></p></div><div class="grid3"><div class="card mini"><div class="miniIcon">💬</div><h3 data-t="p1t"></h3><p class="muted" data-t="p1d"></p></div><div class="card mini"><div class="miniIcon">📅</div><h3 data-t="p2t"></h3><p class="muted" data-t="p2d"></p></div><div class="card mini"><div class="miniIcon">⚡</div><h3 data-t="p3t"></h3><p class="muted" data-t="p3d"></p></div></div></div></section>
-    <section><div class="container"><div class="card flow"><div><div class="eyebrow" data-t="flowEyebrow"></div><h2 data-t="flowTitle"></h2><p class="lead" data-t="flowLead"></p><div class="heroBtns"><a class="btn primary" href="#start" onclick="go('start')" data-t="startNow"></a><a class="btn secondary tiktok" target="_blank">TikTok</a></div></div><div class="steps"><div class="card step"><div class="stepFlex"><div class="num">01</div><div><h3 data-t="f1t"></h3><p class="muted" data-t="f1d"></p></div></div></div><div class="card step"><div class="stepFlex"><div class="num">02</div><div><h3 data-t="f2t"></h3><p class="muted" data-t="f2d"></p></div></div></div><div class="card step"><div class="stepFlex"><div class="num">03</div><div><h3 data-t="f3t"></h3><p class="muted" data-t="f3d"></p></div></div></div></div></div></div></section>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span data-ar="نظام ذكاء اصطناعي مخصص للعيادات والمنشآت الطبية" data-en="AI system built for clinics and medical businesses">نظام ذكاء اصطناعي مخصص للعيادات والمنشآت الطبية</span>
+          </div>
+
+          <h1 data-ar="خلّ عيادتك تشتغل بذكاء أعلى وتجيب عملاء أكثر." data-en="Help your clinic run smarter and bring in more qualified leads.">خلّ عيادتك تشتغل بذكاء أعلى وتجيب عملاء أكثر.</h1>
+          <p data-ar="Oryx هو نظام ذكاء اصطناعي متكامل يساعد العيادات والقطاع الطبي على زيادة الليدز، رفع الحجوزات، تقليل التكاليف التشغيلية، وتحسين طريقة متابعة العملاء المحتملين من أول تواصل إلى الحجز." data-en="Oryx is a complete AI system for clinics and medical businesses. We help you generate more leads, increase bookings, reduce operating waste, and improve how prospects move from first contact to appointment.">Oryx هو نظام ذكاء اصطناعي متكامل يساعد العيادات والقطاع الطبي على زيادة الليدز، رفع الحجوزات، تقليل التكاليف التشغيلية، وتحسين طريقة متابعة العملاء المحتملين من أول تواصل إلى الحجز.</p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#lead-form" data-ar="احجز مكالمة مبيعات" data-en="Book a Sales Call">احجز مكالمة مبيعات</a>
+            <a class="btn btn-secondary" href="#services" data-ar="شوف كيف نساعدك" data-en="See How We Help">شوف كيف نساعدك</a>
+          </div>
+
+          <div class="proof">
+            <span data-ar="زيادة العملاء المحتملين" data-en="More qualified leads">زيادة العملاء المحتملين</span>
+            <span data-ar="تقليل المصاريف والهدر" data-en="Lower waste and costs">تقليل المصاريف والهدر</span>
+            <span data-ar="رفع الحجوزات والمتابعة" data-en="Higher bookings and follow-up">رفع الحجوزات والمتابعة</span>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <div class="dashboard">
+            <div class="metric-row">
+              <div class="panel metric">
+                <small data-ar="تحسين إدارة الليدز" data-en="Lead management improvement">تحسين إدارة الليدز</small>
+                <strong>+AI</strong>
+              </div>
+              <div class="panel metric">
+                <small data-ar="متابعة أسرع وأكثر دقة" data-en="Faster, smarter follow-up">متابعة أسرع وأكثر دقة</small>
+                <strong>24/7</strong>
+              </div>
+              <div class="panel metric">
+                <small data-ar="تقليل الهدر التشغيلي" data-en="Lower operational waste">تقليل الهدر التشغيلي</small>
+                <strong>-Cost</strong>
+              </div>
+            </div>
+
+            <div class="stats-grid">
+              <div class="panel">
+                <h3 data-ar="ماذا يطور Oryx؟" data-en="What does Oryx improve?">ماذا يطور Oryx؟</h3>
+                <p data-ar="نظام مصمم للعيادات اللي تبي استقطاب أفضل، تشغيل أذكى، وعائد أعلى من كل فرصة مبيعات." data-en="A system built for clinics that want stronger acquisition, smarter operations, and more revenue from every sales opportunity.">نظام مصمم للعيادات اللي تبي استقطاب أفضل، تشغيل أذكى، وعائد أعلى من كل فرصة مبيعات.</p>
+                <div class="bars">
+                  <div class="bar">
+                    <span><strong data-ar="التعامل مع الليدز" data-en="Lead handling">التعامل مع الليدز</strong><strong>90%</strong></span>
+                    <div class="bar-track"><div class="bar-fill" style="width:90%"></div></div>
+                  </div>
+                  <div class="bar">
+                    <span><strong data-ar="وضوح الرحلة البيعية" data-en="Sales journey clarity">وضوح الرحلة البيعية</strong><strong>82%</strong></span>
+                    <div class="bar-track"><div class="bar-fill" style="width:82%"></div></div>
+                  </div>
+                  <div class="bar">
+                    <span><strong data-ar="كفاءة التشغيل" data-en="Operational efficiency">كفاءة التشغيل</strong><strong>88%</strong></span>
+                    <div class="bar-track"><div class="bar-fill" style="width:88%"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel">
+                <h3 data-ar="يشمل الباكج" data-en="Package includes">يشمل الباكج</h3>
+                <ul class="list-clean">
+                  <li data-ar="نظام Oryx للذكاء الاصطناعي" data-en="Oryx AI system">نظام Oryx للذكاء الاصطناعي</li>
+                  <li data-ar="تدفق ليدز ومتابعة" data-en="Lead flow and follow-up">تدفق ليدز ومتابعة</li>
+                  <li data-ar="رفع جودة الحجوزات" data-en="Higher booking quality">رفع جودة الحجوزات</li>
+                  <li data-ar="هيكلة أقرب للإغلاق" data-en="Closer-to-close structure">هيكلة أقرب للإغلاق</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker" data-ar="الخدمات" data-en="Services">الخدمات</span>
+          <h2 data-ar="مو مجرد موقع. هذا نظام يساعد عيادتك تنمو." data-en="Not just a website. A system built to grow your clinic.">مو مجرد موقع. هذا نظام يساعد عيادتك تنمو.</h2>
+          <p class="section-lead" data-ar="أنت ما تبيع صفحة ويب. أنت تقدم Oryx كنظام ذكاء اصطناعي متكامل يرفع الأداء التجاري والتشغيلي للعيادات والمنشآت الطبية." data-en="You are not selling a basic website. You are offering Oryx as a complete AI system that improves both growth and operations for clinics and medical businesses.">أنت ما تبيع صفحة ويب. أنت تقدم Oryx كنظام ذكاء اصطناعي متكامل يرفع الأداء التجاري والتشغيلي للعيادات والمنشآت الطبية.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card reveal">
+            <div class="icon">✦</div>
+            <h3 data-ar="زيادة الليدز الطبية" data-en="More medical leads">زيادة الليدز الطبية</h3>
+            <p data-ar="نصمم رحلة أوضح للعميل المحتمل من أول زيارة أو تواصل إلى خطوة الحجز الفعلية." data-en="We create a clearer path for prospects so they move from first touch to an actual booking with less friction.">نصمم رحلة أوضح للعميل المحتمل من أول زيارة أو تواصل إلى خطوة الحجز الفعلية.</p>
+            <ul class="service-list">
+              <li data-ar="عرض واضح للخدمة" data-en="Clear offer positioning">عرض واضح للخدمة</li>
+              <li data-ar="ترتيب أقوى للرسائل" data-en="Stronger messaging flow">ترتيب أقوى للرسائل</li>
+              <li data-ar="رفع جودة العملاء المحتملين" data-en="Higher lead quality">رفع جودة العملاء المحتملين</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">⌁</div>
+            <h3 data-ar="أتمتة ومتابعة أذكى" data-en="Smarter automation and follow-up">أتمتة ومتابعة أذكى</h3>
+            <p data-ar="نساعدك تقلل التأخير، تضبط متابعة العملاء، وتخلي النظام يشتغل بشكل أكثر كفاءة." data-en="We help reduce delays, improve lead handling, and make your system run with more consistency and efficiency.">نساعدك تقلل التأخير، تضبط متابعة العملاء، وتخلي النظام يشتغل بشكل أكثر كفاءة.</p>
+            <ul class="service-list">
+              <li data-ar="تقليل ضياع الفرص" data-en="Less lost opportunity">تقليل ضياع الفرص</li>
+              <li data-ar="تحسين التواصل الداخلي" data-en="Better internal coordination">تحسين التواصل الداخلي</li>
+              <li data-ar="تقوية رحلة العميل" data-en="Stronger patient journey">تقوية رحلة العميل</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">↗</div>
+            <h3 data-ar="خفض التكاليف وزيادة العائد" data-en="Lower costs, increase revenue">خفض التكاليف وزيادة العائد</h3>
+            <p data-ar="Oryx يساعدك تستفيد من كل ليد بشكل أفضل، تقلل الهدر التشغيلي، وتبني نظام يوصل لصفقات أعلى قيمة." data-en="Oryx helps you get more value from every lead, reduce operational waste, and build a system better suited for higher-value deals.">Oryx يساعدك تستفيد من كل ليد بشكل أفضل، تقلل الهدر التشغيلي، وتبني نظام يوصل لصفقات أعلى قيمة.</p>
+            <ul class="service-list">
+              <li data-ar="نظام أقرب للربحية" data-en="More profitable systems">نظام أقرب للربحية</li>
+              <li data-ar="تركيز على الصفقات العالية" data-en="Focus on higher-value deals">تركيز على الصفقات العالية</li>
+              <li data-ar="تحسين كفاءة الفريق" data-en="Improved team efficiency">تحسين كفاءة الفريق</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker" data-ar="لماذا Oryx" data-en="Why Oryx">لماذا Oryx</span>
+          <h2 data-ar="لأن العيادات ما تحتاج حلول عامة. تحتاج نظام مصمم لها." data-en="Because clinics do not need generic solutions. They need a system built for them.">لأن العيادات ما تحتاج حلول عامة. تحتاج نظام مصمم لها.</h2>
+          <p class="section-lead" data-ar="صممنا هذه الرحلة بحيث يفهم الزائر قيمة Oryx أولًا، ثم يرسل بياناته، ثم ينتقل إلى مكالمة مبيعات مناسبة بشكل واضح واحترافي." data-en="This journey is designed so visitors first understand the value of Oryx, then submit their details, and then move into a clear, professional sales call.">صممنا هذه الرحلة بحيث يفهم الزائر قيمة Oryx أولًا، ثم يرسل بياناته، ثم ينتقل إلى مكالمة مبيعات مناسبة بشكل واضح واحترافي.</p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card reveal">
+            <h3 data-ar="هيكلة مناسبة للبيع الاستشاري" data-en="Built for consultative selling">هيكلة مناسبة للبيع الاستشاري</h3>
+            <ul class="bullet-list">
+              <li data-ar="الصفحة الأولى تشرح القيمة، وليس السعر فقط." data-en="The first page explains the value, not just a price.">الصفحة الأولى تشرح القيمة، وليس السعر فقط.</li>
+              <li data-ar="بعدها تجمع بيانات العميل قبل الحجز." data-en="Then it collects lead details before booking.">بعدها تجمع بيانات العميل قبل الحجز.</li>
+              <li data-ar="ثم ينتقل العميل إلى مكالمة الإغلاق وهو فاهم الفكرة أكثر." data-en="Then the lead moves to the booking stage with better understanding.">ثم ينتقل العميل إلى مكالمة الإغلاق وهو فاهم الفكرة أكثر.</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <h3 data-ar="مصمم للقطاع الطبي" data-en="Made for the medical sector">مصمم للقطاع الطبي</h3>
+            <ul class="bullet-list">
+              <li data-ar="خطاب واضح للعيادات والمجال الصحي." data-en="Clear messaging for clinics and healthcare businesses.">خطاب واضح للعيادات والمجال الصحي.</li>
+              <li data-ar="تركيز على الليدز، التشغيل، والمردود المالي." data-en="Focused on leads, operations, and financial return.">تركيز على الليدز، التشغيل، والمردود المالي.</li>
+              <li data-ar="أقرب لتقديم Oryx كنظام متكامل، وليس خدمة مبعثرة." data-en="Positions Oryx as a complete system, not a fragmented service.">أقرب لتقديم Oryx كنظام متكامل، وليس خدمة مبعثرة.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker" data-ar="الآلية" data-en="Process">الآلية</span>
+          <h2 data-ar="كيف تتحول الزيارة إلى فرصة مبيعات فعلية؟" data-en="How does a visit become a real sales opportunity?">كيف تتحول الزيارة إلى فرصة مبيعات فعلية؟</h2>
+          <p class="section-lead" data-ar="الرحلة هنا مقصودة: فهم القيمة أولًا، إرسال البيانات ثانيًا، ثم حجز مكالمة مبيعات وأنت داخل المكالمة وأنت فاهم وش هو Oryx." data-en="This journey is intentional: understand the value first, submit your details second, then book a sales call already knowing what Oryx is and why it matters.">الرحلة هنا مقصودة: فهم القيمة أولًا، إرسال البيانات ثانيًا، ثم حجز مكالمة مبيعات وأنت داخل المكالمة وأنت فاهم وش هو Oryx.</p>
+        </div>
+
+        <div class="steps">
+          <article class="step-card reveal">
+            <span class="step-number">01</span>
+            <h3 data-ar="يفهم العيادة الفكرة" data-en="The clinic understands the offer">يفهم العيادة الفكرة</h3>
+            <p data-ar="يشوف الزائر كيف يساعد Oryx في زيادة الليدز، تحسين الحجز، وتقليل الهدر." data-en="The visitor sees how Oryx helps increase leads, improve bookings, and reduce waste.">يشوف الزائر كيف يساعد Oryx في زيادة الليدز، تحسين الحجز، وتقليل الهدر.</p>
+            <div class="step-result">
+              <strong data-ar="وضوح أعلى" data-en="More clarity">وضوح أعلى</strong>
+              <span class="muted" data-ar="فهم أسرع للقيمة الحقيقية." data-en="Faster understanding of the true value.">فهم أسرع للقيمة الحقيقية.</span>
+            </div>
+          </article>
+
+          <article class="step-card reveal">
+            <span class="step-number">02</span>
+            <h3 data-ar="يرسل بياناته" data-en="Submits lead details">يرسل بياناته</h3>
+            <p data-ar="قبل الحجز، يعبّي الاسم، البريد، الجوال، واسم النشاط حتى تدخل مكالمة المبيعات وأنت عارف من أمامك." data-en="Before booking, the lead submits their name, email, phone number, and business name so you enter the sales call with context.">قبل الحجز، يعبّي الاسم، البريد، الجوال، واسم النشاط حتى تدخل مكالمة المبيعات وأنت عارف من أمامك.</p>
+            <div class="step-result">
+              <strong data-ar="تأهيل أفضل" data-en="Better qualification">تأهيل أفضل</strong>
+              <span class="muted" data-ar="معلومات أوضح قبل المكالمة." data-en="Clearer information before the call.">معلومات أوضح قبل المكالمة.</span>
+            </div>
+          </article>
+
+          <article class="step-card reveal">
+            <span class="step-number">03</span>
+            <h3 data-ar="يحجز مكالمة الإغلاق" data-en="Books the closing call">يحجز مكالمة الإغلاق</h3>
+            <p data-ar="بعد إرسال الفورم، ينتقل مباشرة إلى صفحة الحجز أو صفحة تمهيدية فيها فيديو بيع قصير ثم يحجز." data-en="After submitting the form, they move directly to the booking page or to a pre-sell page with a short video before they book.">بعد إرسال الفورم، ينتقل مباشرة إلى صفحة الحجز أو صفحة تمهيدية فيها فيديو بيع قصير ثم يحجز.</p>
+            <div class="step-result">
+              <strong data-ar="فرصة إغلاق أقوى" data-en="Stronger close potential">فرصة إغلاق أقوى</strong>
+              <span class="muted" data-ar="العميل يدخل المكالمة وهو أدفأ." data-en="The prospect enters the call warmer.">العميل يدخل المكالمة وهو أدفأ.</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker" data-ar="آراء تجريبية" data-en="Placeholder testimonials">آراء تجريبية</span>
+          <h2 data-ar="أماكن جاهزة تضيف فيها شهادات عملاء لاحقًا." data-en="Ready sections where you can add client proof later.">أماكن جاهزة تضيف فيها شهادات عملاء لاحقًا.</h2>
+        </div>
+
+        <div class="testimonial-grid">
+          <article class="card testimonial reveal">
+            <div class="stars">★★★★★</div>
+            <p data-ar="“صار عندنا وضوح أكبر في طريقة التعامل مع العملاء المحتملين، وصارت الرحلة البيعية أرتب بكثير.”" data-en="“We became much clearer in how we handle prospects, and the sales journey became far more organized.”">“صار عندنا وضوح أكبر في طريقة التعامل مع العملاء المحتملين، وصارت الرحلة البيعية أرتب بكثير.”</p>
+            <div class="testimonial-footer">
+              <div class="avatar">د</div>
+              <div>
+                <strong data-ar="مدير عيادة" data-en="Clinic Manager">مدير عيادة</strong>
+                <div class="testimonial-role" data-ar="Placeholder testimonial" data-en="Placeholder testimonial">Placeholder testimonial</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card testimonial reveal">
+            <div class="stars">★★★★★</div>
+            <p data-ar="“الطريقة كانت أوضح من مجرد موقع. حسّينا إن فيه نظام فعلي يساعدنا نرتب النمو والتشغيل.”" data-en="“This felt bigger than just a website. It felt like an actual system helping us organize growth and operations.”">“الطريقة كانت أوضح من مجرد موقع. حسّينا إن فيه نظام فعلي يساعدنا نرتب النمو والتشغيل.”</p>
+            <div class="testimonial-footer">
+              <div class="avatar">ط</div>
+              <div>
+                <strong data-ar="صاحب منشأة طبية" data-en="Medical Business Owner">صاحب منشأة طبية</strong>
+                <div class="testimonial-role" data-ar="Placeholder testimonial" data-en="Placeholder testimonial">Placeholder testimonial</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card testimonial reveal">
+            <div class="stars">★★★★★</div>
+            <p data-ar="“دخلنا على المكالمة وإحنا فاهمين وش راح ناخذ تقريبًا، وهذا رفع جودة الحوار من البداية.”" data-en="“We entered the call already understanding the offer, which made the conversation better from the start.”">“دخلنا على المكالمة وإحنا فاهمين وش راح ناخذ تقريبًا، وهذا رفع جودة الحوار من البداية.”</p>
+            <div class="testimonial-footer">
+              <div class="avatar">م</div>
+              <div>
+                <strong data-ar="إدارة تشغيل" data-en="Operations Lead">إدارة تشغيل</strong>
+                <div class="testimonial-role" data-ar="Placeholder testimonial" data-en="Placeholder testimonial">Placeholder testimonial</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</span>
+          <h2 data-ar="أسئلة ممكن تجي في بال العيادة قبل الحجز." data-en="Questions a clinic may have before booking.">أسئلة ممكن تجي في بال العيادة قبل الحجز.</h2>
+        </div>
+
+        <div class="faq-grid reveal">
+          <div class="faq-item active">
+            <button class="faq-question" type="button" aria-expanded="true">
+              <span data-ar="هل Oryx مجرد موقع إلكتروني؟" data-en="Is Oryx just a website?">هل Oryx مجرد موقع إلكتروني؟</span>
+              <span class="plus">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-ar="لا. الموقع هنا جزء من الرحلة فقط. Oryx يتم تقديمه كنظام ذكاء اصطناعي متكامل يساعد في الليدز، الحجز، المتابعة، وتحسين الكفاءة التشغيلية." data-en="No. The website is only one part of the journey. Oryx is positioned as a complete AI system that helps with leads, booking, follow-up, and operational efficiency.">لا. الموقع هنا جزء من الرحلة فقط. Oryx يتم تقديمه كنظام ذكاء اصطناعي متكامل يساعد في الليدز، الحجز، المتابعة، وتحسين الكفاءة التشغيلية.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span data-ar="هل يصلح للعيادات فقط؟" data-en="Is it only for clinics?">هل يصلح للعيادات فقط؟</span>
+              <span class="plus">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-ar="التركيز الحالي على العيادات والمنشآت الطبية لأن هذا القطاع يحتاج تنظيم أعلى في التعامل مع العملاء والفرص والحجوزات." data-en="The current positioning is focused on clinics and medical businesses because this sector benefits heavily from better lead handling, appointment flow, and operational structure.">التركيز الحالي على العيادات والمنشآت الطبية لأن هذا القطاع يحتاج تنظيم أعلى في التعامل مع العملاء والفرص والحجوزات.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span data-ar="ليش فيه فورم قبل الحجز؟" data-en="Why is there a form before booking?">ليش فيه فورم قبل الحجز؟</span>
+              <span class="plus">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-ar="عشان تدخل مكالمة المبيعات بمعلومات أوضح عن العميل المحتمل، ويصير الحوار أنسب وأقرب للإغلاق بدل ما يكون عام وعشوائي." data-en="So you enter the sales call with better context about the lead, making the conversation more relevant and more likely to close.">عشان تدخل مكالمة المبيعات بمعلومات أوضح عن العميل المحتمل، ويصير الحوار أنسب وأقرب للإغلاق بدل ما يكون عام وعشوائي.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span data-ar="هل أقدر أضيف فيديو تمهيدي قبل رابط الحجز؟" data-en="Can I add a pre-sell video before the booking link?">هل أقدر أضيف فيديو تمهيدي قبل رابط الحجز؟</span>
+              <span class="plus">+</span>
+            </button>
+            <div class="faq-answer">
+              <p data-ar="نعم. الكود مجهز لصفحة ثانية بعد إرسال الفورم، وتقدر تضيف فيها فيديو يشرح الفكرة بشكل أعمق قبل ما يضغط العميل على رابط الحجز النهائي." data-en="Yes. The code is already structured for a second step after form submission, where you can add a video that explains the offer more deeply before the prospect clicks the final booking link.">نعم. الكود مجهز لصفحة ثانية بعد إرسال الفورم، وتقدر تضيف فيها فيديو يشرح الفكرة بشكل أعمق قبل ما يضغط العميل على رابط الحجز النهائي.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lead-form">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker" data-ar="الخطوة التالية" data-en="Next step">الخطوة التالية</span>
+          <h2 data-ar="قبل الحجز، عرفنا عليك وعلى نشاطك." data-en="Before booking, tell us about you and your business.">قبل الحجز، عرفنا عليك وعلى نشاطك.</h2>
+          <p class="section-lead" data-ar="هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط مكالمة المبيعات." data-en="This step prepares a better sales call. After submitting the form, the visitor moves to a pre-booking page and then to the sales call link.">هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط مكالمة المبيعات.</p>
+        </div>
+
+        <form class="form-card reveal" id="leadCaptureForm" action="https://formspree.io/f/xeepgawk" method="POST">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name" data-ar="الاسم" data-en="Name">الاسم</label>
+              <input id="name" name="name" type="text" required data-ar-placeholder="اكتب اسمك" data-en-placeholder="Enter your name" placeholder="اكتب اسمك" />
+            </div>
+            <div class="field">
+              <label for="business" data-ar="اسم النشاط / العيادة" data-en="Business / Clinic Name">اسم النشاط / العيادة</label>
+              <input id="business" name="business" type="text" required data-ar-placeholder="اسم النشاط" data-en-placeholder="Business name" placeholder="اسم النشاط" />
+            </div>
+            <div class="field">
+              <label for="email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+              <input id="email" name="email" type="email" required data-ar-placeholder="name@example.com" data-en-placeholder="name@example.com" placeholder="name@example.com" />
+            </div>
+            <div class="field">
+              <label for="phone" data-ar="📞 رقم الجوال" data-en="📞 Phone Number">📞 رقم الجوال</label>
+              <input id="phone" name="phone" type="tel" required data-ar-placeholder="05xxxxxxxx" data-en-placeholder="Phone number" placeholder="05xxxxxxxx" />
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:1rem;">
+            <label for="notes" data-ar="وش أكبر تحدي عندك الآن؟" data-en="What is your biggest challenge right now?">وش أكبر تحدي عندك الآن؟</label>
+            <textarea id="notes" name="notes" data-ar-placeholder="اكتب بشكل مختصر..." data-en-placeholder="Write a short note..." placeholder="اكتب بشكل مختصر..."></textarea>
+          </div>
+
+          <div class="cta-row">
+            <button class="btn btn-primary" id="submitLeadBtn" type="submit" data-ar="أرسل وانتقل للخطوة الأخيرة" data-en="Submit and continue">أرسل وانتقل للخطوة الأخيرة</button>
+            <span id="formSuccess" style="display:none; color: var(--success); font-weight:800; align-self:center;" data-ar="✓ تم الإرسال بنجاح" data-en="✓ Submitted successfully">✓ تم الإرسال بنجاح</span>
+          </div>
+          <p id="formError" class="form-note" style="display:none; color:#fca5a5;" data-ar="صار خطأ أثناء الإرسال. حاول مرة ثانية." data-en="Something went wrong while submitting. Please try again.">صار خطأ أثناء الإرسال. حاول مرة ثانية.</p>
+
+          <p class="form-note" data-ar="مهم: هذا النموذج حاليًا واجهة فقط. لاحقًا تقدر تربطه بـ Formspree أو Tally أو أي نظام يجمع البيانات فعليًا." data-en="Important: this form is currently front-end only. Later, you can connect it to Formspree, Tally, or any lead capture backend.">مهم: هذا النموذج حاليًا واجهة فقط. لاحقًا تقدر تربطه بـ Formspree أو Tally أو أي نظام يجمع البيانات فعليًا.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="prebook-section" class="hidden-section">
+      <div class="container">
+        <div class="video-card reveal show">
+          <span class="kicker" data-ar="قبل الحجز" data-en="Before you book">قبل الحجز</span>
+          <h2 data-ar="ممتاز. باقي خطوة أخيرة قبل مكالمة المبيعات." data-en="Great. One last step before the sales call.">ممتاز. باقي خطوة أخيرة قبل مكالمة المبيعات.</h2>
+          <p class="section-lead" data-ar="في هذه الصفحة تقدر تضيف فيديو يشرح Oryx بشكل أقوى ويهيئ العميل قبل الدخول على مكالمة الإغلاق." data-en="On this page, you can later add a video that explains Oryx more deeply and warms the prospect before the closing call.">في هذه الصفحة تقدر تضيف فيديو يشرح Oryx بشكل أقوى ويهيئ العميل قبل الدخول على مكالمة الإغلاق.</p>
+
+          <div class="video-box">
+            <div>
+              <strong data-ar="مكان الفيديو التمهيدي" data-en="Pre-sell video placeholder">مكان الفيديو التمهيدي</strong>
+              <span data-ar="أضف هنا لاحقًا فيديو يشرح قيمة Oryx، كيف يساعد العيادات، ولماذا مكالمة المبيعات تستحق وقتهم." data-en="Later, add a short video here explaining the value of Oryx, how it helps clinics, and why the sales call is worth their time.">أضف هنا لاحقًا فيديو يشرح قيمة Oryx، كيف يساعد العيادات، ولماذا مكالمة المبيعات تستحق وقتهم.</span>
+            </div>
+          </div>
+
+          <div class="cta-row" style="align-items:stretch; width:100%;">
+            <a class="btn btn-primary" href="https://calendly.com/nexa-conn/new-meeting-1" target="_blank" rel="noopener noreferrer" style="min-height:56px;">
+              <span>📞</span>
+              <span data-ar="مكالمة هاتفية - 5 دقائق" data-en="Phone Call - 5 min">مكالمة هاتفية - 5 دقائق</span>
+            </a>
+            <a class="btn btn-secondary" href="https://calendly.com/nexa-conn/new-meeting" target="_blank" rel="noopener noreferrer" style="min-height:56px;">
+              <span>🎥</span>
+              <span data-ar="اجتماع Zoom" data-en="Zoom Meeting">اجتماع Zoom</span>
+            </a>
+            <a class="btn btn-secondary" href="https://calendly.com/nexa-conn/30min" target="_blank" rel="noopener noreferrer" style="min-height:56px;">
+              <span>📹</span>
+              <span data-ar="اجتماع Google Meet" data-en="Google Meet Meeting">اجتماع Google Meet</span>
+            </a>
+            <a class="btn btn-secondary" href="#top" data-ar="الرجوع للأعلى" data-en="Back to top">الرجوع للأعلى</a>
+          </div>
+
+          <div class="pdf-embed-card">
+            <div class="pdf-embed-toolbar">
+              <div class="pdf-embed-title">
+                <strong data-ar="استعراض البريزنتيشن الكامل" data-en="View the full presentation">استعراض البريزنتيشن الكامل</strong>
+                <span class="muted" data-ar="تقدر تتصفح العرض داخل الصفحة أو تفتحه بحجم كامل بدون ما تضيع من نفس المسار." data-en="You can scroll through the deck inside the page or open it full size without losing the flow.">تقدر تتصفح العرض داخل الصفحة أو تفتحه بحجم كامل بدون ما تضيع من نفس المسار.</span>
+              </div>
+              <a class="btn btn-secondary" href="orxy-sales-system.pdf.pdf" target="_blank" rel="noopener noreferrer" data-ar="فتح العرض كامل" data-en="Open full screen">فتح العرض كامل</a>
+            </div>
+
+            <div class="pdf-embed-frame">
+              <iframe src="orxy-sales-system.pdf.pdf#view=FitH" title="Oryx Sales System Presentation" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="final-cta reveal">
+          <span class="kicker" data-ar="دعوة أخيرة" data-en="Final CTA">دعوة أخيرة</span>
+          <h2 data-ar="إذا عندك عيادة أو منشأة طبية وتبي تشغيل أذكى ونمو أوضح، Oryx جاهز." data-en="If you run a clinic or medical business and want smarter operations with clearer growth, Oryx is ready.">إذا عندك عيادة أو منشأة طبية وتبي تشغيل أذكى ونمو أوضح، Oryx جاهز.</h2>
+          <p class="section-lead" data-ar="ابدأ من الفورم، وبعدها خذ مكالمة مبيعات نفهم فيها وضعك ونشوف إذا Oryx مناسب لك فعلاً." data-en="Start with the form, then book a sales call so we can understand your current setup and see whether Oryx is the right fit.">ابدأ من الفورم، وبعدها خذ مكالمة مبيعات نفهم فيها وضعك ونشوف إذا Oryx مناسب لك فعلاً.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#lead-form" data-ar="ابدأ الآن" data-en="Start now">ابدأ الآن</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <main id="systems" class="page"><section><div class="container"><div class="sectionHead"><div class="eyebrow" data-t="systemsEyebrow"></div><h2 data-t="systemsTitle"></h2><p data-t="systemsLead"></p></div><div class="grid3">
-    <div class="card system"><div class="systemTop"><span class="badge">Core</span><div class="miniIcon">🤖</div></div><h3 data-t="sys1"></h3><p class="muted" data-t="sys1d"></p><div class="outcome"><small data-t="goal"></small><strong data-t="faster"></strong></div></div>
-    <div class="card system"><div class="systemTop"><span class="badge">Booking</span><div class="miniIcon">📅</div></div><h3 data-t="sys2"></h3><p class="muted" data-t="sys2d"></p><div class="outcome"><small data-t="goal"></small><strong data-t="better"></strong></div></div>
-    <div class="card system"><div class="systemTop"><span class="badge">Sales</span><div class="miniIcon">⚡</div></div><h3 data-t="sys3"></h3><p class="muted" data-t="sys3d"></p><div class="outcome"><small data-t="goal"></small><strong data-t="lost"></strong></div></div>
-    <div class="card system"><div class="systemTop"><span class="badge">Knowledge</span><div class="miniIcon">🧠</div></div><h3 data-t="sys4"></h3><p class="muted" data-t="sys4d"></p><div class="outcome"><small data-t="goal"></small><strong data-t="clean"></strong></div></div>
-    <div class="card system"><div class="systemTop"><span class="badge">Social</span><div class="miniIcon">▶</div></div><h3 data-t="sys5"></h3><p class="muted" data-t="sys5d"></p><div class="outcome"><small data-t="goal"></small><strong data-t="funnel"></strong></div></div>
-    <div class="card system"><div class="systemTop"><span class="badge" data-t="soon"></span><div class="miniIcon">📊</div></div><h3 data-t="sys6"></h3><p class="muted" data-t="sys6d"></p><div class="outcome"><small data-t="status"></small><strong data-t="soon"></strong></div></div>
-  </div></div></section></main>
-
-  <main id="start" class="page"><div class="container contact"><div><div class="pill" data-t="startPill"></div><h1 data-t="startTitle"></h1><p class="lead" data-t="startLead"></p><div class="contactList"><div class="contactItem"><span data-t="email"></span><a class="emailText"></a></div><div class="contactItem"><span data-t="phone"></span><a class="phoneText"></a></div><div class="contactItem"><span data-t="pdf"></span><a class="pdf" target="_blank" data-t="openPdf"></a></div></div></div>
-  <div><div class="card formCard"><div class="eyebrow" data-t="formEyebrow"></div><h3 style="font-size:30px" data-t="formTitle"></h3><form id="leadForm" class="formGrid"><div class="field"><label data-t="name"></label><input name="name" required placeholder="..." /></div><div class="field"><label data-t="clinic"></label><input name="clinic" required placeholder="..." /></div><div class="field"><label data-t="phone"></label><input name="phone" required placeholder="05xxxxxxxx" /></div><div class="field"><label data-t="email"></label><input type="email" name="email" placeholder="name@email.com" /></div><div class="field full"><label data-t="type"></label><select name="type" required><option value="">—</option><option>Dental</option><option>Dermatology / Aesthetic</option><option>General clinic</option><option>Medical center</option><option>Other</option></select></div><div class="field full"><label data-t="improve"></label><textarea name="message" required placeholder="..."></textarea></div><div class="field full"><button class="btn primary" type="submit" data-t="submit"></button></div></form><div id="formStatus" class="status" data-t="done"></div></div>
-  <div class="card locked"><h3 data-t="bookTitle"></h3><p class="muted" id="lockText" data-t="locked"></p><div class="lockedBtns"><a id="bookBtn" class="btn secondary disabled" target="_blank" data-t="bookConsult"></a><a id="callBtn" class="btn secondary disabled" target="_blank" data-t="bookCall"></a><a class="btn secondary whatsapp" target="_blank">WhatsApp</a><a class="btn secondary pdf" target="_blank">PDF</a></div></div></div></div></main>
-
-  <footer><div class="container footerFlex"><div><strong style="color:#fff" class="brandName">ORXY AI</strong><p style="margin-top:6px" data-t="footer"></p></div><div class="footerLinks"><a href="#home" onclick="go('home')" data-t="navHome"></a><a href="#systems" onclick="go('systems')" data-t="navSystems"></a><a href="#start" onclick="go('start')" data-t="navStart"></a><a class="ig" target="_blank">Instagram</a><a class="tiktok" target="_blank">TikTok</a></div></div></footer>
+  <footer>
+    <div class="container" style="margin-bottom: 1.2rem;">
+      <div class="card" style="padding:1.2rem;">
+        <span class="kicker" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</span>
+        <h3 style="margin-top:.4rem;" data-ar="معلومات التواصل" data-en="Contact Information">معلومات التواصل</h3>
+        <div class="cta-row" style="margin-top:1rem;">
+          <a class="btn btn-secondary" href="tel:0504397818">0504397818</a>
+          <a class="btn btn-secondary" href="https://www.instagram.com/orxy.00/?hl=ar" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a class="btn btn-secondary" href="https://www.tiktok.com/@orxy.00" target="_blank" rel="noopener noreferrer">TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-row">
+      <div>© <span id="year"></span> Oryx</div>
+      <div data-ar="نظام ذكاء اصطناعي للعيادات والمنشآت الطبية" data-en="AI system for clinics and medical businesses">نظام ذكاء اصطناعي للعيادات والمنشآت الطبية</div>
+    </div>
+  </footer>
 
   <script>
-    function applyLang(){const d=T[LANG];document.documentElement.lang=LANG;document.documentElement.dir=d.dir;document.body.style.direction=d.dir;document.getElementById('langBtn').textContent=d.langLabel;document.querySelectorAll('[data-t]').forEach(el=>{el.textContent=d[el.dataset.t]||''});const lock=document.getElementById('lockText');if(lock&&localStorage.getItem('orxy_application_done')) lock.textContent=d.unlocked;}
-    function toggleLang(){LANG=LANG==='ar'?'en':'ar';localStorage.setItem('orxy_lang',LANG);applyLang();}
-    function setLinks(){document.querySelectorAll('.brandName').forEach(x=>x.textContent=CONFIG.brand);document.querySelectorAll('.ig').forEach(x=>x.href=CONFIG.instagram);document.querySelectorAll('.tiktok').forEach(x=>x.href=CONFIG.tiktok);document.querySelectorAll('.whatsapp').forEach(x=>x.href=CONFIG.whatsapp);document.querySelectorAll('.pdf').forEach(x=>x.href=CONFIG.pdf);document.querySelectorAll('.emailText').forEach(x=>{x.textContent=CONFIG.email;x.href='mailto:'+CONFIG.email});document.querySelectorAll('.phoneText').forEach(x=>{x.textContent=CONFIG.phone;x.href='tel:'+CONFIG.phone});document.getElementById('bookBtn').href=CONFIG.booking;document.getElementById('callBtn').href=CONFIG.callBooking;}
-    function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.menu a').forEach(a=>a.classList.toggle('active',a.dataset.page===id));history.replaceState(null,'','#'+id);window.scrollTo({top:0,behavior:'smooth'});}
-    function unlockBooking(){document.getElementById('bookBtn').classList.remove('disabled');document.getElementById('callBtn').classList.remove('disabled');document.getElementById('formStatus').style.display='block';document.getElementById('lockText').textContent=T[LANG].unlocked;}
-    document.getElementById('leadForm').addEventListener('submit',async function(e){e.preventDefault();const data=new FormData(this);if(CONFIG.formEndpoint){try{await fetch(CONFIG.formEndpoint,{method:'POST',body:data,headers:{'Accept':'application/json'}});}catch(err){}}localStorage.setItem('orxy_application_done','yes');unlockBooking();});
-    document.querySelectorAll('#bookBtn,#callBtn').forEach(btn=>btn.addEventListener('click',function(e){if(!localStorage.getItem('orxy_application_done')){e.preventDefault();go('start');document.getElementById('leadForm').scrollIntoView({behavior:'smooth',block:'center'});}}));
-    setLinks();applyLang();if(localStorage.getItem('orxy_application_done'))unlockBooking();const startPage=location.hash?location.hash.replace('#',''):'home';if(['home','systems','start'].includes(startPage))go(startPage);
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const body = document.body;
+    const langToggle = document.getElementById('langToggle');
+    let currentLang = 'ar';
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      const isArabic = lang === 'ar';
+      document.documentElement.lang = isArabic ? 'ar' : 'en';
+      document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+      body.classList.toggle('en', !isArabic);
+      langToggle.textContent = isArabic ? 'English' : 'العربية';
+      document.title = isArabic
+        ? 'Oryx | نظام ذكاء اصطناعي للعيادات والمجال الطبي'
+        : 'Oryx | AI System for Clinics and Medical Businesses';
+
+      document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = isArabic ? el.dataset.ar : el.dataset.en;
+      });
+
+      document.querySelectorAll('[data-ar-placeholder]').forEach(el => {
+        el.placeholder = isArabic ? el.dataset.arPlaceholder : el.dataset.enPlaceholder;
+      });
+    }
+
+    langToggle.addEventListener('click', () => {
+      applyLanguage(currentLang === 'ar' ? 'en' : 'ar');
+    });
+
+    applyLanguage('ar');
+
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const button = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+
+      if (item.classList.contains('active')) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+
+      button.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        faqItems.forEach(other => {
+          other.classList.remove('active');
+          other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          other.querySelector('.faq-answer').style.maxHeight = null;
+        });
+        if (!isActive) {
+          item.classList.add('active');
+          button.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealElements.forEach(el => observer.observe(el));
+
+    const leadForm = document.getElementById('leadCaptureForm');
+    const prebookSection = document.getElementById('prebook-section');
+    const submitLeadBtn = document.getElementById('submitLeadBtn');
+    const formSuccess = document.getElementById('formSuccess');
+    const formError = document.getElementById('formError');
+
+    leadForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      formError.style.display = 'none';
+      formSuccess.style.display = 'none';
+      submitLeadBtn.disabled = true;
+      submitLeadBtn.style.opacity = '0.7';
+
+      const originalText = submitLeadBtn.textContent;
+      submitLeadBtn.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
+
+      try {
+        const formData = new FormData(leadForm);
+        const response = await fetch(leadForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Submission failed');
+        }
+
+        formSuccess.style.display = 'inline-flex';
+        submitLeadBtn.style.display = 'none';
+        leadForm.reset();
+        prebookSection.classList.add('show');
+        prebookSection.classList.remove('hidden-section');
+        prebookSection.scrollIntoView({ behavior: 'smooth' });
+      } catch (error) {
+        formError.style.display = 'block';
+        submitLeadBtn.disabled = false;
+        submitLeadBtn.style.opacity = '1';
+        submitLeadBtn.textContent = originalText;
+      }
+    });
   </script>
 </body>
 </html>
