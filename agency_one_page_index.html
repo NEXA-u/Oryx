@@ -1,1186 +1,564 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oryx | نظام ذكاء اصطناعي للعيادات والمجال الطبي</title>
-  <meta name="description" content="Oryx يساعد العيادات والمنشآت الطبية على زيادة العملاء المحتملين، رفع الحجوزات، تقليل الهدر، وتحسين التشغيل باستخدام أنظمة الذكاء الاصطناعي." />
-  <style>
-    :root {
-      --bg: #07111b;
-      --bg-soft: #0d1824;
-      --card: rgba(255,255,255,0.06);
-      --card-2: rgba(255,255,255,0.08);
-      --text: #f7fbff;
-      --muted: #aab7c6;
-      --line: rgba(255,255,255,0.11);
-      --primary: #7dd3fc;
-      --primary-2: #67e8f9;
-      --accent: #d8f5ff;
-      --success: #86efac;
-      --shadow: 0 24px 80px rgba(0,0,0,.35);
-      --radius: 24px;
-      --radius-sm: 18px;
-      --max: 1180px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: "IBM Plex Sans Arabic", "Tajawal", "Cairo", Inter, system-ui, sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(103,232,249,.14), transparent 28%),
-        radial-gradient(circle at top left, rgba(125,211,252,.14), transparent 32%),
-        linear-gradient(180deg, #07111b 0%, #091521 50%, #0a1722 100%);
-      color: var(--text);
-      line-height: 1.7;
-    }
-
-    body.en {
-      direction: ltr;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    button, input, textarea, select { font: inherit; }
-    .container {
-      width: min(calc(100% - 2rem), var(--max));
-      margin: 0 auto;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(14px);
-      background: rgba(5, 10, 17, .7);
-      border-bottom: 1px solid rgba(255,255,255,.07);
-    }
-
-    .nav {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: .85rem;
-      font-weight: 800;
-      letter-spacing: .02em;
-    }
-
-    .logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      box-shadow: 0 14px 30px rgba(103,232,249,.22);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .logo::after {
-      content: "";
-      position: absolute;
-      inset: 1px;
-      border-radius: 13px;
-      background: linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,0));
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      color: var(--muted);
-      font-size: .95rem;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible,
-    .lang-toggle:hover,
-    .lang-toggle:focus-visible {
-      color: var(--text);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-    }
-
-    .lang-toggle,
-    .btn {
-      border: 0;
-      cursor: pointer;
-      min-height: 48px;
-      padding: 0 1.1rem;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: .55rem;
-      transition: .2s ease;
-      font-weight: 800;
-    }
-
-    .lang-toggle {
-      background: rgba(255,255,255,.04);
-      color: var(--muted);
-      border: 1px solid rgba(255,255,255,.08);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      color: #031018;
-      box-shadow: 0 16px 40px rgba(103,232,249,.18);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,.05);
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,.08);
-    }
-
-    .btn:hover,
-    .lang-toggle:hover {
-      transform: translateY(-2px);
-    }
-
-    .hero {
-      padding: 5rem 0 3.5rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.12fr .88fr;
-      gap: 1.4rem;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: .55rem;
-      padding: .48rem .9rem;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: #dff8ff;
-      font-size: .92rem;
-      margin-bottom: 1rem;
-    }
-
-    .eyebrow-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--success);
-      box-shadow: 0 0 0 8px rgba(134,239,172,.12);
-    }
-
-    h1, h2, h3 { line-height: 1.08; margin: 0; letter-spacing: -.03em; }
-    h1 { font-size: clamp(2.3rem, 6vw, 5rem); max-width: 12ch; }
-    h2 { font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: .85rem; }
-    h3 { font-size: 1.16rem; margin-bottom: .55rem; }
-
-    .hero p,
-    .section-lead,
-    .muted,
-    .faq-answer,
-    .testimonial-role,
-    .step-card p,
-    .card p,
-    li {
-      color: var(--muted);
-    }
-
-    .hero p {
-      font-size: 1.06rem;
-      max-width: 60ch;
-      margin: 1.15rem 0 1.6rem;
-    }
-
-    .hero-actions,
-    .proof,
-    .form-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .85rem;
-    }
-
-    .proof span {
-      padding: .55rem .82rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.07);
-      color: #dce9f5;
-      font-size: .93rem;
-    }
-
-    .hero-card,
-    .card,
-    .form-card,
-    .video-card,
-    .final-cta {
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-card {
-      padding: 1.2rem;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top left, rgba(125,211,252,.18), transparent 30%);
-      pointer-events: none;
-    }
-
-    .dashboard {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      gap: 1rem;
-    }
-
-    .metric-row,
-    .grid-3,
-    .grid-2,
-    .testimonial-grid,
-    .steps,
-    .faq-grid,
-    .form-grid,
-    .stats-grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .metric-row { grid-template-columns: repeat(3, 1fr); }
-    .grid-3, .steps, .testimonial-grid { grid-template-columns: repeat(3, 1fr); }
-    .grid-2, .form-grid { grid-template-columns: repeat(2, 1fr); }
-    .stats-grid { grid-template-columns: 1.1fr .9fr; }
-
-    .panel,
-    .step-card {
-      background: rgba(7,17,27,.62);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 20px;
-      padding: 1rem;
-    }
-
-    .metric strong,
-    .stat strong,
-    .step-result strong {
-      display: block;
-      font-size: 1.45rem;
-      letter-spacing: -.03em;
-      color: var(--text);
-    }
-
-    .bars { display: grid; gap: .8rem; margin-top: 1rem; }
-    .bar span {
-      display: flex;
-      justify-content: space-between;
-      gap: .75rem;
-      margin-bottom: .45rem;
-      color: #ebf8ff;
-      font-size: .93rem;
-    }
-
-    .bar-track {
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-      overflow: hidden;
-    }
-
-    .bar-fill {
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--primary), var(--primary-2));
-    }
-
-    .list-clean,
-    .bullet-list,
-    .service-list {
-      list-style: none;
-      padding: 0;
-      margin: 1rem 0 0;
-      display: grid;
-      gap: .72rem;
-    }
-
-    .list-clean li,
-    .bullet-list li,
-    .service-list li {
-      position: relative;
-      padding-inline-start: 1.25rem;
-    }
-
-    .list-clean li::before,
-    .bullet-list li::before,
-    .service-list li::before {
-      content: "";
-      position: absolute;
-      inset-inline-start: 0;
-      top: .78rem;
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-    }
-
-    section { padding: 4.5rem 0; }
-
-    .section-head {
-      display: flex;
-      flex-direction: column;
-      gap: .8rem;
-      align-items: flex-start;
-      margin-bottom: 2rem;
-    }
-
-    .kicker {
-      color: var(--primary-2);
-      font-size: .84rem;
-      font-weight: 800;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-
-    .icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, rgba(125,211,252,.16), rgba(103,232,249,.17));
-      border: 1px solid rgba(255,255,255,.08);
-      font-size: 1.15rem;
-    }
-
-    .step-number {
-      width: 42px;
-      height: 42px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.08);
-      margin-bottom: 1rem;
-      font-weight: 800;
-    }
-
-    .step-result {
-      margin-top: 1rem;
-      padding: .95rem;
-      border-radius: 18px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.06);
-    }
-
-    .testimonial {
-      display: flex;
-      flex-direction: column;
-      gap: .95rem;
-      min-height: 100%;
-    }
-
-    .stars { color: #ffd66b; letter-spacing: .12em; }
-    .testimonial-footer {
-      display: flex;
-      align-items: center;
-      gap: .8rem;
-      margin-top: auto;
-    }
-
-    .avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 999px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, rgba(125,211,252,.24), rgba(103,232,249,.22));
-      border: 1px solid rgba(255,255,255,.08);
-      font-weight: 800;
-    }
-
-    .faq-item {
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.04);
-      overflow: hidden;
-    }
-
-    .faq-question {
-      width: 100%;
-      border: 0;
-      background: transparent;
-      color: var(--text);
-      padding: 1.1rem 1.15rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      cursor: pointer;
-      text-align: inherit;
-    }
-
-    .faq-question .plus {
-      font-size: 1.45rem;
-      transition: transform .2s ease;
-    }
-
-    .faq-item.active .plus { transform: rotate(45deg); }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .28s ease;
-      padding: 0 1.15rem;
-    }
-
-    .faq-answer p { margin: 0 0 1.1rem; }
-
-    .hidden-section { display: none; }
-    .show { display: block; }
-
-    .form-card,
-    .video-card,
-    .final-cta {
-      padding: 1.4rem;
-    }
-
-    .form-card {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: .45rem;
-    }
-
-    .field label {
-      font-weight: 700;
-      color: #e6f3fb;
-    }
-
-    .field input,
-    .field textarea,
-    .field select {
-      width: 100%;
-      min-height: 52px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.09);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      padding: .95rem 1rem;
-      outline: none;
-    }
-
-    .field textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
-
-    .field input::placeholder,
-    .field textarea::placeholder { color: #8ca1b5; }
-
-    .form-note {
-      margin-top: 1rem;
-      font-size: .95rem;
-      color: var(--muted);
-    }
-
-    .video-box {
-      min-height: 260px;
-      border-radius: 20px;
-      border: 1px dashed rgba(255,255,255,.14);
-      background: rgba(255,255,255,.03);
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 1.5rem;
-      color: var(--muted);
-    }
-
-    .video-box strong {
-      display: block;
-      color: var(--text);
-      margin-bottom: .4rem;
-      font-size: 1.15rem;
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .85rem;
-      margin-top: 1.2rem;
-    }
-
-    .pdf-embed-card {
-      margin-top: 1.25rem;
-      padding: 1rem;
-      border-radius: 20px;
-      background: rgba(255,255,255,.035);
-      border: 1px solid rgba(255,255,255,.08);
-    }
-
-    .pdf-embed-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: .9rem;
-      flex-wrap: wrap;
-    }
-
-    .pdf-embed-title {
-      display: flex;
-      flex-direction: column;
-      gap: .25rem;
-    }
-
-    .pdf-embed-title strong {
-      color: var(--text);
-      font-size: 1.02rem;
-    }
-
-    .pdf-embed-frame {
-      width: 100%;
-      height: 420px;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.02);
-    }
-
-    .pdf-embed-frame iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display: block;
-      background: #0b1220;
-    }
-
-    footer {
-      padding: 2rem 0 3rem;
-      color: var(--muted);
-      font-size: .94rem;
-    }
-
-    .footer-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      border-top: 1px solid rgba(255,255,255,.08);
-      padding-top: 1.2rem;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 980px) {
-      .hero-grid,
-      .grid-3,
-      .grid-2,
-      .steps,
-      .testimonial-grid,
-      .form-grid,
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .metric-row { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      h1 { max-width: 100%; }
-    }
-
-    @media (max-width: 640px) {
-      .container { width: min(calc(100% - 1.15rem), var(--max)); }
-      .hero { padding-top: 4rem; }
-      section { padding: 3.6rem 0; }
-      .footer-row { flex-direction: column; align-items: flex-start; }
-      .nav { min-height: 70px; }
-      .hero-card,
-      .card,
-      .form-card,
-      .video-card,
-      .final-cta { border-radius: 20px; }
-    }
-  </style>
-</head>
-<body>
-  <header class="topbar">
-    <div class="container nav">
-      <a href="#top" class="brand" aria-label="Oryx home">
-        <span class="logo" aria-hidden="true"></span>
-        <span>ORYX</span>
-      </a>
-
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a href="#services" data-ar="الخدمات" data-en="Services">الخدمات</a>
-        <a href="#why" data-ar="لماذا Oryx" data-en="Why Oryx">لماذا Oryx</a>
-        <a href="#process" data-ar="الآلية" data-en="Process">الآلية</a>
-        <a href="#faq" data-ar="الأسئلة" data-en="FAQ">الأسئلة</a>
-      </nav>
-
-      <div class="nav-actions">
-        <button class="lang-toggle" id="langToggle" type="button">English</button>
-        <a class="btn btn-primary" href="#lead-form" data-ar="ابدأ الآن" data-en="Get Started">ابدأ الآن</a>
-      </div>
+import React, { useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowRight,
+  BarChart3,
+  Bot,
+  CalendarCheck,
+  CheckCircle2,
+  Clock3,
+  ExternalLink,
+  Instagram,
+  MessageCircle,
+  PhoneCall,
+  Play,
+  ShieldCheck,
+  Sparkles,
+  Stethoscope,
+  Users,
+  Workflow,
+  Zap,
+} from "lucide-react";
+
+const LINKS = {
+  form: "https://forms.gle/YOUR_FORM_LINK",
+  booking: "https://calendly.com/YOUR_BOOKING_LINK",
+  instagram: "https://instagram.com/YOUR_USERNAME",
+  tiktok: "https://tiktok.com/@YOUR_USERNAME",
+  whatsapp: "https://wa.me/9665XXXXXXXX",
+};
+
+const navItems = [
+  { id: "home", label: "Home" },
+  { id: "systems", label: "AI Systems" },
+  { id: "contact", label: "Start" },
+];
+
+const problems = [
+  {
+    title: "Patients Ask the Same Questions Daily",
+    desc: "Prices, services, working hours, doctor availability, location, and booking questions repeat all day.",
+    icon: MessageCircle,
+  },
+  {
+    title: "Leads Disappear Before Booking",
+    desc: "A patient sends a message, waits too long, then books with another clinic that replied faster.",
+    icon: Clock3,
+  },
+  {
+    title: "Your Team Is Busy With Manual Follow-Up",
+    desc: "Reception and marketing teams waste time copying messages, checking calendars, and reminding patients manually.",
+    icon: Workflow,
+  },
+  {
+    title: "Marketing Brings Leads, But Not Enough Calls",
+    desc: "Ads and content generate interest, but without smart follow-up, many opportunities stay cold.",
+    icon: BarChart3,
+  },
+  {
+    title: "Booking Is Not Smooth Enough",
+    desc: "Patients want fast answers, clear options, and an easy way to pick the right treatment or appointment.",
+    icon: CalendarCheck,
+  },
+  {
+    title: "No Clear System for Missed Opportunities",
+    desc: "No automatic tracking for who asked, who replied, who booked, and who needs another follow-up.",
+    icon: Users,
+  },
+];
+
+const systems = [
+  {
+    badge: "Most Popular",
+    title: "WhatsApp AI Receptionist",
+    desc: "A bilingual AI agent that answers patients, explains services, qualifies interest, and sends them to booking.",
+    result: "24/7 replies",
+    icon: Bot,
+  },
+  {
+    badge: "High Impact",
+    title: "Smart Booking Assistant",
+    desc: "Helps patients choose the right service, collects details, and routes them to the right appointment flow.",
+    result: "More booked calls",
+    icon: CalendarCheck,
+  },
+  {
+    badge: "Sales Follow-Up",
+    title: "Lead Recovery System",
+    desc: "Automatically follows up with people who asked but did not book, without sounding robotic or spammy.",
+    result: "Less lost leads",
+    icon: Zap,
+  },
+  {
+    badge: "Operations",
+    title: "Patient FAQ Knowledge Base",
+    desc: "Turns your clinic info into a clean AI brain: services, prices, offers, doctors, policies, and location.",
+    result: "Consistent answers",
+    icon: ShieldCheck,
+  },
+  {
+    badge: "Marketing",
+    title: "Content-to-Lead Funnel",
+    desc: "Connect TikTok, Instagram, forms, and booking links into one simple path that turns attention into calls.",
+    result: "Cleaner funnel",
+    icon: Play,
+  },
+  {
+    badge: "Reporting",
+    title: "Clinic Lead Dashboard",
+    desc: "Track where leads came from, what they asked about, and which ones need follow-up next.",
+    result: "Better decisions",
+    icon: BarChart3,
+  },
+];
+
+const previewFeedback = [
+  {
+    name: "Clinic Manager Preview",
+    label: "Demo feedback — not a client result",
+    quote: "The flow feels like a real receptionist. It answers fast, keeps the patient moving, and makes booking easier.",
+  },
+  {
+    name: "Marketing Team Preview",
+    label: "Demo feedback — not a client result",
+    quote: "This is exactly the missing link between our social media leads and actual appointments.",
+  },
+  {
+    name: "Operations Preview",
+    label: "Demo feedback — not a client result",
+    quote: "The best part is that the answers stay consistent instead of every employee replying differently.",
+  },
+];
+
+function Glow() {
+  return (
+    <div className="pointer-events-none fixed inset-0 overflow-hidden bg-[#060711]">
+      <div className="absolute left-[-10%] top-[-10%] h-[420px] w-[420px] rounded-full bg-cyan-500/20 blur-[120px]" />
+      <div className="absolute right-[-12%] top-[10%] h-[480px] w-[480px] rounded-full bg-blue-600/20 blur-[130px]" />
+      <div className="absolute bottom-[-15%] left-[35%] h-[420px] w-[420px] rounded-full bg-emerald-400/10 blur-[130px]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.10),transparent_35%),linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:100%_100%,54px_54px,54px_54px]" />
     </div>
-  </header>
+  );
+}
 
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="reveal">
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            <span data-ar="نظام ذكاء اصطناعي مخصص للعيادات والمنشآت الطبية" data-en="AI system built for clinics and medical businesses">نظام ذكاء اصطناعي مخصص للعيادات والمنشآت الطبية</span>
+function Pill({ children }) {
+  return (
+    <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-sm text-cyan-100 shadow-lg shadow-cyan-950/20 backdrop-blur-xl">
+      <Sparkles className="h-4 w-4 text-cyan-300" />
+      {children}
+    </span>
+  );
+}
+
+function ButtonLink({ href, children, variant = "primary", onClick }) {
+  const classes =
+    variant === "primary"
+      ? "bg-cyan-300 text-slate-950 hover:bg-white shadow-[0_0_40px_rgba(103,232,249,0.25)]"
+      : "border border-white/10 bg-white/[0.06] text-white hover:bg-white/[0.1]";
+
+  if (onClick) {
+    return (
+      <button
+        onClick={onClick}
+        className={`inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition ${classes}`}
+      >
+        {children}
+      </button>
+    );
+  }
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={`inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition ${classes}`}
+    >
+      {children}
+    </a>
+  );
+}
+
+function Stat({ number, label }) {
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur-xl">
+      <div className="text-3xl font-black tracking-tight text-white">{number}</div>
+      <div className="mt-1 text-sm leading-5 text-slate-400">{label}</div>
+    </div>
+  );
+}
+
+function Card({ children, className = "" }) {
+  return (
+    <div className={`rounded-[2rem] border border-white/10 bg-white/[0.055] p-6 shadow-2xl shadow-black/20 backdrop-blur-xl ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+function SectionHeader({ eyebrow, title, desc }) {
+  return (
+    <div className="mx-auto mb-10 max-w-3xl text-center">
+      <div className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300/80">{eyebrow}</div>
+      <h2 className="text-3xl font-black tracking-tight text-white md:text-5xl">{title}</h2>
+      <p className="mt-4 text-base leading-7 text-slate-400 md:text-lg">{desc}</p>
+    </div>
+  );
+}
+
+function Header({ activePage, setActivePage }) {
+  return (
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#060711]/70 backdrop-blur-2xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
+        <button onClick={() => setActivePage("home")} className="flex items-center gap-3">
+          <div className="grid h-11 w-11 place-items-center rounded-2xl bg-cyan-300 text-slate-950 shadow-[0_0_30px_rgba(103,232,249,0.35)]">
+            <Bot className="h-6 w-6" />
           </div>
-
-          <h1 data-ar="خلّ عيادتك تشتغل بذكاء أعلى وتجيب عملاء أكثر." data-en="Help your clinic run smarter and bring in more qualified leads.">خلّ عيادتك تشتغل بذكاء أعلى وتجيب عملاء أكثر.</h1>
-          <p data-ar="Oryx هو نظام ذكاء اصطناعي متكامل يساعد العيادات والقطاع الطبي على زيادة الليدز، رفع الحجوزات، تقليل التكاليف التشغيلية، وتحسين طريقة متابعة العملاء المحتملين من أول تواصل إلى الحجز." data-en="Oryx is a complete AI system for clinics and medical businesses. We help you generate more leads, increase bookings, reduce operating waste, and improve how prospects move from first contact to appointment.">Oryx هو نظام ذكاء اصطناعي متكامل يساعد العيادات والقطاع الطبي على زيادة الليدز، رفع الحجوزات، تقليل التكاليف التشغيلية، وتحسين طريقة متابعة العملاء المحتملين من أول تواصل إلى الحجز.</p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#lead-form" data-ar="احجز مكالمة مبيعات" data-en="Book a Sales Call">احجز مكالمة مبيعات</a>
-            <a class="btn btn-secondary" href="#services" data-ar="شوف كيف نساعدك" data-en="See How We Help">شوف كيف نساعدك</a>
+          <div className="text-left">
+            <div className="text-lg font-black leading-5 text-white">ClinicAI</div>
+            <div className="text-xs text-cyan-200/70">AI Agents for Clinics</div>
           </div>
+        </button>
 
-          <div class="proof">
-            <span data-ar="زيادة العملاء المحتملين" data-en="More qualified leads">زيادة العملاء المحتملين</span>
-            <span data-ar="تقليل المصاريف والهدر" data-en="Lower waste and costs">تقليل المصاريف والهدر</span>
-            <span data-ar="رفع الحجوزات والمتابعة" data-en="Higher bookings and follow-up">رفع الحجوزات والمتابعة</span>
-          </div>
+        <nav className="hidden items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-1 md:flex">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setActivePage(item.id)}
+              className={`rounded-xl px-4 py-2 text-sm font-medium transition ${
+                activePage === item.id ? "bg-white text-slate-950" : "text-slate-300 hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <a href={LINKS.instagram} target="_blank" rel="noreferrer" className="hidden rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-slate-300 transition hover:bg-white/10 hover:text-white sm:block">
+            <Instagram className="h-5 w-5" />
+          </a>
+          <ButtonLink href={LINKS.form}>Get Started <ArrowRight className="h-4 w-4" /></ButtonLink>
         </div>
+      </div>
+    </header>
+  );
+}
 
-        <div class="hero-card reveal">
-          <div class="dashboard">
-            <div class="metric-row">
-              <div class="panel metric">
-                <small data-ar="تحسين إدارة الليدز" data-en="Lead management improvement">تحسين إدارة الليدز</small>
-                <strong>+AI</strong>
-              </div>
-              <div class="panel metric">
-                <small data-ar="متابعة أسرع وأكثر دقة" data-en="Faster, smarter follow-up">متابعة أسرع وأكثر دقة</small>
-                <strong>24/7</strong>
-              </div>
-              <div class="panel metric">
-                <small data-ar="تقليل الهدر التشغيلي" data-en="Lower operational waste">تقليل الهدر التشغيلي</small>
-                <strong>-Cost</strong>
-              </div>
-            </div>
+function HomePage({ setActivePage }) {
+  return (
+    <main>
+      <section className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-[1.1fr_0.9fr] md:px-8 md:py-24">
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
+          <Pill>AI Reception + Booking + Follow-Up · Saudi Clinics</Pill>
+          <h1 className="mt-7 max-w-5xl text-5xl font-black leading-[0.92] tracking-tight text-white md:text-7xl">
+            AI Agents That Turn Clinic Messages Into Booked Appointments.
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 md:text-xl">
+            We build clean AI systems for clinics: WhatsApp replies, patient qualification, service recommendations, booking flow, reminders, and follow-up — all working together.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <ButtonLink href={LINKS.form}>Apply in 2 Minutes <ArrowRight className="h-4 w-4" /></ButtonLink>
+            <ButtonLink href={LINKS.booking} variant="secondary">Book a Call <PhoneCall className="h-4 w-4" /></ButtonLink>
+          </div>
+          <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-slate-400">
+            <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-cyan-300" /> Arabic + English</span>
+            <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-cyan-300" /> WhatsApp-first</span>
+            <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-cyan-300" /> Built for medical services</span>
+          </div>
+        </motion.div>
 
-            <div class="stats-grid">
-              <div class="panel">
-                <h3 data-ar="ماذا يطور Oryx؟" data-en="What does Oryx improve?">ماذا يطور Oryx؟</h3>
-                <p data-ar="نظام مصمم للعيادات اللي تبي استقطاب أفضل، تشغيل أذكى، وعائد أعلى من كل فرصة مبيعات." data-en="A system built for clinics that want stronger acquisition, smarter operations, and more revenue from every sales opportunity.">نظام مصمم للعيادات اللي تبي استقطاب أفضل، تشغيل أذكى، وعائد أعلى من كل فرصة مبيعات.</p>
-                <div class="bars">
-                  <div class="bar">
-                    <span><strong data-ar="التعامل مع الليدز" data-en="Lead handling">التعامل مع الليدز</strong><strong>90%</strong></span>
-                    <div class="bar-track"><div class="bar-fill" style="width:90%"></div></div>
+        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.65, delay: 0.1 }}>
+          <Card className="relative overflow-hidden p-0">
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/15 via-transparent to-blue-500/10" />
+            <div className="relative p-5">
+              <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/70 p-5">
+                <div className="mb-5 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-300 text-slate-950">
+                      <Stethoscope className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-white">Patient Chat</div>
+                      <div className="text-sm text-cyan-200/70">AI receptionist online now</div>
+                    </div>
                   </div>
-                  <div class="bar">
-                    <span><strong data-ar="وضوح الرحلة البيعية" data-en="Sales journey clarity">وضوح الرحلة البيعية</strong><strong>82%</strong></span>
-                    <div class="bar-track"><div class="bar-fill" style="width:82%"></div></div>
+                  <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-semibold text-emerald-200">Live</span>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="ml-auto max-w-[82%] rounded-2xl rounded-tr-md bg-white px-4 py-3 text-sm text-slate-950">
+                    Hi, do you have laser appointments this week?
                   </div>
-                  <div class="bar">
-                    <span><strong data-ar="كفاءة التشغيل" data-en="Operational efficiency">كفاءة التشغيل</strong><strong>88%</strong></span>
-                    <div class="bar-track"><div class="bar-fill" style="width:88%"></div></div>
+                  <div className="max-w-[88%] rounded-2xl rounded-tl-md border border-white/10 bg-white/[0.06] px-4 py-3 text-sm leading-6 text-slate-100">
+                    Yes. I can help you choose the right laser option and check available times. Is this your first session with us?
+                  </div>
+                  <div className="ml-auto max-w-[70%] rounded-2xl rounded-tr-md bg-white px-4 py-3 text-sm text-slate-950">
+                    Yes, first time.
+                  </div>
+                  <div className="max-w-[92%] rounded-2xl rounded-tl-md border border-cyan-300/20 bg-cyan-300/10 px-4 py-3 text-sm leading-6 text-cyan-50">
+                    Perfect. I’ll ask 3 quick questions, then send you the booking link with the best option.
                   </div>
                 </div>
               </div>
 
-              <div class="panel">
-                <h3 data-ar="يشمل الباكج" data-en="Package includes">يشمل الباكج</h3>
-                <ul class="list-clean">
-                  <li data-ar="نظام Oryx للذكاء الاصطناعي" data-en="Oryx AI system">نظام Oryx للذكاء الاصطناعي</li>
-                  <li data-ar="تدفق ليدز ومتابعة" data-en="Lead flow and follow-up">تدفق ليدز ومتابعة</li>
-                  <li data-ar="رفع جودة الحجوزات" data-en="Higher booking quality">رفع جودة الحجوزات</li>
-                  <li data-ar="هيكلة أقرب للإغلاق" data-en="Closer-to-close structure">هيكلة أقرب للإغلاق</li>
-                </ul>
+              <div className="mt-5 grid grid-cols-2 gap-3">
+                <Stat number="24/7" label="Patient replies" />
+                <Stat number="3x" label="Faster follow-up" />
+                <Stat number="0" label="Fake testimonials" />
+                <Stat number="Soon" label="Pilot partners" />
               </div>
             </div>
-          </div>
+          </Card>
+        </motion.div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-12 md:px-8">
+        <SectionHeader
+          eyebrow="The Problem"
+          title="Clinics Don’t Lose Patients Because of Bad Services. They Lose Them Because of Slow Systems."
+          desc="Your marketing can be strong, but if the reply, booking, and follow-up process is slow, the opportunity disappears."
+        />
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {problems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Card key={item.title}>
+                <div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-white/[0.07] text-cyan-300">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                <p className="mt-3 leading-7 text-slate-400">{item.desc}</p>
+              </Card>
+            );
+          })}
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="services">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="kicker" data-ar="الخدمات" data-en="Services">الخدمات</span>
-          <h2 data-ar="مو مجرد موقع. هذا نظام يساعد عيادتك تنمو." data-en="Not just a website. A system built to grow your clinic.">مو مجرد موقع. هذا نظام يساعد عيادتك تنمو.</h2>
-          <p class="section-lead" data-ar="أنت ما تبيع صفحة ويب. أنت تقدم Oryx كنظام ذكاء اصطناعي متكامل يرفع الأداء التجاري والتشغيلي للعيادات والمنشآت الطبية." data-en="You are not selling a basic website. You are offering Oryx as a complete AI system that improves both growth and operations for clinics and medical businesses.">أنت ما تبيع صفحة ويب. أنت تقدم Oryx كنظام ذكاء اصطناعي متكامل يرفع الأداء التجاري والتشغيلي للعيادات والمنشآت الطبية.</p>
-        </div>
-
-        <div class="grid-3">
-          <article class="card reveal">
-            <div class="icon">✦</div>
-            <h3 data-ar="زيادة الليدز الطبية" data-en="More medical leads">زيادة الليدز الطبية</h3>
-            <p data-ar="نصمم رحلة أوضح للعميل المحتمل من أول زيارة أو تواصل إلى خطوة الحجز الفعلية." data-en="We create a clearer path for prospects so they move from first touch to an actual booking with less friction.">نصمم رحلة أوضح للعميل المحتمل من أول زيارة أو تواصل إلى خطوة الحجز الفعلية.</p>
-            <ul class="service-list">
-              <li data-ar="عرض واضح للخدمة" data-en="Clear offer positioning">عرض واضح للخدمة</li>
-              <li data-ar="ترتيب أقوى للرسائل" data-en="Stronger messaging flow">ترتيب أقوى للرسائل</li>
-              <li data-ar="رفع جودة العملاء المحتملين" data-en="Higher lead quality">رفع جودة العملاء المحتملين</li>
-            </ul>
-          </article>
-
-          <article class="card reveal">
-            <div class="icon">⌁</div>
-            <h3 data-ar="أتمتة ومتابعة أذكى" data-en="Smarter automation and follow-up">أتمتة ومتابعة أذكى</h3>
-            <p data-ar="نساعدك تقلل التأخير، تضبط متابعة العملاء، وتخلي النظام يشتغل بشكل أكثر كفاءة." data-en="We help reduce delays, improve lead handling, and make your system run with more consistency and efficiency.">نساعدك تقلل التأخير، تضبط متابعة العملاء، وتخلي النظام يشتغل بشكل أكثر كفاءة.</p>
-            <ul class="service-list">
-              <li data-ar="تقليل ضياع الفرص" data-en="Less lost opportunity">تقليل ضياع الفرص</li>
-              <li data-ar="تحسين التواصل الداخلي" data-en="Better internal coordination">تحسين التواصل الداخلي</li>
-              <li data-ar="تقوية رحلة العميل" data-en="Stronger patient journey">تقوية رحلة العميل</li>
-            </ul>
-          </article>
-
-          <article class="card reveal">
-            <div class="icon">↗</div>
-            <h3 data-ar="خفض التكاليف وزيادة العائد" data-en="Lower costs, increase revenue">خفض التكاليف وزيادة العائد</h3>
-            <p data-ar="Oryx يساعدك تستفيد من كل ليد بشكل أفضل، تقلل الهدر التشغيلي، وتبني نظام يوصل لصفقات أعلى قيمة." data-en="Oryx helps you get more value from every lead, reduce operational waste, and build a system better suited for higher-value deals.">Oryx يساعدك تستفيد من كل ليد بشكل أفضل، تقلل الهدر التشغيلي، وتبني نظام يوصل لصفقات أعلى قيمة.</p>
-            <ul class="service-list">
-              <li data-ar="نظام أقرب للربحية" data-en="More profitable systems">نظام أقرب للربحية</li>
-              <li data-ar="تركيز على الصفقات العالية" data-en="Focus on higher-value deals">تركيز على الصفقات العالية</li>
-              <li data-ar="تحسين كفاءة الفريق" data-en="Improved team efficiency">تحسين كفاءة الفريق</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="why">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="kicker" data-ar="لماذا Oryx" data-en="Why Oryx">لماذا Oryx</span>
-          <h2 data-ar="لأن العيادات ما تحتاج حلول عامة. تحتاج نظام مصمم لها." data-en="Because clinics do not need generic solutions. They need a system built for them.">لأن العيادات ما تحتاج حلول عامة. تحتاج نظام مصمم لها.</h2>
-          <p class="section-lead" data-ar="صممنا هذه الرحلة بحيث يفهم الزائر قيمة Oryx أولًا، ثم يرسل بياناته، ثم ينتقل إلى مكالمة مبيعات مناسبة بشكل واضح واحترافي." data-en="This journey is designed so visitors first understand the value of Oryx, then submit their details, and then move into a clear, professional sales call.">صممنا هذه الرحلة بحيث يفهم الزائر قيمة Oryx أولًا، ثم يرسل بياناته، ثم ينتقل إلى مكالمة مبيعات مناسبة بشكل واضح واحترافي.</p>
-        </div>
-
-        <div class="grid-2">
-          <article class="card reveal">
-            <h3 data-ar="هيكلة مناسبة للبيع الاستشاري" data-en="Built for consultative selling">هيكلة مناسبة للبيع الاستشاري</h3>
-            <ul class="bullet-list">
-              <li data-ar="الصفحة الأولى تشرح القيمة، وليس السعر فقط." data-en="The first page explains the value, not just a price.">الصفحة الأولى تشرح القيمة، وليس السعر فقط.</li>
-              <li data-ar="بعدها تجمع بيانات العميل قبل الحجز." data-en="Then it collects lead details before booking.">بعدها تجمع بيانات العميل قبل الحجز.</li>
-              <li data-ar="ثم ينتقل العميل إلى مكالمة الإغلاق وهو فاهم الفكرة أكثر." data-en="Then the lead moves to the booking stage with better understanding.">ثم ينتقل العميل إلى مكالمة الإغلاق وهو فاهم الفكرة أكثر.</li>
-            </ul>
-          </article>
-
-          <article class="card reveal">
-            <h3 data-ar="مصمم للقطاع الطبي" data-en="Made for the medical sector">مصمم للقطاع الطبي</h3>
-            <ul class="bullet-list">
-              <li data-ar="خطاب واضح للعيادات والمجال الصحي." data-en="Clear messaging for clinics and healthcare businesses.">خطاب واضح للعيادات والمجال الصحي.</li>
-              <li data-ar="تركيز على الليدز، التشغيل، والمردود المالي." data-en="Focused on leads, operations, and financial return.">تركيز على الليدز، التشغيل، والمردود المالي.</li>
-              <li data-ar="أقرب لتقديم Oryx كنظام متكامل، وليس خدمة مبعثرة." data-en="Positions Oryx as a complete system, not a fragmented service.">أقرب لتقديم Oryx كنظام متكامل، وليس خدمة مبعثرة.</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="process">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="kicker" data-ar="الآلية" data-en="Process">الآلية</span>
-          <h2 data-ar="كيف تتحول الزيارة إلى فرصة مبيعات فعلية؟" data-en="How does a visit become a real sales opportunity?">كيف تتحول الزيارة إلى فرصة مبيعات فعلية؟</h2>
-          <p class="section-lead" data-ar="الرحلة هنا مقصودة: فهم القيمة أولًا، إرسال البيانات ثانيًا، ثم حجز مكالمة مبيعات وأنت داخل المكالمة وأنت فاهم وش هو Oryx." data-en="This journey is intentional: understand the value first, submit your details second, then book a sales call already knowing what Oryx is and why it matters.">الرحلة هنا مقصودة: فهم القيمة أولًا، إرسال البيانات ثانيًا، ثم حجز مكالمة مبيعات وأنت داخل المكالمة وأنت فاهم وش هو Oryx.</p>
-        </div>
-
-        <div class="steps">
-          <article class="step-card reveal">
-            <span class="step-number">01</span>
-            <h3 data-ar="يفهم العيادة الفكرة" data-en="The clinic understands the offer">يفهم العيادة الفكرة</h3>
-            <p data-ar="يشوف الزائر كيف يساعد Oryx في زيادة الليدز، تحسين الحجز، وتقليل الهدر." data-en="The visitor sees how Oryx helps increase leads, improve bookings, and reduce waste.">يشوف الزائر كيف يساعد Oryx في زيادة الليدز، تحسين الحجز، وتقليل الهدر.</p>
-            <div class="step-result">
-              <strong data-ar="وضوح أعلى" data-en="More clarity">وضوح أعلى</strong>
-              <span class="muted" data-ar="فهم أسرع للقيمة الحقيقية." data-en="Faster understanding of the true value.">فهم أسرع للقيمة الحقيقية.</span>
-            </div>
-          </article>
-
-          <article class="step-card reveal">
-            <span class="step-number">02</span>
-            <h3 data-ar="يرسل بياناته" data-en="Submits lead details">يرسل بياناته</h3>
-            <p data-ar="قبل الحجز، يعبّي الاسم، البريد، الجوال، واسم النشاط حتى تدخل مكالمة المبيعات وأنت عارف من أمامك." data-en="Before booking, the lead submits their name, email, phone number, and business name so you enter the sales call with context.">قبل الحجز، يعبّي الاسم، البريد، الجوال، واسم النشاط حتى تدخل مكالمة المبيعات وأنت عارف من أمامك.</p>
-            <div class="step-result">
-              <strong data-ar="تأهيل أفضل" data-en="Better qualification">تأهيل أفضل</strong>
-              <span class="muted" data-ar="معلومات أوضح قبل المكالمة." data-en="Clearer information before the call.">معلومات أوضح قبل المكالمة.</span>
-            </div>
-          </article>
-
-          <article class="step-card reveal">
-            <span class="step-number">03</span>
-            <h3 data-ar="يحجز مكالمة الإغلاق" data-en="Books the closing call">يحجز مكالمة الإغلاق</h3>
-            <p data-ar="بعد إرسال الفورم، ينتقل مباشرة إلى صفحة الحجز أو صفحة تمهيدية فيها فيديو بيع قصير ثم يحجز." data-en="After submitting the form, they move directly to the booking page or to a pre-sell page with a short video before they book.">بعد إرسال الفورم، ينتقل مباشرة إلى صفحة الحجز أو صفحة تمهيدية فيها فيديو بيع قصير ثم يحجز.</p>
-            <div class="step-result">
-              <strong data-ar="فرصة إغلاق أقوى" data-en="Stronger close potential">فرصة إغلاق أقوى</strong>
-              <span class="muted" data-ar="العميل يدخل المكالمة وهو أدفأ." data-en="The prospect enters the call warmer.">العميل يدخل المكالمة وهو أدفأ.</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="kicker" data-ar="آراء تجريبية" data-en="Placeholder testimonials">آراء تجريبية</span>
-          <h2 data-ar="أماكن جاهزة تضيف فيها شهادات عملاء لاحقًا." data-en="Ready sections where you can add client proof later.">أماكن جاهزة تضيف فيها شهادات عملاء لاحقًا.</h2>
-        </div>
-
-        <div class="testimonial-grid">
-          <article class="card testimonial reveal">
-            <div class="stars">★★★★★</div>
-            <p data-ar="“صار عندنا وضوح أكبر في طريقة التعامل مع العملاء المحتملين، وصارت الرحلة البيعية أرتب بكثير.”" data-en="“We became much clearer in how we handle prospects, and the sales journey became far more organized.”">“صار عندنا وضوح أكبر في طريقة التعامل مع العملاء المحتملين، وصارت الرحلة البيعية أرتب بكثير.”</p>
-            <div class="testimonial-footer">
-              <div class="avatar">د</div>
-              <div>
-                <strong data-ar="مدير عيادة" data-en="Clinic Manager">مدير عيادة</strong>
-                <div class="testimonial-role" data-ar="Placeholder testimonial" data-en="Placeholder testimonial">Placeholder testimonial</div>
-              </div>
-            </div>
-          </article>
-
-          <article class="card testimonial reveal">
-            <div class="stars">★★★★★</div>
-            <p data-ar="“الطريقة كانت أوضح من مجرد موقع. حسّينا إن فيه نظام فعلي يساعدنا نرتب النمو والتشغيل.”" data-en="“This felt bigger than just a website. It felt like an actual system helping us organize growth and operations.”">“الطريقة كانت أوضح من مجرد موقع. حسّينا إن فيه نظام فعلي يساعدنا نرتب النمو والتشغيل.”</p>
-            <div class="testimonial-footer">
-              <div class="avatar">ط</div>
-              <div>
-                <strong data-ar="صاحب منشأة طبية" data-en="Medical Business Owner">صاحب منشأة طبية</strong>
-                <div class="testimonial-role" data-ar="Placeholder testimonial" data-en="Placeholder testimonial">Placeholder testimonial</div>
-              </div>
-            </div>
-          </article>
-
-          <article class="card testimonial reveal">
-            <div class="stars">★★★★★</div>
-            <p data-ar="“دخلنا على المكالمة وإحنا فاهمين وش راح ناخذ تقريبًا، وهذا رفع جودة الحوار من البداية.”" data-en="“We entered the call already understanding the offer, which made the conversation better from the start.”">“دخلنا على المكالمة وإحنا فاهمين وش راح ناخذ تقريبًا، وهذا رفع جودة الحوار من البداية.”</p>
-            <div class="testimonial-footer">
-              <div class="avatar">م</div>
-              <div>
-                <strong data-ar="إدارة تشغيل" data-en="Operations Lead">إدارة تشغيل</strong>
-                <div class="testimonial-role" data-ar="Placeholder testimonial" data-en="Placeholder testimonial">Placeholder testimonial</div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="kicker" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</span>
-          <h2 data-ar="أسئلة ممكن تجي في بال العيادة قبل الحجز." data-en="Questions a clinic may have before booking.">أسئلة ممكن تجي في بال العيادة قبل الحجز.</h2>
-        </div>
-
-        <div class="faq-grid reveal">
-          <div class="faq-item active">
-            <button class="faq-question" type="button" aria-expanded="true">
-              <span data-ar="هل Oryx مجرد موقع إلكتروني؟" data-en="Is Oryx just a website?">هل Oryx مجرد موقع إلكتروني؟</span>
-              <span class="plus">+</span>
-            </button>
-            <div class="faq-answer">
-              <p data-ar="لا. الموقع هنا جزء من الرحلة فقط. Oryx يتم تقديمه كنظام ذكاء اصطناعي متكامل يساعد في الليدز، الحجز، المتابعة، وتحسين الكفاءة التشغيلية." data-en="No. The website is only one part of the journey. Oryx is positioned as a complete AI system that helps with leads, booking, follow-up, and operational efficiency.">لا. الموقع هنا جزء من الرحلة فقط. Oryx يتم تقديمه كنظام ذكاء اصطناعي متكامل يساعد في الليدز، الحجز، المتابعة، وتحسين الكفاءة التشغيلية.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span data-ar="هل يصلح للعيادات فقط؟" data-en="Is it only for clinics?">هل يصلح للعيادات فقط؟</span>
-              <span class="plus">+</span>
-            </button>
-            <div class="faq-answer">
-              <p data-ar="التركيز الحالي على العيادات والمنشآت الطبية لأن هذا القطاع يحتاج تنظيم أعلى في التعامل مع العملاء والفرص والحجوزات." data-en="The current positioning is focused on clinics and medical businesses because this sector benefits heavily from better lead handling, appointment flow, and operational structure.">التركيز الحالي على العيادات والمنشآت الطبية لأن هذا القطاع يحتاج تنظيم أعلى في التعامل مع العملاء والفرص والحجوزات.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span data-ar="ليش فيه فورم قبل الحجز؟" data-en="Why is there a form before booking?">ليش فيه فورم قبل الحجز؟</span>
-              <span class="plus">+</span>
-            </button>
-            <div class="faq-answer">
-              <p data-ar="عشان تدخل مكالمة المبيعات بمعلومات أوضح عن العميل المحتمل، ويصير الحوار أنسب وأقرب للإغلاق بدل ما يكون عام وعشوائي." data-en="So you enter the sales call with better context about the lead, making the conversation more relevant and more likely to close.">عشان تدخل مكالمة المبيعات بمعلومات أوضح عن العميل المحتمل، ويصير الحوار أنسب وأقرب للإغلاق بدل ما يكون عام وعشوائي.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span data-ar="هل أقدر أضيف فيديو تمهيدي قبل رابط الحجز؟" data-en="Can I add a pre-sell video before the booking link?">هل أقدر أضيف فيديو تمهيدي قبل رابط الحجز؟</span>
-              <span class="plus">+</span>
-            </button>
-            <div class="faq-answer">
-              <p data-ar="نعم. الكود مجهز لصفحة ثانية بعد إرسال الفورم، وتقدر تضيف فيها فيديو يشرح الفكرة بشكل أعمق قبل ما يضغط العميل على رابط الحجز النهائي." data-en="Yes. The code is already structured for a second step after form submission, where you can add a video that explains the offer more deeply before the prospect clicks the final booking link.">نعم. الكود مجهز لصفحة ثانية بعد إرسال الفورم، وتقدر تضيف فيها فيديو يشرح الفكرة بشكل أعمق قبل ما يضغط العميل على رابط الحجز النهائي.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="lead-form">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="kicker" data-ar="الخطوة التالية" data-en="Next step">الخطوة التالية</span>
-          <h2 data-ar="قبل الحجز، عرفنا عليك وعلى نشاطك." data-en="Before booking, tell us about you and your business.">قبل الحجز، عرفنا عليك وعلى نشاطك.</h2>
-          <p class="section-lead" data-ar="هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط مكالمة المبيعات." data-en="This step prepares a better sales call. After submitting the form, the visitor moves to a pre-booking page and then to the sales call link.">هذه الخطوة تجهز مكالمة مبيعات أفضل. بعد إرسال البيانات، ينتقل الزائر إلى صفحة ما قبل الحجز ثم إلى رابط مكالمة المبيعات.</p>
-        </div>
-
-        <form class="form-card reveal" id="leadCaptureForm" action="https://formspree.io/f/xeepgawk" method="POST">
-          <div class="form-grid">
-            <div class="field">
-              <label for="name" data-ar="الاسم" data-en="Name">الاسم</label>
-              <input id="name" name="name" type="text" required data-ar-placeholder="اكتب اسمك" data-en-placeholder="Enter your name" placeholder="اكتب اسمك" />
-            </div>
-            <div class="field">
-              <label for="business" data-ar="اسم النشاط / العيادة" data-en="Business / Clinic Name">اسم النشاط / العيادة</label>
-              <input id="business" name="business" type="text" required data-ar-placeholder="اسم النشاط" data-en-placeholder="Business name" placeholder="اسم النشاط" />
-            </div>
-            <div class="field">
-              <label for="email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
-              <input id="email" name="email" type="email" required data-ar-placeholder="name@example.com" data-en-placeholder="name@example.com" placeholder="name@example.com" />
-            </div>
-            <div class="field">
-              <label for="phone" data-ar="📞 رقم الجوال" data-en="📞 Phone Number">📞 رقم الجوال</label>
-              <input id="phone" name="phone" type="tel" required data-ar-placeholder="05xxxxxxxx" data-en-placeholder="Phone number" placeholder="05xxxxxxxx" />
-            </div>
-          </div>
-
-          <div class="field" style="margin-top:1rem;">
-            <label for="notes" data-ar="وش أكبر تحدي عندك الآن؟" data-en="What is your biggest challenge right now?">وش أكبر تحدي عندك الآن؟</label>
-            <textarea id="notes" name="notes" data-ar-placeholder="اكتب بشكل مختصر..." data-en-placeholder="Write a short note..." placeholder="اكتب بشكل مختصر..."></textarea>
-          </div>
-
-          <div class="cta-row">
-            <button class="btn btn-primary" id="submitLeadBtn" type="submit" data-ar="أرسل وانتقل للخطوة الأخيرة" data-en="Submit and continue">أرسل وانتقل للخطوة الأخيرة</button>
-            <span id="formSuccess" style="display:none; color: var(--success); font-weight:800; align-self:center;" data-ar="✓ تم الإرسال بنجاح" data-en="✓ Submitted successfully">✓ تم الإرسال بنجاح</span>
-          </div>
-          <p id="formError" class="form-note" style="display:none; color:#fca5a5;" data-ar="صار خطأ أثناء الإرسال. حاول مرة ثانية." data-en="Something went wrong while submitting. Please try again.">صار خطأ أثناء الإرسال. حاول مرة ثانية.</p>
-
-          <p class="form-note" data-ar="مهم: هذا النموذج حاليًا واجهة فقط. لاحقًا تقدر تربطه بـ Formspree أو Tally أو أي نظام يجمع البيانات فعليًا." data-en="Important: this form is currently front-end only. Later, you can connect it to Formspree, Tally, or any lead capture backend.">مهم: هذا النموذج حاليًا واجهة فقط. لاحقًا تقدر تربطه بـ Formspree أو Tally أو أي نظام يجمع البيانات فعليًا.</p>
-        </form>
-      </div>
-    </section>
-
-    <section id="prebook-section" class="hidden-section">
-      <div class="container">
-        <div class="video-card reveal show">
-          <span class="kicker" data-ar="قبل الحجز" data-en="Before you book">قبل الحجز</span>
-          <h2 data-ar="ممتاز. باقي خطوة أخيرة قبل مكالمة المبيعات." data-en="Great. One last step before the sales call.">ممتاز. باقي خطوة أخيرة قبل مكالمة المبيعات.</h2>
-          <p class="section-lead" data-ar="في هذه الصفحة تقدر تضيف فيديو يشرح Oryx بشكل أقوى ويهيئ العميل قبل الدخول على مكالمة الإغلاق." data-en="On this page, you can later add a video that explains Oryx more deeply and warms the prospect before the closing call.">في هذه الصفحة تقدر تضيف فيديو يشرح Oryx بشكل أقوى ويهيئ العميل قبل الدخول على مكالمة الإغلاق.</p>
-
-          <div class="video-box">
+      <section className="mx-auto max-w-7xl px-4 py-16 md:px-8">
+        <Card className="overflow-hidden p-0">
+          <div className="grid gap-8 p-8 md:grid-cols-[0.9fr_1.1fr] md:p-10">
             <div>
-              <strong data-ar="مكان الفيديو التمهيدي" data-en="Pre-sell video placeholder">مكان الفيديو التمهيدي</strong>
-              <span data-ar="أضف هنا لاحقًا فيديو يشرح قيمة Oryx، كيف يساعد العيادات، ولماذا مكالمة المبيعات تستحق وقتهم." data-en="Later, add a short video here explaining the value of Oryx, how it helps clinics, and why the sales call is worth their time.">أضف هنا لاحقًا فيديو يشرح قيمة Oryx، كيف يساعد العيادات، ولماذا مكالمة المبيعات تستحق وقتهم.</span>
-            </div>
-          </div>
-
-          <div class="cta-row" style="align-items:stretch; width:100%;">
-            <a class="btn btn-primary" href="https://calendly.com/nexa-conn/new-meeting-1" target="_blank" rel="noopener noreferrer" style="min-height:56px;">
-              <span>📞</span>
-              <span data-ar="مكالمة هاتفية - 5 دقائق" data-en="Phone Call - 5 min">مكالمة هاتفية - 5 دقائق</span>
-            </a>
-            <a class="btn btn-secondary" href="https://calendly.com/nexa-conn/new-meeting" target="_blank" rel="noopener noreferrer" style="min-height:56px;">
-              <span>🎥</span>
-              <span data-ar="اجتماع Zoom" data-en="Zoom Meeting">اجتماع Zoom</span>
-            </a>
-            <a class="btn btn-secondary" href="https://calendly.com/nexa-conn/30min" target="_blank" rel="noopener noreferrer" style="min-height:56px;">
-              <span>📹</span>
-              <span data-ar="اجتماع Google Meet" data-en="Google Meet Meeting">اجتماع Google Meet</span>
-            </a>
-            <a class="btn btn-secondary" href="#top" data-ar="الرجوع للأعلى" data-en="Back to top">الرجوع للأعلى</a>
-          </div>
-
-          <div class="pdf-embed-card">
-            <div class="pdf-embed-toolbar">
-              <div class="pdf-embed-title">
-                <strong data-ar="استعراض البريزنتيشن الكامل" data-en="View the full presentation">استعراض البريزنتيشن الكامل</strong>
-                <span class="muted" data-ar="تقدر تتصفح العرض داخل الصفحة أو تفتحه بحجم كامل بدون ما تضيع من نفس المسار." data-en="You can scroll through the deck inside the page or open it full size without losing the flow.">تقدر تتصفح العرض داخل الصفحة أو تفتحه بحجم كامل بدون ما تضيع من نفس المسار.</span>
+              <div className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300/80">The Upgrade</div>
+              <h2 className="mt-4 text-3xl font-black tracking-tight text-white md:text-5xl">One System. Three Simple Steps.</h2>
+              <p className="mt-5 text-lg leading-8 text-slate-400">
+                Instead of random tools everywhere, your clinic gets one clean flow from social media attention to booked appointment.
+              </p>
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink onClick={() => setActivePage("systems")}>See Systems <ArrowRight className="h-4 w-4" /></ButtonLink>
+                <ButtonLink href={LINKS.tiktok} variant="secondary">Watch TikTok <Play className="h-4 w-4" /></ButtonLink>
               </div>
-              <a class="btn btn-secondary" href="orxy-sales-system.pdf.pdf" target="_blank" rel="noopener noreferrer" data-ar="فتح العرض كامل" data-en="Open full screen">فتح العرض كامل</a>
             </div>
-
-            <div class="pdf-embed-frame">
-              <iframe src="orxy-sales-system.pdf.pdf#view=FitH" title="Oryx Sales System Presentation" loading="lazy"></iframe>
+            <div className="grid gap-4">
+              {[
+                ["01", "Patient sees your TikTok/Instagram", "The content creates interest and sends them to the right form or chat."],
+                ["02", "AI answers and qualifies", "The agent replies fast, asks smart questions, and recommends the next step."],
+                ["03", "Booking + follow-up happens", "The patient gets the booking path, reminders, and follow-up if they disappear."],
+              ].map(([num, title, desc]) => (
+                <div key={num} className="rounded-3xl border border-white/10 bg-slate-950/50 p-5">
+                  <div className="flex gap-4">
+                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-cyan-300 text-lg font-black text-slate-950">{num}</div>
+                    <div>
+                      <h3 className="font-bold text-white">{title}</h3>
+                      <p className="mt-1 leading-6 text-slate-400">{desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
+        </Card>
+      </section>
+    </main>
+  );
+}
+
+function SystemsPage() {
+  return (
+    <main className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-24">
+      <SectionHeader
+        eyebrow="AI Systems"
+        title="Built for Clinics That Want More Appointments Without More Manual Work."
+        desc="Pick one system first, then connect the rest later. The goal is simple: faster replies, cleaner booking, and better follow-up."
+      />
+
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {systems.map((item) => {
+          const Icon = item.icon;
+          return (
+            <motion.div key={item.title} whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 260, damping: 18 }}>
+              <Card className="h-full">
+                <div className="mb-5 flex items-center justify-between gap-3">
+                  <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-semibold text-cyan-200">{item.badge}</span>
+                  <div className="grid h-11 w-11 place-items-center rounded-2xl bg-white/[0.07] text-cyan-300">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                </div>
+                <h3 className="text-2xl font-black text-white">{item.title}</h3>
+                <p className="mt-3 min-h-[112px] leading-7 text-slate-400">{item.desc}</p>
+                <div className="mt-6 rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+                  <div className="text-sm text-slate-500">Expected outcome</div>
+                  <div className="mt-1 text-lg font-black text-cyan-200">{item.result}</div>
+                </div>
+              </Card>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      <div className="mt-14 grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
+        <Card>
+          <div className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300/80">Coming Soon</div>
+          <h3 className="mt-4 text-3xl font-black text-white">Pilot Clinics & Case Studies</h3>
+          <p className="mt-4 leading-7 text-slate-400">
+            Since we’re still early, this area should not show fake company logos. Keep it honest: “Pilot partners coming soon” and replace it with real results after the first clients.
+          </p>
+          <div className="mt-6 grid gap-3">
+            {["Dermatology clinic", "Dental clinic", "Aesthetic medical center"].map((x) => (
+              <div key={x} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-slate-300">
+                <span>{x}</span>
+                <span className="rounded-full bg-white/[0.06] px-3 py-1 text-xs text-cyan-200">Soon</span>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        <div className="grid gap-5 md:grid-cols-3">
+          {previewFeedback.map((item) => (
+            <Card key={item.name}>
+              <div className="mb-4 flex gap-1 text-cyan-300">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Sparkles key={i} className="h-4 w-4" />
+                ))}
+              </div>
+              <p className="leading-7 text-slate-300">“{item.quote}”</p>
+              <div className="mt-5 border-t border-white/10 pt-4">
+                <div className="font-bold text-white">{item.name}</div>
+                <div className="mt-1 text-xs leading-5 text-cyan-200/70">{item.label}</div>
+              </div>
+            </Card>
+          ))}
         </div>
       </div>
-    </section>
+    </main>
+  );
+}
 
-    <section>
-      <div class="container">
-        <div class="final-cta reveal">
-          <span class="kicker" data-ar="دعوة أخيرة" data-en="Final CTA">دعوة أخيرة</span>
-          <h2 data-ar="إذا عندك عيادة أو منشأة طبية وتبي تشغيل أذكى ونمو أوضح، Oryx جاهز." data-en="If you run a clinic or medical business and want smarter operations with clearer growth, Oryx is ready.">إذا عندك عيادة أو منشأة طبية وتبي تشغيل أذكى ونمو أوضح، Oryx جاهز.</h2>
-          <p class="section-lead" data-ar="ابدأ من الفورم، وبعدها خذ مكالمة مبيعات نفهم فيها وضعك ونشوف إذا Oryx مناسب لك فعلاً." data-en="Start with the form, then book a sales call so we can understand your current setup and see whether Oryx is the right fit.">ابدأ من الفورم، وبعدها خذ مكالمة مبيعات نفهم فيها وضعك ونشوف إذا Oryx مناسب لك فعلاً.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#lead-form" data-ar="ابدأ الآن" data-en="Start now">ابدأ الآن</a>
+function ContactPage() {
+  const contactSteps = [
+    ["01", "Fill the quick form", "Tell us your clinic type, services, and what you want automated."],
+    ["02", "We review your flow", "We look at your Instagram/TikTok, booking process, and patient questions."],
+    ["03", "You get a clear demo", "You see how the AI agent would reply, qualify, and move patients to booking."],
+  ];
+
+  return (
+    <main className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-24">
+      <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div>
+          <Pill>Start small. Upgrade fast.</Pill>
+          <h1 className="mt-6 text-5xl font-black leading-[0.95] tracking-tight text-white md:text-7xl">Ready to Build Your Clinic AI Agent?</h1>
+          <p className="mt-6 text-lg leading-8 text-slate-300">
+            Send your clinic details through the form, or book a call directly. We’ll map the simplest AI system that can create value first.
+          </p>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <ButtonLink href={LINKS.form}>Open Form App <ExternalLink className="h-4 w-4" /></ButtonLink>
+            <ButtonLink href={LINKS.booking} variant="secondary">Book a Call <CalendarCheck className="h-4 w-4" /></ButtonLink>
+            <ButtonLink href={LINKS.instagram} variant="secondary">Instagram <Instagram className="h-4 w-4" /></ButtonLink>
+            <ButtonLink href={LINKS.tiktok} variant="secondary">TikTok <Play className="h-4 w-4" /></ButtonLink>
+          </div>
+
+          <div className="mt-8 rounded-[2rem] border border-cyan-300/20 bg-cyan-300/10 p-5 text-cyan-50">
+            <div className="font-bold">Note for the website</div>
+            <p className="mt-2 leading-7 text-cyan-50/80">
+              Replace the placeholder links at the top of the code with your real TikTok, Instagram, booking, form, and WhatsApp links.
+            </p>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
 
-  <footer>
-    <div class="container" style="margin-bottom: 1.2rem;">
-      <div class="card" style="padding:1.2rem;">
-        <span class="kicker" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</span>
-        <h3 style="margin-top:.4rem;" data-ar="معلومات التواصل" data-en="Contact Information">معلومات التواصل</h3>
-        <div class="cta-row" style="margin-top:1rem;">
-          <a class="btn btn-secondary" href="tel:0504397818">0504397818</a>
-          <a class="btn btn-secondary" href="https://www.instagram.com/orxy.00/?hl=ar" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a class="btn btn-secondary" href="https://www.tiktok.com/@orxy.00" target="_blank" rel="noopener noreferrer">TikTok</a>
+        <Card>
+          <div className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300/80">How It Works</div>
+          <div className="mt-6 space-y-4">
+            {contactSteps.map(([num, title, desc]) => (
+              <div key={num} className="rounded-3xl border border-white/10 bg-slate-950/50 p-5">
+                <div className="flex gap-4">
+                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-lg font-black text-slate-950">{num}</div>
+                  <div>
+                    <h3 className="text-xl font-black text-white">{title}</h3>
+                    <p className="mt-2 leading-7 text-slate-400">{desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+            <div className="flex items-center gap-3">
+              <div className="grid h-11 w-11 place-items-center rounded-2xl bg-emerald-400/15 text-emerald-200">
+                <MessageCircle className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="font-black text-white">Prefer WhatsApp?</div>
+                <div className="text-sm text-slate-400">Send a quick message and we’ll continue there.</div>
+              </div>
+            </div>
+            <a href={LINKS.whatsapp} target="_blank" rel="noreferrer" className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-300 px-5 py-3 text-sm font-black text-slate-950 transition hover:bg-white">
+              Message on WhatsApp <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </Card>
+      </div>
+    </main>
+  );
+}
+
+function Footer({ setActivePage }) {
+  return (
+    <footer className="border-t border-white/10 px-4 py-10 md:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <div>
+          <div className="text-lg font-black text-white">ClinicAI</div>
+          <p className="mt-1 text-sm text-slate-400">AI automation systems for clinics in Saudi Arabia.</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {navItems.map((item) => (
+            <button key={item.id} onClick={() => setActivePage(item.id)} className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-300 hover:bg-white/10 hover:text-white">
+              {item.label}
+            </button>
+          ))}
+          <a href={LINKS.instagram} target="_blank" rel="noreferrer" className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-300 hover:bg-white/10 hover:text-white">Instagram</a>
+          <a href={LINKS.tiktok} target="_blank" rel="noreferrer" className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-300 hover:bg-white/10 hover:text-white">TikTok</a>
         </div>
       </div>
+    </footer>
+  );
+}
+
+export default function App() {
+  const [activePage, setActivePage] = useState("home");
+  const page = useMemo(() => {
+    if (activePage === "systems") return <SystemsPage />;
+    if (activePage === "contact") return <ContactPage />;
+    return <HomePage setActivePage={setActivePage} />;
+  }, [activePage]);
+
+  return (
+    <div className="min-h-screen bg-[#060711] font-sans text-white">
+      <Glow />
+      <div className="relative z-10">
+        <Header activePage={activePage} setActivePage={setActivePage} />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activePage}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25 }}
+          >
+            {page}
+          </motion.div>
+        </AnimatePresence>
+        <Footer setActivePage={setActivePage} />
+      </div>
     </div>
-    <div class="container footer-row">
-      <div>© <span id="year"></span> Oryx</div>
-      <div data-ar="نظام ذكاء اصطناعي للعيادات والمنشآت الطبية" data-en="AI system for clinics and medical businesses">نظام ذكاء اصطناعي للعيادات والمنشآت الطبية</div>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    const body = document.body;
-    const langToggle = document.getElementById('langToggle');
-    let currentLang = 'ar';
-
-    function applyLanguage(lang) {
-      currentLang = lang;
-      const isArabic = lang === 'ar';
-      document.documentElement.lang = isArabic ? 'ar' : 'en';
-      document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
-      body.classList.toggle('en', !isArabic);
-      langToggle.textContent = isArabic ? 'English' : 'العربية';
-      document.title = isArabic
-        ? 'Oryx | نظام ذكاء اصطناعي للعيادات والمجال الطبي'
-        : 'Oryx | AI System for Clinics and Medical Businesses';
-
-      document.querySelectorAll('[data-ar]').forEach(el => {
-        el.textContent = isArabic ? el.dataset.ar : el.dataset.en;
-      });
-
-      document.querySelectorAll('[data-ar-placeholder]').forEach(el => {
-        el.placeholder = isArabic ? el.dataset.arPlaceholder : el.dataset.enPlaceholder;
-      });
-    }
-
-    langToggle.addEventListener('click', () => {
-      applyLanguage(currentLang === 'ar' ? 'en' : 'ar');
-    });
-
-    applyLanguage('ar');
-
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-      const button = item.querySelector('.faq-question');
-      const answer = item.querySelector('.faq-answer');
-
-      if (item.classList.contains('active')) {
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-      }
-
-      button.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
-        faqItems.forEach(other => {
-          other.classList.remove('active');
-          other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-          other.querySelector('.faq-answer').style.maxHeight = null;
-        });
-        if (!isActive) {
-          item.classList.add('active');
-          button.setAttribute('aria-expanded', 'true');
-          answer.style.maxHeight = answer.scrollHeight + 'px';
-        }
-      });
-    });
-
-    const revealElements = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    revealElements.forEach(el => observer.observe(el));
-
-    const leadForm = document.getElementById('leadCaptureForm');
-    const prebookSection = document.getElementById('prebook-section');
-    const submitLeadBtn = document.getElementById('submitLeadBtn');
-    const formSuccess = document.getElementById('formSuccess');
-    const formError = document.getElementById('formError');
-
-    leadForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      formError.style.display = 'none';
-      formSuccess.style.display = 'none';
-      submitLeadBtn.disabled = true;
-      submitLeadBtn.style.opacity = '0.7';
-
-      const originalText = submitLeadBtn.textContent;
-      submitLeadBtn.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
-
-      try {
-        const formData = new FormData(leadForm);
-        const response = await fetch(leadForm.action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error('Submission failed');
-        }
-
-        formSuccess.style.display = 'inline-flex';
-        submitLeadBtn.style.display = 'none';
-        leadForm.reset();
-        prebookSection.classList.add('show');
-        prebookSection.classList.remove('hidden-section');
-        prebookSection.scrollIntoView({ behavior: 'smooth' });
-      } catch (error) {
-        formError.style.display = 'block';
-        submitLeadBtn.disabled = false;
-        submitLeadBtn.style.opacity = '1';
-        submitLeadBtn.textContent = originalText;
-      }
-    });
-  </script>
-</body>
-</html>
+  );
+}
